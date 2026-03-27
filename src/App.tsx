@@ -52,7 +52,7 @@ import { PublicHeader } from './components/PublicHeader';
 import { PublicFooter } from './components/PublicFooter';
 import { AppFooter } from './components/AppFooter';
 
-type View = 'landing' | 'features' | 'pricing' | 'faq' | 'blog' | 'blog-post-2026' | 'blog-post-2026-en' | 'legal' | 'dashboard' | 'list' | 'create' | 'edit' | 'preview' | 'settings';
+type View = 'landing' | 'features' | 'pricing' | 'faq' | 'blog' | 'blog-post' | 'legal' | 'dashboard' | 'list' | 'create' | 'edit' | 'preview' | 'settings';
 
 export default function App() {
   const { t, i18n } = useTranslation();
@@ -64,7 +64,7 @@ export default function App() {
   const [isSending, setIsSending] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const isPublicView = ['landing', 'features', 'pricing', 'faq', 'blog', 'blog-post-2026', 'blog-post-2026-en', 'legal'].includes(view);
+  const isPublicView = ['landing', 'features', 'pricing', 'faq', 'blog', 'blog-post', 'legal'].includes(view);
 
   const handleNavigate = (newView: View, slug?: string) => {
     setView(newView);
@@ -215,19 +215,11 @@ export default function App() {
             {view === 'features' && <Features key="features" />}
             {view === 'pricing' && <Pricing key="pricing" />}
             {view === 'faq' && <FAQ key="faq" />}
-            {view === 'blog' && <Blog key="blog" onNavigate={(v, s) => handleNavigate(v as View, s)} />}
-            {view === 'blog-post-2026' && (
+            {view === 'blog' && <Blog key="blog" onNavigate={(v, s) => handleNavigate(v as View, s)} onStart={() => setView('dashboard')} />}
+            {view === 'blog-post' && (
               <BlogPost 
-                key="blog-post-2026" 
-                slug={blogSlug || 'guide-conformite-facturation-2026'} 
-                onBack={() => setView('blog')} 
-                onStart={() => setView('dashboard')} 
-              />
-            )}
-            {view === 'blog-post-2026-en' && (
-              <BlogPost 
-                key="blog-post-2026-en" 
-                slug={blogSlug || '2026-invoicing-conformity-guide'} 
+                key="blog-post" 
+                slug={blogSlug || (i18n.language === 'fr' ? 'guide-conformite-facturation-2026' : '2026-invoicing-conformity-guide')} 
                 onBack={() => setView('blog')} 
                 onStart={() => setView('dashboard')} 
               />

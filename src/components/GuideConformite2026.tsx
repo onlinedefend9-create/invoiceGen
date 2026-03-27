@@ -1,81 +1,90 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useSpring } from 'motion/react';
-import { ArrowLeft, Clock, Calendar, User, Zap, ArrowRight, ShieldCheck, FileText, CheckCircle, Smartphone, ArrowDown } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, User, Zap, ArrowRight, ShieldCheck, FileText, CheckCircle, Smartphone, ArrowDown, Lock } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 // --- Animations ---
 
 const AppConceptVisual = () => (
-  <div className="relative w-full max-w-3xl mx-auto py-20 px-8 bg-white rounded-[64px] my-16 overflow-hidden shadow-2xl border border-slate-100 not-prose">
-    {/* Background Pattern */}
-    <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#3b82f6 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
-    
-    <div className="relative z-10 flex flex-col md:flex-row items-center gap-12">
-      {/* Left: The "Speed" & "UI" part */}
-      <div className="flex-1 space-y-6">
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-widest">
-          Concept Local-First
+  <div className="relative w-full max-w-4xl mx-auto py-16 px-6 lg:px-12 bg-slate-50 rounded-[48px] my-20 overflow-hidden border border-slate-100 not-prose">
+    <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* Left: Text Content */}
+      <div className="space-y-8">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full text-xs font-black uppercase tracking-widest">
+          <ShieldCheck size={14} />
+          Local-First Security
         </div>
-        <h4 className="text-4xl font-black text-slate-900 tracking-tighter leading-none">
-          La Facturation <span className="text-blue-600">Instantanée</span> & Privée.
-        </h4>
-        <p className="text-slate-500 font-bold leading-relaxed">
+        <h3 className="text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter leading-[0.9]">
+          La Facturation <br />
+          <span className="text-blue-600">Instantanée</span> & Privée.
+        </h3>
+        <p className="text-lg text-slate-600 font-medium leading-relaxed">
           InvoiceGEN n'est pas un logiciel cloud classique. C'est un outil de précision qui transforme votre navigateur en terminal de facturation sécurisé.
         </p>
         
-        <div className="flex gap-8">
-          <div className="flex flex-col gap-1">
+        <div className="grid grid-cols-2 gap-6">
+          <div className="p-4 bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-1">
             <span className="text-3xl font-black text-slate-900">10s</span>
             <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest">Génération</span>
           </div>
-          <div className="w-px h-10 bg-slate-100" />
-          <div className="flex flex-col gap-1">
+          <div className="p-4 bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-1">
             <span className="text-3xl font-black text-slate-900">0</span>
             <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest">Données Serveur</span>
           </div>
         </div>
       </div>
 
-      {/* Right: The Visual Representation */}
-      <div className="flex-1 relative w-full">
+      {/* Right: Vector Illustration */}
+      <div className="relative">
         <motion.div 
           animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="relative z-20 w-full aspect-[4/5] bg-slate-900 rounded-3xl shadow-2xl border border-slate-800 p-6 overflow-hidden"
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          className="relative z-20 bg-white rounded-[32px] shadow-2xl border border-slate-100 p-8 aspect-[4/5] flex flex-col gap-6"
         >
-          {/* Mini Dashboard UI */}
-          <div className="h-full flex flex-col gap-4">
-            <div className="flex justify-between items-center">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-black text-xs">I</div>
-              <div className="w-20 h-2 bg-slate-700 rounded-full" />
-            </div>
-            <div className="flex-1 bg-slate-800/50 rounded-2xl border border-slate-700/50 flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent" />
-              <Zap size={48} className="text-blue-500 opacity-50" />
-            </div>
-            <div className="space-y-2">
-              <div className="w-full h-2 bg-slate-700 rounded-full" />
-              <div className="w-2/3 h-2 bg-slate-700 rounded-full" />
-            </div>
-            <div className="mt-auto">
-              <div className="w-full h-12 bg-blue-600 rounded-xl flex items-center justify-center font-black text-white text-[10px] uppercase tracking-widest shadow-lg shadow-blue-900/50">
-                GÉNÉRER FACTUR-X
+          {/* Header Vector */}
+          <div className="flex justify-between items-center pb-6 border-b border-slate-50">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white">
+                <FileText size={20} />
               </div>
+              <div className="space-y-1">
+                <div className="w-20 h-2 bg-slate-100 rounded-full" />
+                <div className="w-12 h-1.5 bg-slate-50 rounded-full" />
+              </div>
+            </div>
+            <div className="w-8 h-8 bg-slate-50 rounded-full flex items-center justify-center">
+              <Lock size={14} className="text-slate-300" />
+            </div>
+          </div>
+
+          {/* Body Vector */}
+          <div className="flex-1 flex flex-col gap-4 py-4">
+            <div className="w-full h-4 bg-slate-50 rounded-lg" />
+            <div className="w-full h-4 bg-slate-50 rounded-lg" />
+            <div className="w-2/3 h-4 bg-slate-50 rounded-lg" />
+            
+            <div className="mt-8 p-6 bg-blue-50 rounded-2xl border border-blue-100 flex items-center justify-center">
+              <motion.div
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <Zap size={40} className="text-blue-600" />
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Footer Vector */}
+          <div className="mt-auto pt-6 border-t border-slate-50">
+            <div className="w-full h-12 bg-blue-600 rounded-xl flex items-center justify-center gap-3 text-white font-black text-xs uppercase tracking-widest shadow-lg shadow-blue-200">
+              Générer Factur-X
+              <ArrowRight size={16} />
             </div>
           </div>
         </motion.div>
 
-        {/* Floating Badges */}
-        <motion.div 
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 3, repeat: Infinity }}
-          className="absolute -top-6 -right-6 z-30 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex flex-col items-center gap-1"
-        >
-          <ShieldCheck size={24} className="text-green-500" />
-          <span className="text-[8px] font-black text-slate-400 uppercase">100% Privé</span>
-        </motion.div>
-
-        <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-600/20 blur-[60px] rounded-full" />
+        {/* Decorative Elements */}
+        <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-100 rounded-full blur-3xl opacity-50" />
+        <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-blue-50 rounded-full blur-2xl opacity-50" />
       </div>
     </div>
   </div>

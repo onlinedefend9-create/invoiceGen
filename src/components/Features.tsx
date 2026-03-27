@@ -74,54 +74,105 @@ export const Features: React.FC = () => {
               ))}
             </ul>
           </div>
-          <div className="bg-slate-50 rounded-[48px] p-8 lg:p-12 border border-slate-100 shadow-inner">
-            <div className="bg-white rounded-3xl shadow-2xl p-6 space-y-6 aspect-[3/4] flex flex-col">
-              <div className="h-8 w-32 bg-slate-100 rounded-lg" />
-              <div className="flex justify-between items-start">
-                <div className="space-y-2">
-                  <div className="h-4 w-48 bg-slate-100 rounded" />
-                  <div className="h-4 w-32 bg-slate-50 rounded" />
-                </div>
-                <div className="h-12 w-12 bg-blue-50 rounded-full" />
-              </div>
-              <div className="flex-1 border-y border-slate-100 py-8 space-y-4">
-                {[1, 2, 3].map(i => (
-                  <div key={i} className="flex justify-between">
-                    <div className="h-4 w-40 bg-slate-50 rounded" />
-                    <div className="h-4 w-12 bg-slate-100 rounded" />
+          <div className="relative group">
+            <div className="absolute inset-0 bg-blue-500/10 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+            <div className="bg-slate-50 rounded-[64px] p-8 lg:p-16 border border-slate-100 shadow-inner flex items-center justify-center relative overflow-hidden">
+              {/* Background Grid */}
+              <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+              
+              <motion.div 
+                animate={{ 
+                  y: [0, -20, 0],
+                  rotateY: [-5, 5, -5]
+                }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                style={{ perspective: 1000 }}
+                className="bg-white rounded-[40px] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] p-10 space-y-8 aspect-[3/4] w-full max-w-[340px] flex flex-col border border-slate-100 relative z-10"
+              >
+                <div className="flex justify-between items-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
+                    <FileText size={24} />
                   </div>
-                ))}
-              </div>
-              <div className="flex justify-end pt-4">
-                <div className="h-10 w-32 bg-blue-600 rounded-xl" />
-              </div>
+                  <div className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[8px] font-black uppercase tracking-widest border border-blue-100">
+                    HD Export
+                  </div>
+                </div>
+                <div className="flex-1 border-y border-slate-50 py-8 space-y-6">
+                  {[1, 2, 3].map(i => (
+                    <div key={i} className="flex justify-between items-center">
+                      <div className="space-y-2">
+                        <div className="h-2 w-32 bg-slate-100 rounded-full" />
+                        <div className="h-1.5 w-20 bg-slate-50 rounded-full" />
+                      </div>
+                      <div className="h-2 w-10 bg-slate-100 rounded-full" />
+                    </div>
+                  ))}
+                </div>
+                <div className="flex justify-between items-end pt-4">
+                  <div className="w-24 h-8 bg-slate-900 rounded-2xl" />
+                  <div className="w-12 h-12 bg-blue-600 rounded-2xl shadow-xl shadow-blue-100 flex items-center justify-center text-white">
+                    <Zap size={20} fill="currentColor" />
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
 
         {/* Feature 2: Quotes */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center py-12 border-b border-slate-100">
-          <div className="order-2 lg:order-1 bg-slate-900 rounded-[48px] p-12 text-white relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-600/20 to-transparent" />
-            <div className="relative z-10 space-y-8">
+          <div className="order-2 lg:order-1 bg-slate-900 rounded-[64px] p-12 lg:p-20 text-white relative overflow-hidden group">
+            {/* Animated Background Glow */}
+            <motion.div 
+              animate={{ 
+                scale: [1, 1.2, 1],
+                opacity: [0.2, 0.4, 0.2]
+              }}
+              transition={{ duration: 8, repeat: Infinity }}
+              className="absolute -top-24 -right-24 w-96 h-96 bg-blue-600 blur-[120px] rounded-full"
+            />
+            
+            <div className="relative z-10 space-y-12">
               <div className="flex gap-4">
-                <div className="h-2 w-12 bg-blue-500 rounded-full" />
-                <div className="h-2 w-8 bg-slate-700 rounded-full" />
+                <div className="h-3 w-16 bg-blue-500 rounded-full" />
+                <div className="h-3 w-10 bg-slate-700 rounded-full" />
               </div>
-              <div className="space-y-4">
-                <div className="text-6xl font-black tracking-tighter">98%</div>
-                <p className="text-slate-400 font-bold">De taux de conversion moyen pour nos utilisateurs envoyant des devis en moins de 10 minutes.</p>
+              <div className="space-y-6">
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  className="text-8xl font-black tracking-tighter bg-gradient-to-br from-white to-slate-500 bg-clip-text text-transparent"
+                >
+                  98%
+                </motion.div>
+                <p className="text-xl text-slate-400 font-bold leading-relaxed max-w-md">De taux de conversion moyen pour nos utilisateurs envoyant des devis en moins de 10 minutes.</p>
               </div>
-              <div className="pt-8 grid grid-cols-2 gap-8">
-                <div>
-                  <div className="text-2xl font-black">Fast-Track</div>
-                  <div className="text-sm text-slate-500">Conversion Devis vers Facture</div>
+              <div className="pt-12 grid grid-cols-2 gap-12 border-t border-slate-800">
+                <div className="space-y-2">
+                  <div className="text-3xl font-black text-blue-400">Fast-Track</div>
+                  <div className="text-xs font-black uppercase tracking-widest text-slate-500">Conversion Devis</div>
                 </div>
-                <div>
-                  <div className="text-2xl font-black">Instant</div>
-                  <div className="text-sm text-slate-500">Signature électronique prête</div>
+                <div className="space-y-2">
+                  <div className="text-3xl font-black text-emerald-400">Instant</div>
+                  <div className="text-xs font-black uppercase tracking-widest text-slate-500">Signature Prête</div>
                 </div>
               </div>
+            </div>
+
+            {/* Floating Particles */}
+            <div className="absolute inset-0 pointer-events-none">
+              {[1, 2, 3].map(i => (
+                <motion.div
+                  key={i}
+                  animate={{ 
+                    y: [0, -100, 0],
+                    opacity: [0, 0.5, 0]
+                  }}
+                  transition={{ duration: 4 + i, repeat: Infinity, delay: i }}
+                  className="absolute w-1 h-1 bg-blue-400 rounded-full"
+                  style={{ left: `${20 * i}%`, bottom: '10%' }}
+                />
+              ))}
             </div>
           </div>
           <div className="order-1 lg:order-2 space-y-8">
@@ -166,53 +217,111 @@ export const Features: React.FC = () => {
               </p>
             </div>
           </div>
-          <div className="relative">
-            <div className="bg-emerald-50 rounded-[48px] p-12 border border-emerald-100">
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
+          <div className="relative group">
+            <div className="absolute inset-0 bg-emerald-500/10 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+            <div className="bg-emerald-50 rounded-[64px] p-12 lg:p-20 border border-emerald-100 relative overflow-hidden">
+              {/* Holographic Grid Overlay */}
+              <div className="absolute inset-0 opacity-[0.1] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #10b981 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+              
+              <div className="relative z-10 space-y-10">
+                <motion.div 
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="flex items-center gap-4 bg-white/80 backdrop-blur-sm w-fit px-6 py-3 rounded-2xl border border-emerald-200 shadow-sm"
+                >
                   <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse" />
-                  <span className="text-sm font-black text-emerald-700 uppercase tracking-widest">Mise à jour fiscale 2026 active</span>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm font-bold text-slate-500">
-                    <span>Base HT</span>
-                    <span>1 250,00 €</span>
+                  <span className="text-xs font-black text-emerald-700 uppercase tracking-widest">Mise à jour fiscale 2026 active</span>
+                </motion.div>
+                
+                <div className="space-y-6 bg-white p-8 rounded-[32px] shadow-xl border border-emerald-100">
+                  <div className="space-y-4">
+                    <div className="flex justify-between text-sm font-bold text-slate-500">
+                      <span>Base HT</span>
+                      <span className="font-mono">1 250,00 €</span>
+                    </div>
+                    <div className="flex justify-between text-sm font-bold text-emerald-600">
+                      <span>TVA (20%)</span>
+                      <span className="font-mono">+ 250,00 €</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between text-sm font-bold text-emerald-600">
-                    <span>TVA (20%)</span>
-                    <span>+ 250,00 €</span>
-                  </div>
-                  <div className="h-px bg-emerald-200 my-4" />
-                  <div className="flex justify-between text-2xl font-black text-slate-900">
-                    <span>Total TTC</span>
-                    <span>1 500,00 €</span>
+                  <div className="h-px bg-slate-100" />
+                  <div className="flex justify-between items-end">
+                    <div className="space-y-1">
+                      <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total TTC</div>
+                      <div className="text-4xl font-black text-slate-900 tracking-tighter">1 500,00 €</div>
+                    </div>
+                    <div className="w-14 h-14 bg-emerald-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-emerald-100">
+                      <ShieldCheck size={32} />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-3xl shadow-xl border border-slate-100 max-w-[200px]">
-              <p className="text-xs font-bold text-slate-500 leading-tight">
+            
+            <motion.div 
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -bottom-8 -right-8 bg-slate-900 p-8 rounded-[32px] shadow-2xl border border-slate-800 max-w-[240px] text-white"
+            >
+              <p className="text-sm font-bold text-slate-300 leading-relaxed italic">
                 "Grâce à InvoiceGEN, j'ai pu anticiper les nouvelles normes sans changer mes habitudes."
               </p>
-              <p className="text-[10px] font-black text-blue-600 mt-2">— Sarah, Freelance</p>
-            </div>
+              <div className="mt-4 flex items-center gap-3">
+                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-[10px] font-black">S</div>
+                <p className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Sarah, Freelance</p>
+              </div>
+            </motion.div>
           </div>
         </section>
 
         {/* Feature 4: Security */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center py-12">
-          <div className="order-2 lg:order-1 flex justify-center">
-            <div className="relative w-full max-w-md aspect-square bg-slate-50 rounded-full flex items-center justify-center border border-slate-100">
-              <div className="absolute inset-0 border-2 border-dashed border-slate-200 rounded-full animate-[spin_20s_linear_infinite]" />
-              <div className="w-48 h-48 bg-white rounded-[40px] shadow-2xl flex items-center justify-center relative z-10">
-                <Lock size={64} className="text-blue-600" />
-              </div>
-              <div className="absolute top-12 left-12 w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
-                <Database size={24} className="text-slate-400" />
-              </div>
-              <div className="absolute bottom-12 right-12 w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
-                <Globe size={24} className="text-slate-400" />
-              </div>
+          <div className="order-2 lg:order-1 flex justify-center relative group">
+            <div className="absolute inset-0 bg-blue-500/5 blur-[120px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+            <div className="relative w-full max-w-lg aspect-square bg-slate-50 rounded-[64px] flex items-center justify-center border border-slate-100 overflow-hidden">
+              {/* Animated Radar Rings */}
+              {[1, 2, 3].map(i => (
+                <motion.div
+                  key={i}
+                  animate={{ 
+                    scale: [1, 2, 1],
+                    opacity: [0.1, 0, 0.1]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity, delay: i }}
+                  className="absolute inset-0 border border-blue-500 rounded-full"
+                />
+              ))}
+              
+              <motion.div 
+                animate={{ 
+                  rotate: [0, 360],
+                  scale: [1, 1.05, 1]
+                }}
+                transition={{ 
+                  rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+                  scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                }}
+                className="w-64 h-64 bg-white rounded-[48px] shadow-2xl flex items-center justify-center relative z-10 border border-slate-100"
+              >
+                <div className="absolute inset-4 border-2 border-dashed border-slate-100 rounded-[32px]" />
+                <Lock size={80} className="text-blue-600 drop-shadow-2xl" />
+              </motion.div>
+
+              {/* Floating Security Nodes */}
+              <motion.div
+                animate={{ y: [0, -20, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-16 left-16 w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center border border-slate-100"
+              >
+                <Database size={28} className="text-blue-500" />
+              </motion.div>
+              <motion.div
+                animate={{ y: [0, 20, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute bottom-16 right-16 w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center border border-slate-100"
+              >
+                <Globe size={28} className="text-indigo-500" />
+              </motion.div>
             </div>
           </div>
           <div className="order-1 lg:order-2 space-y-8">

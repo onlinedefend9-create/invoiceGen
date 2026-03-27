@@ -102,20 +102,141 @@ export const LandingPage: React.FC<Props> = ({ onStart, onNavigate }) => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
-            className="pt-24 relative"
+            transition={{ duration: 1, ease: "backOut" }}
+            className="pt-24 relative max-w-5xl mx-auto"
           >
-            <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10" />
-            <div className="bg-slate-900 rounded-[40px] p-4 shadow-2xl border border-slate-800 overflow-hidden">
-              <img 
-                src="https://picsum.photos/seed/dashboard/1920/1080" 
-                alt="App Dashboard" 
-                className="rounded-[32px] w-full opacity-90"
-                referrerPolicy="no-referrer"
-              />
+            {/* Magic Tech Showcase Container */}
+            <div className="relative z-10 bg-white rounded-[64px] p-8 lg:p-20 border border-slate-100 overflow-hidden aspect-[16/10] flex items-center justify-center shadow-[0_50px_100px_-20px_rgba(59,130,246,0.12)]">
+              
+              {/* Vibrant Background Glows */}
+              <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.05),transparent_70%)]" />
+              <div className="absolute -top-24 -right-24 w-96 h-96 bg-purple-500/10 blur-[100px] rounded-full animate-pulse" />
+              <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-blue-500/10 blur-[100px] rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+
+              <div className="relative w-full h-full flex items-center justify-center">
+                
+                {/* The "Magic" Transformation Scene */}
+                <div className="relative w-full max-w-3xl aspect-video">
+                  
+                  {/* Glowing Connection Beam */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <motion.div 
+                      animate={{ 
+                        opacity: [0.3, 0.6, 0.3],
+                        scaleX: [1, 1.2, 1]
+                      }}
+                      transition={{ duration: 4, repeat: Infinity }}
+                      className="w-full h-32 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent blur-3xl"
+                    />
+                  </div>
+
+                  {/* Main 3D-style Invoice Card */}
+                  <motion.div
+                    animate={{ 
+                      y: [0, -20, 0],
+                      rotateY: [-10, 10, -10],
+                      rotateX: [5, -5, 5]
+                    }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                    style={{ perspective: 1000 }}
+                    className="absolute inset-0 m-auto w-[300px] md:w-[420px] aspect-[3/4] bg-white rounded-[40px] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-10 flex flex-col gap-8 overflow-hidden group"
+                  >
+                    {/* Holographic Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/5 via-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                    
+                    <div className="flex justify-between items-center relative z-10">
+                      <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-blue-200">
+                        <Zap size={32} fill="currentColor" />
+                      </div>
+                      <div className="px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-widest border border-blue-100">
+                        Draft v2.0
+                      </div>
+                    </div>
+
+                    <div className="flex-1 space-y-8 relative z-10">
+                      <div className="h-px bg-slate-100 w-full" />
+                      <div className="space-y-4">
+                        {[1, 2, 3].map(i => (
+                          <div key={i} className="flex justify-between items-center">
+                            <div className="space-y-2">
+                              <div className="w-40 h-2 bg-slate-100 rounded-full" />
+                              <div className="w-24 h-1.5 bg-slate-50 rounded-full" />
+                            </div>
+                            <div className="w-12 h-2 bg-slate-100 rounded-full" />
+                          </div>
+                        ))}
+                      </div>
+                      <div className="h-px bg-slate-100 w-full" />
+                    </div>
+
+                    <div className="mt-auto flex justify-between items-end relative z-10">
+                      <div className="space-y-2">
+                        <div className="w-20 h-2 bg-slate-100 rounded-full" />
+                        <div className="w-32 h-6 bg-slate-900 rounded-full" />
+                      </div>
+                      <motion.div 
+                        animate={{ scale: [1, 1.1, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center text-white shadow-lg shadow-emerald-200 border-4 border-white"
+                      >
+                        <ShieldCheck size={32} />
+                      </motion.div>
+                    </div>
+                  </motion.div>
+
+                  {/* Floating "Magic" Particles */}
+                  {[1, 2, 3, 4].map(i => (
+                    <motion.div
+                      key={i}
+                      animate={{ 
+                        y: [0, -100, 0],
+                        opacity: [0, 1, 0],
+                        scale: [0.5, 1, 0.5]
+                      }}
+                      transition={{ 
+                        duration: 3 + i, 
+                        repeat: Infinity, 
+                        delay: i * 0.5 
+                      }}
+                      className="absolute w-4 h-4 bg-blue-400 rounded-full blur-[4px]"
+                      style={{ 
+                        left: `${20 + i * 15}%`,
+                        bottom: '20%'
+                      }}
+                    />
+                  ))}
+
+                  {/* Floating Status Badges */}
+                  <motion.div
+                    animate={{ x: [0, 20, 0], y: [0, -10, 0] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-10 right-0 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3"
+                  >
+                    <div className="w-8 h-8 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center">
+                      <CheckCircle2 size={18} />
+                    </div>
+                    <span className="text-[10px] font-black text-slate-900 uppercase tracking-widest">Certifié 2026</span>
+                  </motion.div>
+
+                  <motion.div
+                    animate={{ x: [0, -20, 0], y: [0, 10, 0] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                    className="absolute bottom-10 left-0 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3"
+                  >
+                    <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
+                      <BarChart3 size={18} />
+                    </div>
+                    <span className="text-[10px] font-black text-slate-900 uppercase tracking-widest">Vitesse Max</span>
+                  </motion.div>
+
+                </div>
+              </div>
             </div>
+
+            {/* Background Grid Accent */}
+            <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
           </motion.div>
         </div>
       </section>
@@ -195,12 +316,20 @@ export const LandingPage: React.FC<Props> = ({ onStart, onNavigate }) => {
 
 function FeatureCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
   return (
-    <div className="bg-white p-10 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all space-y-6 group">
-      <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-2xl group-hover:bg-blue-50 transition-colors">
+    <div className="bg-white p-10 rounded-[40px] border border-slate-100 shadow-sm hover:shadow-[0_30px_60px_-15px_rgba(59,130,246,0.1)] hover:-translate-y-2 transition-all duration-500 space-y-6 group relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-2xl group-hover:bg-white group-hover:shadow-xl group-hover:shadow-blue-100 transition-all duration-500 relative z-10">
         {icon}
       </div>
-      <h3 className="text-xl font-black tracking-tight text-slate-900">{title}</h3>
-      <p className="text-slate-500 font-bold text-sm leading-relaxed">{description}</p>
+      <div className="space-y-3 relative z-10">
+        <h3 className="text-xl font-black tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors">{title}</h3>
+        <p className="text-slate-500 font-bold text-sm leading-relaxed">{description}</p>
+      </div>
+      <div className="pt-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 relative z-10">
+        <div className="flex items-center gap-2 text-blue-600 font-black text-[10px] uppercase tracking-widest">
+          Learn more <ArrowRight size={14} />
+        </div>
+      </div>
     </div>
   );
 }
