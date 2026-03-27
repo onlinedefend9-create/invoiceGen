@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@theme {
+  @keyframes shimmer {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+  }
+}
+
 @layer base {
   @media print {
     body * {

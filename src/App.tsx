@@ -42,7 +42,7 @@ import { InvoiceForm } from './components/InvoiceForm';
 import { InvoicePreview } from './components/InvoicePreview';
 import { ProfileSettings } from './components/ProfileSettings';
 import { Blog } from './components/Blog';
-import { GuideConformite2026 } from './components/GuideConformite2026';
+import { BlogPost } from './components/BlogPost';
 import { LandingPage } from './components/LandingPage';
 import { Features } from './components/Features';
 import { Pricing } from './components/Pricing';
@@ -58,12 +58,19 @@ export default function App() {
   const { t, i18n } = useTranslation();
   const { invoices, profile, setProfile, addInvoice, updateInvoice, deleteInvoice } = useInvoiceStore();
   const [view, setView] = useState<View>('landing');
+  const [blogSlug, setBlogSlug] = useState<string>('');
   const [currentInvoice, setCurrentInvoice] = useState<Invoice | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSending, setIsSending] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const isPublicView = ['landing', 'features', 'pricing', 'faq', 'blog', 'blog-post-2026', 'blog-post-2026-en', 'legal'].includes(view);
+
+  const handleNavigate = (newView: View, slug?: string) => {
+    setView(newView);
+    if (slug) setBlogSlug(slug);
+    window.scrollTo(0, 0);
+  };
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'fr' ? 'en' : 'fr';
@@ -208,9 +215,23 @@ export default function App() {
             {view === 'features' && <Features key="features" />}
             {view === 'pricing' && <Pricing key="pricing" />}
             {view === 'faq' && <FAQ key="faq" />}
-            {view === 'blog' && <Blog key="blog" onNavigate={setView} />}
-            {view === 'blog-post-2026' && <GuideConformite2026 key="blog-post-2026" onBack={() => setView('blog')} onStart={() => setView('dashboard')} />}
-            {view === 'blog-post-2026-en' && <GuideConformite2026 key="blog-post-2026-en" onBack={() => setView('blog')} onStart={() => setView('dashboard')} />}
+            {view === 'blog' && <Blog key="blog" onNavigate={(v, s) => handleNavigate(v as View, s)} />}
+            {view === 'blog-post-2026' && (
+              <BlogPost 
+                key="blog-post-2026" 
+                slug={blogSlug || 'guide-conformite-facturation-2026'} 
+                onBack={() => setView('blog')} 
+                onStart={() => setView('dashboard')} 
+              />
+            )}
+            {view === 'blog-post-2026-en' && (
+              <BlogPost 
+                key="blog-post-2026-en" 
+                slug={blogSlug || '2026-invoicing-conformity-guide'} 
+                onBack={() => setView('blog')} 
+                onStart={() => setView('dashboard')} 
+              />
+            )}
             {view === 'legal' && <Legal key="legal" />}
           </AnimatePresence>
         </main>

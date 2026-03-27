@@ -5,6 +5,47 @@ import { useTranslation } from 'react-i18next';
 
 // --- Animations ---
 
+const PulseInvoice = () => (
+  <div className="relative w-full max-w-md mx-auto h-64 bg-slate-50 rounded-[40px] flex items-center justify-center overflow-hidden border border-slate-100 my-16 shadow-inner">
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent animate-pulse" />
+    
+    <motion.div 
+      initial={{ y: 20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      className="relative z-10 flex flex-col items-center gap-6"
+    >
+      <div className="relative">
+        <motion.div
+          animate={{ 
+            scale: [1, 1.05, 1],
+            rotate: [0, -1, 1, 0]
+          }}
+          transition={{ duration: 4, repeat: Infinity }}
+          className="w-32 h-40 bg-white rounded-xl shadow-2xl border border-slate-100 p-4 flex flex-col gap-2"
+        >
+          <div className="w-full h-3 bg-slate-100 rounded" />
+          <div className="w-3/4 h-3 bg-slate-100 rounded" />
+          <div className="w-1/2 h-3 bg-slate-100 rounded" />
+          <div className="mt-auto w-full h-8 bg-slate-50 rounded-lg" />
+        </motion.div>
+        
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.8, type: "spring" }}
+          className="absolute -bottom-4 -right-4 bg-blue-600 text-white px-4 py-2 rounded-xl font-black text-xs shadow-xl border-2 border-white flex items-center gap-2"
+        >
+          <ShieldCheck size={14} /> CERTIFIÉ 2026
+        </motion.div>
+      </div>
+      
+      <p className="text-xs font-black text-slate-400 uppercase tracking-widest animate-bounce">
+        Transformation automatique
+      </p>
+    </motion.div>
+  </div>
+);
+
 const TimelineAnimation = () => (
   <div className="relative h-48 w-full bg-slate-50 rounded-[32px] overflow-hidden flex items-center justify-center px-12 my-12">
     <div className="absolute h-1 w-full bg-slate-200 top-1/2 -translate-y-1/2" />
@@ -122,6 +163,25 @@ export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => 
     const text = document.getElementById('article-content')?.innerText || '';
     const words = text.trim().split(/\s+/).length;
     setReadingTime(Math.ceil(words / 200));
+
+    // SEO: Hreflang tags
+    const frLink = document.createElement('link');
+    frLink.rel = 'alternate';
+    frLink.hreflang = 'fr';
+    frLink.href = 'https://invoicegen.click/blog/guide-conformite-facturation-2026';
+    
+    const enLink = document.createElement('link');
+    enLink.rel = 'alternate';
+    enLink.hreflang = 'en';
+    enLink.href = 'https://invoicegen.click/blog/2026-invoicing-conformity-guide';
+
+    document.head.appendChild(frLink);
+    document.head.appendChild(enLink);
+
+    return () => {
+      document.head.removeChild(frLink);
+      document.head.removeChild(enLink);
+    };
   }, [i18n.language]);
 
   const articleSchema = {
@@ -142,6 +202,7 @@ export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => 
       }
     },
     "datePublished": "2026-03-27",
+    "dateModified": "2026-03-27",
     "description": t('blogPost2026.description')
   };
 
@@ -217,7 +278,8 @@ export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => 
           <div className="w-px h-4 bg-slate-200" />
           <span className="text-xs font-black uppercase tracking-widest text-blue-600 truncate max-w-[200px]">{t('blogPost2026.title')}</span>
         </div>
-        <button onClick={onStart} className="bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-black hover:bg-blue-700 transition-all shadow-lg shadow-blue-100">
+        <button onClick={onStart} className="relative group bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-black hover:bg-blue-700 transition-all shadow-lg shadow-blue-100 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]" />
           {i18n.language === 'fr' ? 'Essayer l\'outil' : 'Try the tool'}
         </button>
       </nav>
@@ -253,7 +315,33 @@ export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => 
             "{t('blogPost2026.intro')}"
           </p>
 
+          <PulseInvoice />
+
+          {/* Psychological Structure: The Problem */}
+          <div className="my-20 p-12 bg-red-50 rounded-[48px] border-2 border-red-100 font-sans not-prose">
+            <h3 className="text-3xl font-black text-red-900 tracking-tighter mb-4">
+              {i18n.language === 'fr' ? 'La réforme 2026 arrive. Êtes-vous prêt ?' : 'The 2026 reform is coming. Are you ready?'}
+            </h3>
+            <p className="text-xl text-red-700 font-bold leading-relaxed">
+              {i18n.language === 'fr' 
+                ? 'Le 1er septembre 2026, la facturation papier et Excel devient illégale pour toutes les entreprises françaises. Sans préparation, vous risquez des amendes et des blocages de paiement.' 
+                : 'On September 1, 2026, paper and Excel invoicing will become illegal for all French companies. Without preparation, you risk fines and payment blocks.'}
+            </p>
+          </div>
+
           <TimelineAnimation />
+
+          {/* Psychological Structure: The Solution */}
+          <div className="my-20 p-12 bg-green-50 rounded-[48px] border-2 border-green-100 font-sans not-prose">
+            <h3 className="text-3xl font-black text-green-900 tracking-tighter mb-4">
+              {i18n.language === 'fr' ? 'InvoiceGEN rend la conformité gratuite.' : 'InvoiceGEN makes compliance free.'}
+            </h3>
+            <p className="text-xl text-green-700 font-bold leading-relaxed">
+              {i18n.language === 'fr' 
+                ? 'Nous avons conçu InvoiceGEN pour que la conformité ne soit plus un fardeau financier. Pas d\'abonnement, pas de frais cachés, juste un outil puissant et conforme.' 
+                : 'We designed InvoiceGEN so that compliance is no longer a financial burden. No subscriptions, no hidden fees, just a powerful and compliant tool.'}
+            </p>
+          </div>
 
           <h2 id="changement" className="mt-20">{t('blogPost2026.section1Title')}</h2>
           <p>{t('blogPost2026.section1Content')}</p>
@@ -263,13 +351,16 @@ export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => 
             <li><strong>{t('blogPost2026.change3').split(':')[0]}:</strong> {t('blogPost2026.change3').split(':')[1]}</li>
           </ul>
 
-          {/* CTA Block 1 */}
+          {/* Psychological Structure: The Action */}
           <div className="my-20 p-12 bg-blue-600 rounded-[48px] text-white font-sans not-prose shadow-2xl shadow-blue-200 relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl group-hover:scale-110 transition-transform duration-700" />
             <div className="relative z-10 space-y-8">
-              <h3 className="text-4xl font-black tracking-tighter leading-none">{i18n.language === 'fr' ? 'Prêt pour la transition ?' : 'Ready for the transition?'}</h3>
+              <h3 className="text-4xl font-black tracking-tighter leading-none">
+                {i18n.language === 'fr' ? 'Générez votre facture en 10 secondes.' : 'Generate your invoice in 10 seconds.'}
+              </h3>
               <p className="text-xl font-bold opacity-90">{t('blogPost2026.ctaText')}</p>
-              <button onClick={onStart} className="px-10 py-5 bg-white text-blue-600 rounded-2xl font-black text-xl hover:scale-105 transition-transform flex items-center gap-3">
+              <button onClick={onStart} className="relative overflow-hidden group px-10 py-5 bg-white text-blue-600 rounded-2xl font-black text-xl hover:scale-105 transition-transform flex items-center gap-3">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-600/10 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]" />
                 {i18n.language === 'fr' ? 'Créer ma facture' : 'Create my invoice'} <Zap size={24} fill="currentColor" />
               </button>
             </div>

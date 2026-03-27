@@ -3,7 +3,7 @@ import { BookOpen, ChevronRight, Star, ArrowRight } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { useTranslation } from 'react-i18next';
 
-export const Blog: React.FC<{ onNavigate: (view: any) => void }> = ({ onNavigate }) => {
+export const Blog: React.FC<{ onNavigate: (view: any, slug?: string) => void }> = ({ onNavigate }) => {
   const { t } = useTranslation();
 
   return (
@@ -21,7 +21,7 @@ export const Blog: React.FC<{ onNavigate: (view: any) => void }> = ({ onNavigate
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Featured Post */}
         <div 
-          onClick={() => onNavigate('blog-post-2026')}
+          onClick={() => onNavigate('blog-post-2026', 'guide-conformite-facturation-2026')}
           className="lg:col-span-2 bg-slate-900 rounded-[64px] p-12 lg:p-20 text-white relative overflow-hidden group cursor-pointer shadow-2xl shadow-blue-100"
         >
           <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-blue-600/30 to-transparent opacity-50 group-hover:scale-110 transition-transform duration-700" />
@@ -47,7 +47,7 @@ export const Blog: React.FC<{ onNavigate: (view: any) => void }> = ({ onNavigate
         <ResourceCard 
           title={t('blog.card1Title', { defaultValue: "Conformité 2026" })} 
           desc={t('blog.card1Desc', { defaultValue: "Tout ce qu'il faut savoir sur la facturation électronique obligatoire." })} 
-          onClick={() => onNavigate('blog-post-2026')}
+          onClick={() => onNavigate('blog-post-2026', 'guide-conformite-facturation-2026')}
         />
         <ResourceCard 
           title={t('blog.card2Title', { defaultValue: "Optimisation Fiscale" })} 
