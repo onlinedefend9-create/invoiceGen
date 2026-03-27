@@ -40,7 +40,7 @@ export const LandingPage: React.FC<Props> = ({ onStart, onNavigate }) => {
             className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-widest border border-blue-100"
           >
             <Zap size={14} className="fill-blue-600" />
-            {t('landing.newFeature', { defaultValue: 'New: Magic Fill AI is available' })}
+            {t('landing.newFeature', { defaultValue: 'Magic Fill' })}
           </motion.div>
 
           <motion.h1
@@ -58,7 +58,26 @@ export const LandingPage: React.FC<Props> = ({ onStart, onNavigate }) => {
             transition={{ delay: 0.2 }}
             className="max-w-2xl mx-auto text-xl text-slate-500 font-bold leading-relaxed"
           >
-            {t('landing.heroSubtitle', { defaultValue: 'The all-in-one SaaS billing platform for modern SMEs and freelancers. 2026 compliant, AI-powered.' })}
+            {t('landing.heroSubtitle', { defaultValue: 'Power your business with the fastest AI billing on the market. 2026 compliant and 100% ' })}
+            <motion.span
+              animate={{ 
+                scale: [1, 1.1, 1],
+                color: ['#3b82f6', '#2563eb', '#3b82f6'],
+                textShadow: [
+                  '0 0 0px rgba(59, 130, 246, 0)',
+                  '0 0 10px rgba(59, 130, 246, 0.5)',
+                  '0 0 0px rgba(59, 130, 246, 0)'
+                ]
+              }}
+              transition={{ 
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="inline-block text-blue-600 font-black"
+            >
+              {t('landing.heroFree', { defaultValue: 'FREE' })}
+            </motion.span>
           </motion.p>
 
           <motion.div
@@ -157,7 +176,7 @@ export const LandingPage: React.FC<Props> = ({ onStart, onNavigate }) => {
             {t('landing.ctaTitle', { defaultValue: 'Ready to transform your billing?' })}
           </h2>
           <p className="text-blue-100 text-xl font-bold max-w-2xl mx-auto relative z-10">
-            {t('landing.ctaSubtitle', { defaultValue: 'Join thousands of entrepreneurs who save time every day with InvoiceGen Pro.' })}
+            {t('landing.ctaSubtitle', { defaultValue: 'Join thousands of entrepreneurs who save time every day with InvoiceGEN.' })}
           </p>
           <div className="pt-8 relative z-10">
             <button 

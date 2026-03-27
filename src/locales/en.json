@@ -15,7 +15,11 @@
     "viewAll": "View All",
     "filter": "Filter",
     "createNew": "Create New",
-    "actions": "Actions"
+    "actions": "Actions",
+    "message": "Your message...",
+    "send": "Send",
+    "messageSent": "Message sent!",
+    "sendAnother": "Send another"
   },
   "settings": {
     "profileSettings": "Profile Settings",
@@ -32,9 +36,10 @@
     "logoUrlPlaceholder": "Logo URL (https://...)"
   },
   "landing": {
-    "newFeature": "New: Magic Fill AI is available",
+    "newFeature": "Magic Fill",
     "heroTitle": "Invoice in seconds, not hours.",
-    "heroSubtitle": "The all-in-one SaaS billing platform for modern SMEs and freelancers. 2026 compliant, AI-powered.",
+    "heroSubtitle": "Power your business with the fastest AI billing on the market. 2026 compliant and 100% ",
+    "heroFree": "FREE",
     "startFree": "Start for free",
     "viewFeatures": "View Features",
     "featuresTitle": "Everything you need to manage your business.",
@@ -52,7 +57,7 @@
     "feature6Title": "Instant Sending",
     "feature6Desc": "Send your invoices directly by email with receipt and payment tracking.",
     "ctaTitle": "Ready to transform your billing?",
-    "ctaSubtitle": "Join thousands of entrepreneurs who save time every day with InvoiceGen Pro.",
+    "ctaSubtitle": "Join thousands of entrepreneurs who save time every day with InvoiceGEN.",
     "startAdventure": "Start the adventure"
   },
   "nav": {
@@ -71,13 +76,13 @@
     "privacyPolicy": "Privacy Policy",
     "legalMentions": "Legal Mentions",
     "contact": "Contact",
-    "copyright": "© 2026 InvoiceGen Pro. All rights reserved.",
-    "madeWith": "Made with",
-    "byTeam": "by the InvoiceGen team"
+    "copyright": "© 2026 InvoiceGEN. All rights reserved.",
+    "madeWith": "By",
+    "byTeam": "InvoiceGen Team"
   },
   "features": {
     "heroTitle": "Features designed for you.",
-    "heroSubtitle": "InvoiceGen Pro is not just an invoice generator. It's your personal financial assistant, designed to simplify every step of your billing.",
+    "heroSubtitle": "InvoiceGEN is not just an invoice generator. It's your personal financial assistant, designed to simplify every step of your billing.",
     "feature1Title": "Magic Fill AI",
     "feature1Desc": "Our cutting-edge AI analyzes your raw text to automatically extract clients, items, and prices. No more tedious manual entry.",
     "feature1Benefit1": "80% time saving",
@@ -99,7 +104,7 @@
     "feature4Benefit2": "Revenue forecasts",
     "feature4Benefit3": "Accounting data export",
     "feature5Title": "Multi-Currency & Languages",
-    "feature5Desc": "Invoice your clients anywhere in the world. InvoiceGen Pro handles currency conversions and international formats.",
+    "feature5Desc": "Invoice your clients anywhere in the world. InvoiceGEN handles currency conversions and international formats.",
     "feature5Benefit1": "Over 150 currencies",
     "feature5Benefit2": "Automatic translations",
     "feature5Benefit3": "Local date formats",
@@ -108,7 +113,7 @@
     "feature6Benefit1": "Automatic reminders",
     "feature6Benefit2": "Recurring billing",
     "feature6Benefit3": "Webhooks & API",
-    "whyChooseTitle": "Why choose InvoiceGen Pro?",
+    "whyChooseTitle": "Why choose InvoiceGEN?",
     "simplicityTitle": "Simplicity",
     "simplicityDesc": "No complex configuration. Create your first invoice in less than 60 seconds.",
     "intelligenceTitle": "Intelligence",
@@ -118,28 +123,28 @@
   },
   "legal": {
     "title": "Legal Mentions.",
-    "subtitle": "Transparency, security and compliance. Everything you need to know about InvoiceGen Pro.",
+    "subtitle": "Transparency, security and compliance. Everything you need to know about InvoiceGEN.",
     "cguTitle": "General Terms of Use (GTU)",
-    "cguContent": "InvoiceGen Pro is an online billing service. By using our platform, you agree to the following conditions:\n\n1. Use of the service: You are responsible for the accuracy of the data entered in your invoices.\n2. Intellectual property: The design, templates and code of InvoiceGen Pro are protected by copyright.\n3. Liability: InvoiceGen Pro cannot be held responsible for fiscal or legal errors resulting from misuse of the service.\n4. Modification of conditions: We reserve the right to modify these GTU at any time.",
+    "cguContent": "InvoiceGEN is an online billing service. By using our platform, you agree to the following conditions:\n\n1. Use of the service: You are responsible for the accuracy of the data entered in your invoices.\n2. Intellectual property: The design, templates and code of InvoiceGEN are protected by copyright.\n3. Liability: InvoiceGEN cannot be held responsible for fiscal or legal errors resulting from misuse of the service.\n4. Modification of conditions: We reserve the right to modify these GTU at any time.",
     "privacyTitle": "Privacy Policy (GDPR)",
     "privacyContent": "Your privacy is our priority. Here is how we treat your data:\n\n1. Data collection: We only collect the data necessary for the proper functioning of the service (email, billing data).\n2. Storage: Your data is stored securely and is never resold to third parties.\n3. User rights: In accordance with the GDPR, you have a right of access, rectification and deletion of your data.\n4. Cookies: We use technical cookies to improve your user experience.",
     "mentionsTitle": "Legal Mentions",
-    "mentionsContent": "Site publisher: InvoiceGen Pro SAS with a capital of €10,000\nHead office: 123 Avenue de la Facturation, 75000 Paris, France\nRegistration: RCS Paris B 123 456 789\nPublication Director: Jean Facture\nHosting: Cloud Run (Google Cloud Platform)\nContact: legal@invoicegen.pro",
+    "mentionsContent": "Site publisher: InvoiceGEN SAS with a capital of €10,000\nHead office: 123 Avenue de la Facturation, 75000 Paris, France\nRegistration: RCS Paris B 123 456 789\nPublication Director: Jean Facture\nHosting: Cloud Run (Google Cloud Platform)\nContact: legal@invoicegen.pro",
     "lastUpdate": "Last update: March 26, 2026. For any questions, contact our legal team."
   },
   "blog": {
-    "heroTitle": "The Ultimate Guide to Modern Billing",
+    "heroTitle": "The Complete Guide to Invoicing for SMEs and Freelancers in 2026",
     "expertResource": "Expert Resource",
-    "authorName": "InvoiceGen Team",
+    "authorName": "InvoiceGEN Team",
     "authorRole": "Fintech Expert",
     "shareArticle": "Share the article",
-    "card1Title": "2026 Compliance",
-    "card1Desc": "Everything you need to know about mandatory electronic invoicing.",
-    "card2Title": "Tax Optimization",
-    "card2Desc": "How to manage your VAT without stress.",
-    "card3Title": "Client Reminders",
-    "card3Desc": "Email templates to get paid on time.",
-    "articleContent": "\n# Mastering Billing for SMEs/Freelancers (2026)\n\nBilling is not just a legal obligation, it's a reflection of your professionalism. In 2026, with the generalization of electronic invoicing, it is crucial to respect certain standards.\n\n## 1. Mandatory Mentions\nEach invoice must include:\n- Your SIRET number and address.\n- Complete client details.\n- A unique and chronological invoice number.\n- Details of services (quantity, unit price, excl. tax, VAT).\n\n## 2. Design at the Service of Payment\nA clear and aesthetic invoice is paid **20% faster**. Why? Because it inspires confidence and makes payment information easy to read.\n\n## 3. Automation with AI\nUsing AI to extract data from your emails or notes saves up to **5 hours per month**. This is time you can reinvest in your core business.\n\n---\n*Guide written by the InvoiceGen Pro team.*\n"
+    "card1Title": "2026 Compliance Guide",
+    "card1Desc": "Master the transition to mandatory electronic invoicing for small businesses.",
+    "card2Title": "AI Billing Automation",
+    "card2Desc": "How AI-powered tools like Magic Fill are revolutionizing SaaS billing.",
+    "card3Title": "Payment Optimization",
+    "card3Desc": "Strategies and templates to reduce late payments by 40% using smart design.",
+    "articleContent": "\n# The Complete Guide to Invoicing for SMEs and Freelancers in 2026\n\nIn the rapidly evolving landscape of 2026, **SaaS billing platforms** have become the backbone of modern business operations. For SMEs and freelancers, mastering the art of invoicing is no longer just about getting paid—it's about compliance, efficiency, and professional branding.\n\n## 1. Navigating 2026 Electronic Invoicing Compliance\nThe year 2026 marks a pivotal shift with mandatory **electronic invoicing** standards. To stay ahead, businesses must adopt platforms that support real-time reporting and structured data formats. InvoiceGEN ensures your business remains 100% compliant with the latest regulations, protecting you from legal risks and streamlining your tax reporting.\n\n## 2. Revolutionizing Efficiency with AI-Powered Billing\nAutomation is the key to scaling. Our **AI-powered Magic Fill** feature allows you to extract data from emails, notes, or receipts in seconds. By eliminating manual data entry, freelancers can save up to **10 hours per month**, allowing them to focus on high-value tasks that drive growth.\n\n## 3. Professional Design: The Secret to Faster Payments\nDid you know that professionally designed invoices are paid **20% faster**? A clean, modern layout with clear payment instructions inspires confidence. InvoiceGEN provides customizable templates that reflect your brand's excellence while making it easy for clients to settle their balances.\n\n## 4. Smart VAT and Tax Management\nManaging VAT across different jurisdictions can be a headache. Modern billing software automates these calculations, ensuring accuracy and reducing the stress of tax season. Whether you're a local freelancer or an international SME, smart tax management is essential for financial health.\n\n### Conclusion\nAs we move further into 2026, the right tools will define the success of small businesses. Embrace the power of AI, ensure your compliance, and elevate your professional image with InvoiceGEN.\n\n---\n*Expert guide curated by the InvoiceGEN Fintech Team.*\n"
   },
   "dashboard": {
     "totalRevenue": "Total Revenue",

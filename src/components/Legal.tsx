@@ -24,7 +24,7 @@ export const Legal: React.FC = () => {
             transition={{ delay: 0.1 }}
             className="max-w-2xl mx-auto text-xl text-slate-500 font-bold leading-relaxed"
           >
-            {t('legal.subtitle', { defaultValue: "Transparency, security and compliance. Everything you need to know about InvoiceGen Pro." })}
+            {t('legal.subtitle', { defaultValue: "Transparency, security and compliance. Everything you need to know about InvoiceGEN." })}
           </motion.p>
         </div>
 
@@ -34,11 +34,11 @@ export const Legal: React.FC = () => {
             icon={<Scale className="text-blue-600" />}
             title={t('legal.cguTitle', { defaultValue: "General Terms of Use (GTU)" })}
             content={t('legal.cguContent', { defaultValue: `
-              InvoiceGen Pro is an online billing service. By using our platform, you agree to the following conditions:
+              InvoiceGEN is an online billing service. By using our platform, you agree to the following conditions:
               
               1. Use of the service: You are responsible for the accuracy of the data entered in your invoices.
-              2. Intellectual property: The design, templates and code of InvoiceGen Pro are protected by copyright.
-              3. Liability: InvoiceGen Pro cannot be held responsible for fiscal or legal errors resulting from misuse of the service.
+              2. Intellectual property: The design, templates and code of InvoiceGEN are protected by copyright.
+              3. Liability: InvoiceGEN cannot be held responsible for fiscal or legal errors resulting from misuse of the service.
               4. Modification of conditions: We reserve the right to modify these GTU at any time.
             ` })}
           />
@@ -60,7 +60,7 @@ export const Legal: React.FC = () => {
             icon={<ShieldCheck className="text-emerald-600" />}
             title={t('legal.mentionsTitle', { defaultValue: "Legal Mentions" })}
             content={t('legal.mentionsContent', { defaultValue: `
-              Site publisher: InvoiceGen Pro SAS with a capital of €10,000
+              Site publisher: InvoiceGEN SAS with a capital of €10,000
               Head office: 123 Avenue de la Facturation, 75000 Paris, France
               Registration: RCS Paris B 123 456 789
               Publication Director: Jean Facture

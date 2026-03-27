@@ -27,7 +27,7 @@ export const PublicHeader: React.FC<Props> = ({ onNavigate, currentView }) => {
           className="flex items-center gap-3 text-blue-600 cursor-pointer"
         >
           <div className="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-blue-100">I</div>
-          <h1 className="text-xl font-black tracking-tighter text-slate-900">InvoiceGen<span className="text-slate-300">Pro</span></h1>
+          <h1 className="text-xl font-black tracking-tighter text-slate-900">InvoiceGEN</h1>
         </div>
 
         {/* Desktop Nav */}

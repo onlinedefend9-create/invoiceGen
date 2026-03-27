@@ -29,15 +29,15 @@ export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onPreview, onBac
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <button onClick={onBack} className="flex items-center gap-2 text-slate-500 hover:text-slate-800 font-bold text-sm transition-colors">
           <ArrowLeft size={20} /> {t('common.back', { defaultValue: 'Back' })}
         </button>
-        <div className="flex gap-4">
-          <button onClick={onPreview} className="px-6 py-2 bg-white border border-slate-200 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-slate-50 transition-all shadow-sm">
+        <div className="flex flex-wrap gap-4 w-full sm:w-auto">
+          <button onClick={onPreview} className="flex-1 sm:flex-none px-6 py-2 bg-white border border-slate-200 rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-slate-50 transition-all shadow-sm">
             <Printer size={18} /> {t('invoice.previewPdf', { defaultValue: 'PDF Preview' })}
           </button>
-          <button onClick={() => onSave(invoice)} className="px-8 py-2 bg-blue-600 text-white rounded-xl text-sm font-black flex items-center gap-2 hover:bg-blue-700 transition-all shadow-lg shadow-blue-100">
+          <button onClick={() => onSave(invoice)} className="flex-1 sm:flex-none px-8 py-2 bg-blue-600 text-white rounded-xl text-sm font-black flex items-center justify-center gap-2 hover:bg-blue-700 transition-all shadow-lg shadow-blue-100">
             <Save size={18} /> {t('common.save', { defaultValue: 'Save' })}
           </button>
         </div>
@@ -45,13 +45,13 @@ export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onPreview, onBac
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
-          <div className="bg-white rounded-3xl border border-slate-100 shadow-xl p-8 space-y-12">
+          <div className="bg-white rounded-3xl border border-slate-100 shadow-xl p-4 lg:p-8 space-y-12">
             <section className="space-y-6">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
                   <Layout size={14} /> {t('invoice.details', { defaultValue: 'Invoice Details' })}
                 </h4>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   {(['minimalist', 'corporate', 'modern', 'credit_note'] as TemplateType[]).map(t_type => (
                     <button 
                       key={t_type}
@@ -66,7 +66,7 @@ export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onPreview, onBac
                   ))}
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <InputGroup 
                   label={t('invoice.documentType', { defaultValue: 'Document Type' })} 
                   type="select" 
@@ -122,7 +122,7 @@ export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onPreview, onBac
               </div>
               <div className="space-y-4">
                 {invoice.items.map((item, idx) => (
-                  <div key={item.id} className="p-6 bg-slate-50 rounded-2xl space-y-4 relative group">
+                  <div key={item.id} className="p-4 lg:p-6 bg-slate-50 rounded-2xl space-y-4 relative group">
                     <button 
                       onClick={() => onChange({ ...invoice, items: invoice.items.filter((_, i) => i !== idx) })}
                       className="absolute top-4 right-4 p-2 text-slate-300 hover:text-rose-500 transition-colors"
@@ -132,7 +132,7 @@ export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onPreview, onBac
                     <input 
                       type="text" 
                       placeholder={t('invoice.itemDescriptionPlaceholder', { defaultValue: "Item description..." })}
-                      className="w-full bg-transparent border-none p-0 font-black text-lg tracking-tight focus:ring-0 placeholder:text-slate-300"
+                      className="w-full bg-transparent border-none p-0 font-black text-base lg:text-lg tracking-tight focus:ring-0 placeholder:text-slate-300"
                       value={item.description}
                       onChange={(e) => {
                         const newItems = [...invoice.items];
@@ -140,8 +140,8 @@ export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onPreview, onBac
                         onChange({ ...invoice, items: newItems });
                       }}
                     />
-                    <div className="flex gap-6">
-                      <div className="flex-1 space-y-1">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 lg:gap-6">
+                      <div className="col-span-2 sm:col-span-2 space-y-1">
                         <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">{t('invoice.quantity', { defaultValue: 'Quantity' })}</label>
                         <input 
                           type="number" 
@@ -154,7 +154,7 @@ export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onPreview, onBac
                           }}
                         />
                       </div>
-                      <div className="flex-[2] space-y-1">
+                      <div className="col-span-2 sm:col-span-1 space-y-1">
                         <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">{t('invoice.unitPrice', { defaultValue: 'Unit Price' })}</label>
                         <input 
                           type="number" 
@@ -167,9 +167,9 @@ export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onPreview, onBac
                           }}
                         />
                       </div>
-                      <div className="flex-[2] space-y-1">
+                      <div className="col-span-2 sm:col-span-1 space-y-1">
                         <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">{t('invoice.total', { defaultValue: 'Total' })}</label>
-                        <div className="px-4 py-2 text-sm font-black text-blue-600">
+                        <div className="px-4 py-2 text-sm font-black text-blue-600 bg-blue-50/50 rounded-xl">
                           {formatCurrency(item.quantity * item.unitPrice)}
                         </div>
                       </div>
@@ -241,14 +241,14 @@ function InputGroup({ label, value, onChange, type = 'text', options = [], isTex
       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">{label}</label>
       {isTextArea ? (
         <textarea 
-          className="w-full bg-slate-50 border-none rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all resize-none"
+          className="w-full bg-slate-50 border-none rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all resize-none shadow-sm focus:shadow-blue-100"
           rows={3}
           value={value}
           onChange={e => onChange(e.target.value)}
         />
       ) : type === 'select' ? (
         <select 
-          className="w-full bg-slate-50 border-none rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
+          className="w-full bg-slate-50 border-none rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all shadow-sm focus:shadow-blue-100"
           value={value}
           onChange={e => onChange(e.target.value)}
         >
@@ -261,7 +261,7 @@ function InputGroup({ label, value, onChange, type = 'text', options = [], isTex
       ) : (
         <input 
           type={type}
-          className="w-full bg-slate-50 border-none rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
+          className="w-full bg-slate-50 border-none rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all shadow-sm focus:shadow-blue-100"
           value={value}
           onChange={e => onChange(e.target.value)}
         />

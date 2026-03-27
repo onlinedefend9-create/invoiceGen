@@ -64,7 +64,7 @@ export const Features: React.FC = () => {
     {
       icon: <Globe className="text-sky-600" />,
       title: t('features.feature5Title', { defaultValue: "Multi-Currency & Languages" }),
-      description: t('features.feature5Desc', { defaultValue: "Invoice your clients anywhere in the world. InvoiceGen Pro handles currency conversions and international formats." }),
+      description: t('features.feature5Desc', { defaultValue: "Invoice your clients anywhere in the world. InvoiceGEN handles currency conversions and international formats." }),
       benefits: [
         t('features.feature5Benefit1', { defaultValue: "Over 150 currencies" }),
         t('features.feature5Benefit2', { defaultValue: "Automatic translations" }),
@@ -101,7 +101,7 @@ export const Features: React.FC = () => {
             transition={{ delay: 0.1 }}
             className="max-w-2xl mx-auto text-xl text-slate-500 font-bold leading-relaxed"
           >
-            {t('features.heroSubtitle', { defaultValue: "InvoiceGen Pro is not just an invoice generator. It's your personal financial assistant, designed to simplify every step of your billing." })}
+            {t('features.heroSubtitle', { defaultValue: "InvoiceGEN is not just an invoice generator. It's your personal financial assistant, designed to simplify every step of your billing." })}
           </motion.p>
         </div>
 
@@ -141,7 +141,7 @@ export const Features: React.FC = () => {
           
           <div className="text-center space-y-6 relative z-10">
             <h2 className="text-4xl lg:text-6xl font-black tracking-tighter leading-none">
-              {t('features.whyChooseTitle', { defaultValue: "Why choose InvoiceGen Pro?" })}
+              {t('features.whyChooseTitle', { defaultValue: "Why choose InvoiceGEN?" })}
             </h2>
           </div>
 

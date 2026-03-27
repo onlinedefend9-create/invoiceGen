@@ -14,21 +14,21 @@ export const ProfileSettings: React.FC<Props> = ({ profile, onSave }) => {
 
   return (
     <div className="max-w-4xl mx-auto space-y-12">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div className="space-y-1">
-          <h3 className="text-3xl font-black tracking-tighter">{t('settings.profileSettings', { defaultValue: 'Profile Settings' })}</h3>
-          <p className="text-sm text-slate-400 font-bold uppercase tracking-widest">{t('settings.manageCompanyInfo', { defaultValue: 'Manage your company information' })}</p>
+          <h3 className="text-2xl sm:text-3xl font-black tracking-tighter">{t('settings.profileSettings', { defaultValue: 'Profile Settings' })}</h3>
+          <p className="text-xs sm:text-sm text-slate-400 font-bold uppercase tracking-widest">{t('settings.manageCompanyInfo', { defaultValue: 'Manage your company information' })}</p>
         </div>
         <button 
           onClick={() => onSave(formData)}
-          className="px-8 py-3 bg-blue-600 text-white rounded-2xl text-sm font-black flex items-center gap-2 hover:bg-blue-700 transition-all shadow-xl shadow-blue-100"
+          className="w-full sm:w-auto px-8 py-3 bg-blue-600 text-white rounded-2xl text-sm font-black flex items-center justify-center gap-2 hover:bg-blue-700 transition-all shadow-xl shadow-blue-100"
         >
           <Save size={18} /> {t('common.save', { defaultValue: 'Save' })}
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white rounded-[40px] border border-slate-100 shadow-xl p-10 space-y-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="bg-white rounded-[32px] sm:rounded-[40px] border border-slate-100 shadow-xl p-6 sm:p-10 space-y-8">
           <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
             <Building size={14} /> {t('settings.companyIdentity', { defaultValue: 'Company Identity' })}
           </h4>
@@ -41,7 +41,7 @@ export const ProfileSettings: React.FC<Props> = ({ profile, onSave }) => {
         </div>
 
         <div className="space-y-8">
-          <div className="bg-white rounded-[40px] border border-slate-100 shadow-xl p-10 space-y-8">
+          <div className="bg-white rounded-[32px] sm:rounded-[40px] border border-slate-100 shadow-xl p-6 sm:p-10 space-y-8">
             <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
               <CreditCard size={14} /> {t('settings.legalBankingInfo', { defaultValue: 'Legal & Banking Info' })}
             </h4>
@@ -51,7 +51,7 @@ export const ProfileSettings: React.FC<Props> = ({ profile, onSave }) => {
             </div>
           </div>
 
-          <div className="bg-white rounded-[40px] border border-slate-100 shadow-xl p-10 space-y-8">
+          <div className="bg-white rounded-[32px] sm:rounded-[40px] border border-slate-100 shadow-xl p-6 sm:p-10 space-y-8">
             <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
               <ImageIcon size={14} /> {t('settings.companyLogo', { defaultValue: 'Company Logo' })}
             </h4>
