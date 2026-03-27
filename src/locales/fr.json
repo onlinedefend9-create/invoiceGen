@@ -81,7 +81,9 @@
     "byTeam": "InvoiceGen Team"
   },
   "features": {
-    "heroTitle": "Des fonctionnalités pensées pour vous.",
+    "heroTitle": "Fonctionnalités : Le Logiciel de Facturation Ultime pour 2026",
+    "heroBadge": "Conforme Normes 2026",
+    "ctaTitle": "Prêt à simplifier votre facturation ?",
     "heroSubtitle": "InvoiceGEN n'est pas juste un générateur de factures. C'est votre assistant financier personnel, conçu pour simplifier chaque étape de votre facturation.",
     "feature1Title": "Magic Fill AI",
     "feature1Desc": "Notre IA de pointe analyse vos textes bruts pour extraire automatiquement les clients, les articles et les prix. Plus besoin de saisie manuelle fastidieuse.",
