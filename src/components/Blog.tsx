@@ -2,9 +2,11 @@ import React from 'react';
 import { BookOpen, Star, ArrowRight, Clock, Zap, ShieldCheck } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'motion/react';
+import { useNavigate } from 'react-router-dom';
 
-export const Blog: React.FC<{ onNavigate: (view: any, slug?: string) => void, onStart: () => void }> = ({ onNavigate, onStart }) => {
+export const Blog: React.FC<{ onStart: () => void }> = ({ onStart }) => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   return (
     <div className="relative overflow-hidden bg-white">
@@ -33,7 +35,7 @@ export const Blog: React.FC<{ onNavigate: (view: any, slug?: string) => void, on
           {/* Featured Post */}
           <motion.div 
             whileHover={{ y: -8 }}
-            onClick={() => onNavigate('blog-post', i18n.language === 'fr' ? 'guide-conformite-facturation-2026' : '2026-invoicing-conformity-guide')}
+            onClick={() => navigate(`/blog/${i18n.language === 'fr' ? 'guide-conformite-facturation-2026' : '2026-invoicing-conformity-guide'}`)}
             className="lg:col-span-8 group cursor-pointer relative bg-slate-900 rounded-[64px] overflow-hidden shadow-2xl shadow-blue-900/20 border border-slate-800"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-blue-600/30 via-transparent to-indigo-600/30 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -77,12 +79,14 @@ export const Blog: React.FC<{ onNavigate: (view: any, slug?: string) => void, on
               desc={t('blog.card2Desc', { defaultValue: "Comment les outils propulsés par l'IA comme Magic Fill révolutionnent la facturation SaaS." })}
               icon={<Zap size={28} />}
               color="blue"
+              onClick={() => navigate('/blog/automatisation-ia')}
             />
             <ResourceCard 
               title={t('blog.card3Title', { defaultValue: "Optimisation des Paiements" })}
               desc={t('blog.card3Desc', { defaultValue: "Stratégies et modèles pour réduire les retards de paiement de 40% grâce au design intelligent." })}
               icon={<ShieldCheck size={28} />}
               color="indigo"
+              onClick={() => navigate('/blog/optimisation-paiements')}
             />
             
             <div className="flex-1 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[48px] p-12 text-white flex flex-col justify-between shadow-2xl shadow-blue-200 relative overflow-hidden group">

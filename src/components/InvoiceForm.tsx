@@ -8,12 +8,11 @@ import { useTranslation } from 'react-i18next';
 interface Props {
   invoice: Invoice;
   onSave: (invoice: Invoice) => void;
-  onPreview: () => void;
-  onBack: () => void;
+  onCancel: () => void;
   onChange: (invoice: Invoice) => void;
 }
 
-export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onPreview, onBack, onChange }) => {
+export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onCancel, onChange }) => {
   const { t } = useTranslation();
   const subtotal = invoice.items.reduce((sum, item) => sum + (item.quantity * item.unitPrice), 0);
   const tax = subtotal * (invoice.taxRate / 100);
@@ -30,13 +29,10 @@ export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onPreview, onBac
   return (
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <button onClick={onBack} className="flex items-center gap-2 text-slate-500 hover:text-slate-800 font-bold text-sm transition-colors">
+        <button onClick={onCancel} className="flex items-center gap-2 text-slate-500 hover:text-slate-800 font-bold text-sm transition-colors">
           <ArrowLeft size={20} /> {t('common.back', { defaultValue: 'Back' })}
         </button>
         <div className="flex flex-wrap gap-4 w-full sm:w-auto">
-          <button onClick={onPreview} className="flex-1 sm:flex-none px-6 py-2 bg-white border border-slate-200 rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-slate-50 transition-all shadow-sm">
-            <Printer size={18} /> {t('invoice.previewPdf', { defaultValue: 'PDF Preview' })}
-          </button>
           <button onClick={() => onSave(invoice)} className="flex-1 sm:flex-none px-8 py-2 bg-blue-600 text-white rounded-xl text-sm font-black flex items-center justify-center gap-2 hover:bg-blue-700 transition-all shadow-lg shadow-blue-100">
             <Save size={18} /> {t('common.save', { defaultValue: 'Save' })}
           </button>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { useNavigate } from 'react-router-dom';
 import { 
   ArrowRight, 
   CheckCircle2, 
@@ -18,11 +19,11 @@ import { cn } from '../lib/utils';
 
 interface Props {
   onStart: () => void;
-  onNavigate: (view: any) => void;
 }
 
-export const LandingPage: React.FC<Props> = ({ onStart, onNavigate }) => {
+export const LandingPage: React.FC<Props> = ({ onStart }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   return (
     <div className="bg-white overflow-hidden">
@@ -94,7 +95,7 @@ export const LandingPage: React.FC<Props> = ({ onStart, onNavigate }) => {
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </button>
             <button 
-              onClick={() => onNavigate('features')}
+              onClick={() => navigate('/features')}
               className="w-full sm:w-auto px-10 py-5 bg-white border-2 border-slate-100 text-slate-900 rounded-2xl font-black text-lg hover:bg-slate-50 transition-all"
             >
               {t('landing.viewFeatures', { defaultValue: 'View Features' })}

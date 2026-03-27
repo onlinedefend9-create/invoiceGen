@@ -1,7 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
-export const AppFooter: React.FC<{ onNavigate: (view: any) => void }> = ({ onNavigate }) => {
+export const AppFooter: React.FC = () => {
   const { t } = useTranslation();
   
   return (
@@ -14,15 +15,15 @@ export const AppFooter: React.FC<{ onNavigate: (view: any) => void }> = ({ onNav
         </div>
         
         <div className="flex items-center gap-6">
-          <button onClick={() => onNavigate('facture-auto-entrepreneur')} className="text-slate-400 hover:text-blue-600 text-[10px] font-black uppercase tracking-widest transition-colors">
+          <Link to="/generateur/facture-auto-entrepreneur" className="text-slate-400 hover:text-blue-600 text-[10px] font-black uppercase tracking-widest transition-colors">
             Auto-entrepreneur
-          </button>
-          <button onClick={() => onNavigate('facture-prestation-service')} className="text-slate-400 hover:text-blue-600 text-[10px] font-black uppercase tracking-widest transition-colors">
+          </Link>
+          <Link to="/generateur/facture-prestation-service" className="text-slate-400 hover:text-blue-600 text-[10px] font-black uppercase tracking-widest transition-colors">
             Prestation
-          </button>
-          <button onClick={() => onNavigate('facture-internationale')} className="text-slate-400 hover:text-blue-600 text-[10px] font-black uppercase tracking-widest transition-colors">
+          </Link>
+          <Link to="/generateur/facture-internationale" className="text-slate-400 hover:text-blue-600 text-[10px] font-black uppercase tracking-widest transition-colors">
             Internationale
-          </button>
+          </Link>
         </div>
       </div>
     </footer>
