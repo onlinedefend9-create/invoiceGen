@@ -1,10 +1,114 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useSpring } from 'motion/react';
-import { ArrowLeft, Clock, Calendar, User, CheckCircle2, AlertCircle, Zap, ArrowRight, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, User, Zap, ArrowRight, ShieldCheck, FileText, CheckCircle, Smartphone, ArrowDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+// --- Animations ---
+
+const TimelineAnimation = () => (
+  <div className="relative h-48 w-full bg-slate-50 rounded-[32px] overflow-hidden flex items-center justify-center px-12 my-12">
+    <div className="absolute h-1 w-full bg-slate-200 top-1/2 -translate-y-1/2" />
+    <div className="flex justify-between w-full relative z-10">
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-12 h-12 bg-white border-4 border-slate-200 rounded-full flex items-center justify-center font-black text-slate-400">2025</div>
+        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Standard</span>
+      </div>
+      <motion.div 
+        initial={{ scale: 0, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.5, type: "spring" }}
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
+      >
+        <div className="bg-green-500 text-white px-4 py-2 rounded-lg font-black text-sm rotate-12 shadow-xl border-2 border-white">CONFORME</div>
+      </motion.div>
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-16 h-16 bg-blue-600 border-4 border-blue-100 rounded-full flex items-center justify-center font-black text-white shadow-xl">2026</div>
+        <span className="text-xs font-bold text-blue-600 uppercase tracking-widest">Réforme</span>
+      </div>
+    </div>
+    <motion.div 
+      initial={{ width: 0 }}
+      whileInView={{ width: "50%" }}
+      transition={{ duration: 1.5, ease: "easeInOut" }}
+      className="absolute h-1 bg-blue-600 top-1/2 -translate-y-1/2 left-0"
+    />
+  </div>
+);
+
+const FacturXAnimation = () => (
+  <div className="relative h-64 w-full bg-slate-900 rounded-[48px] overflow-hidden flex items-center justify-center gap-12 my-12">
+    <motion.div
+      animate={{ 
+        x: [0, 50, 0],
+        opacity: [1, 0, 1],
+        scale: [1, 0.8, 1]
+      }}
+      transition={{ duration: 4, repeat: Infinity }}
+      className="flex flex-col items-center gap-4"
+    >
+      <div className="w-20 h-24 bg-white rounded-lg flex items-center justify-center shadow-2xl relative">
+        <FileText size={40} className="text-slate-400" />
+        <div className="absolute bottom-2 right-2 bg-red-500 text-[8px] font-black text-white px-1 rounded">PDF</div>
+      </div>
+      <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Simple PDF</span>
+    </motion.div>
+
+    <ArrowRight size={32} className="text-blue-500" />
+
+    <motion.div
+      animate={{ 
+        scale: [0.9, 1.1, 0.9],
+        rotate: [0, 5, -5, 0]
+      }}
+      transition={{ duration: 5, repeat: Infinity }}
+      className="flex flex-col items-center gap-4"
+    >
+      <div className="w-24 h-28 bg-blue-600 rounded-xl flex items-center justify-center shadow-2xl relative border-2 border-blue-400">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
+        <Zap size={48} className="text-white" />
+        <div className="absolute bottom-2 right-2 bg-white text-[8px] font-black text-blue-600 px-1 rounded">FACTUR-X</div>
+      </div>
+      <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Smart Invoice</span>
+    </motion.div>
+  </div>
+);
+
+const FreelanceAnimation = () => (
+  <div className="relative h-64 w-full bg-blue-50 rounded-[48px] overflow-hidden flex items-center justify-center my-12">
+    <motion.div 
+      animate={{ y: [0, -10, 0] }}
+      transition={{ duration: 3, repeat: Infinity }}
+      className="relative"
+    >
+      <div className="w-32 h-64 bg-slate-900 rounded-[32px] border-4 border-slate-800 shadow-2xl overflow-hidden p-2">
+        <div className="w-full h-full bg-white rounded-[24px] flex flex-col p-4 gap-2">
+          <div className="w-full h-4 bg-slate-100 rounded" />
+          <div className="w-2/3 h-4 bg-slate-100 rounded" />
+          <div className="mt-auto w-full h-10 bg-blue-600 rounded-xl flex items-center justify-center">
+            <CheckCircle size={20} className="text-white" />
+          </div>
+        </div>
+      </div>
+      <motion.div 
+        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute -top-4 -right-4 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg"
+      >
+        <Zap size={20} fill="currentColor" />
+      </motion.div>
+    </motion.div>
+    <div className="ml-12 space-y-2">
+      <div className="h-2 w-24 bg-blue-200 rounded-full" />
+      <div className="h-2 w-32 bg-blue-200 rounded-full" />
+      <div className="h-2 w-20 bg-blue-200 rounded-full" />
+    </div>
+  </div>
+);
+
+// --- Main Component ---
+
 export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => void }> = ({ onBack, onStart }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -18,16 +122,16 @@ export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => 
     const text = document.getElementById('article-content')?.innerText || '';
     const words = text.trim().split(/\s+/).length;
     setReadingTime(Math.ceil(words / 200));
-  }, []);
+  }, [i18n.language]);
 
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Réforme de la Facturation 2026 : Tout ce que les Freelances et PME doivent savoir pour rester conformes",
+    "headline": t('blogPost2026.title'),
     "image": "https://invoicegen.click/og-image-blog.png",
     "author": {
       "@type": "Organization",
-      "name": "InvoiceGEN Team"
+      "name": t('blogPost2026.author')
     },
     "publisher": {
       "@type": "Organization",
@@ -38,7 +142,30 @@ export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => 
       }
     },
     "datePublished": "2026-03-27",
-    "description": "Guide complet sur la réforme de la facturation électronique 2026 pour les freelances et PME en France. Mentions obligatoires, calendrier et solutions gratuites."
+    "description": t('blogPost2026.description')
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": t('blogPost2026.q1'),
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": t('blogPost2026.a1')
+        }
+      },
+      {
+        "@type": "Question",
+        "name": t('blogPost2026.q2'),
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": t('blogPost2026.a2')
+        }
+      }
+    ]
   };
 
   const breadcrumbSchema = {
@@ -48,7 +175,7 @@ export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => 
       {
         "@type": "ListItem",
         "position": 1,
-        "name": "Accueil",
+        "name": i18n.language === 'fr' ? "Accueil" : "Home",
         "item": "https://invoicegen.click"
       },
       {
@@ -60,15 +187,18 @@ export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => 
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Guide Conformité 2026",
-        "item": "https://invoicegen.click/blog/guide-conformite-facturation-2026"
+        "name": t('blogPost2026.title'),
+        "item": i18n.language === 'fr' 
+          ? "https://invoicegen.click/blog/guide-conformite-facturation-2026" 
+          : "https://invoicegen.click/blog/2026-invoicing-conformity-guide"
       }
     ]
   };
 
   return (
-    <div className="bg-white min-h-screen font-serif">
+    <div className="bg-white min-h-screen font-serif selection:bg-blue-100 selection:text-blue-900">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Progress Bar */}
@@ -80,15 +210,15 @@ export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 h-20 bg-white/80 backdrop-blur-md z-40 border-b border-slate-100 px-6 flex items-center justify-between font-sans">
         <button onClick={onBack} className="flex items-center gap-2 text-slate-500 hover:text-blue-600 transition-colors font-bold">
-          <ArrowLeft size={20} /> Retour au blog
+          <ArrowLeft size={20} /> {i18n.language === 'fr' ? 'Retour au blog' : 'Back to blog'}
         </button>
         <div className="hidden md:flex items-center gap-4">
-          <span className="text-xs font-black uppercase tracking-widest text-slate-400">Lecture en cours</span>
+          <span className="text-xs font-black uppercase tracking-widest text-slate-400">{i18n.language === 'fr' ? 'Lecture en cours' : 'Now reading'}</span>
           <div className="w-px h-4 bg-slate-200" />
-          <span className="text-xs font-black uppercase tracking-widest text-blue-600">Guide Conformité 2026</span>
+          <span className="text-xs font-black uppercase tracking-widest text-blue-600 truncate max-w-[200px]">{t('blogPost2026.title')}</span>
         </div>
         <button onClick={onStart} className="bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-black hover:bg-blue-700 transition-all shadow-lg shadow-blue-100">
-          Essayer l'outil
+          {i18n.language === 'fr' ? 'Essayer l\'outil' : 'Try the tool'}
         </button>
       </nav>
 
@@ -97,22 +227,22 @@ export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => 
         <header className="space-y-12 mb-20 font-sans">
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-widest">
-              <ShieldCheck size={14} /> Guide Expert 2026
+              <ShieldCheck size={14} /> {t('blogPost2026.heroBadge')}
             </div>
             <h1 className="text-5xl lg:text-7xl font-black tracking-tighter leading-[0.95] text-slate-900">
-              Réforme de la Facturation 2026 : Tout ce que les Freelances et PME doivent savoir pour rester conformes.
+              {t('blogPost2026.title')}
             </h1>
           </div>
 
           <div className="flex flex-wrap items-center gap-8 text-slate-400 font-bold text-sm border-y border-slate-100 py-6">
             <div className="flex items-center gap-2">
-              <User size={18} className="text-blue-600" /> Par l'équipe InvoiceGEN
+              <User size={18} className="text-blue-600" /> {t('blogPost2026.author')}
             </div>
             <div className="flex items-center gap-2">
               <Calendar size={18} /> 27 Mars 2026
             </div>
             <div className="flex items-center gap-2">
-              <Clock size={18} /> {readingTime} min de lecture
+              <Clock size={18} /> {readingTime} {i18n.language === 'fr' ? 'min de lecture' : 'min read'}
             </div>
           </div>
         </header>
@@ -120,74 +250,87 @@ export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => 
         {/* Content */}
         <div className="prose prose-slate prose-2xl max-w-none prose-headings:font-sans prose-headings:font-black prose-headings:tracking-tighter prose-p:leading-relaxed prose-p:text-slate-700 prose-li:text-slate-700">
           <p className="text-3xl font-medium text-slate-500 italic border-l-4 border-blue-600 pl-8 mb-16">
-            "Le 1er septembre 2026 marquera un tournant historique pour l'économie française. La facturation électronique ne sera plus une option, mais le standard légal pour toutes les entreprises, des micro-entrepreneurs aux grands groupes."
+            "{t('blogPost2026.intro')}"
           </p>
 
-          <h2 id="changement">Qu'est-ce qui change concrètement le 1er septembre 2026 ?</h2>
-          <p>
-            La réforme de la facturation électronique, initialement prévue pour 2024, a été repoussée pour permettre aux entreprises de mieux se préparer. Mais cette fois, l'échéance est ferme. À partir du 1er septembre 2026, toutes les entreprises assujetties à la TVA en France devront être en mesure de **recevoir** des factures électroniques.
-          </p>
-          <p>
-            Pour les grandes entreprises et les ETI, l'obligation d'**émission** commence également à cette date. Pour les PME et les micro-entreprises (freelances), l'obligation d'émission suivra le 1er septembre 2027. Cependant, l'écosystème change dès 2026 : vos clients (s'ils sont de grandes entreprises) exigeront des formats spécifiques.
-          </p>
-          <p>
-            La réforme repose sur deux piliers :
-          </p>
+          <TimelineAnimation />
+
+          <h2 id="changement" className="mt-20">{t('blogPost2026.section1Title')}</h2>
+          <p>{t('blogPost2026.section1Content')}</p>
           <ul>
-            <li><strong>L'e-invoicing :</strong> L'envoi et la réception de factures sous forme électronique structurée (Factur-X, UBL, CII).</li>
-            <li><strong>L'e-reporting :</strong> La transmission automatique à l'administration fiscale des données de transaction non couvertes par l'e-invoicing (ventes B2C, transactions internationales).</li>
+            <li><strong>{t('blogPost2026.change1').split(':')[0]}:</strong> {t('blogPost2026.change1').split(':')[1]}</li>
+            <li><strong>{t('blogPost2026.change2').split(':')[0]}:</strong> {t('blogPost2026.change2').split(':')[1]}</li>
+            <li><strong>{t('blogPost2026.change3').split(':')[0]}:</strong> {t('blogPost2026.change3').split(':')[1]}</li>
           </ul>
 
           {/* CTA Block 1 */}
           <div className="my-20 p-12 bg-blue-600 rounded-[48px] text-white font-sans not-prose shadow-2xl shadow-blue-200 relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl group-hover:scale-110 transition-transform duration-700" />
             <div className="relative z-10 space-y-8">
-              <h3 className="text-4xl font-black tracking-tighter leading-none">Pas besoin d'un logiciel complexe.</h3>
-              <p className="text-xl font-bold opacity-90">Générez votre première facture conforme 2026 en 10 secondes ici.</p>
+              <h3 className="text-4xl font-black tracking-tighter leading-none">{i18n.language === 'fr' ? 'Prêt pour la transition ?' : 'Ready for the transition?'}</h3>
+              <p className="text-xl font-bold opacity-90">{t('blogPost2026.ctaText')}</p>
               <button onClick={onStart} className="px-10 py-5 bg-white text-blue-600 rounded-2xl font-black text-xl hover:scale-105 transition-transform flex items-center gap-3">
-                Créer ma facture <Zap size={24} fill="currentColor" />
+                {i18n.language === 'fr' ? 'Créer ma facture' : 'Create my invoice'} <Zap size={24} fill="currentColor" />
               </button>
             </div>
           </div>
 
-          <h2 id="mentions">Les 5 mentions obligatoires à ne pas oublier sur vos factures</h2>
-          <p>
-            En plus des mentions classiques (nom, adresse, SIREN, date), la réforme 2026 introduit de nouvelles exigences de données pour faciliter le traitement automatisé par l'administration fiscale (DGFiP).
-          </p>
+          <h2 id="mentions">{t('blogPost2026.section2Title')}</h2>
+          <p>{t('blogPost2026.section2Content')}</p>
           <ol>
-            <li><strong>Le numéro SIREN du client :</strong> Indispensable pour identifier l'acheteur de manière unique dans l'annuaire central.</li>
-            <li><strong>L'adresse de livraison :</strong> Si elle est différente de l'adresse de facturation, elle devient une mention obligatoire.</li>
-            <li><strong>La catégorie de l'opération :</strong> Vous devez préciser s'il s'agit d'une livraison de biens, d'une prestation de services ou d'une opération mixte.</li>
-            <li><strong>L'option pour le paiement de la TVA d'après les débits :</strong> Si vous avez opté pour ce régime, cette mention doit figurer explicitement.</li>
-            <li><strong>Le numéro de facture d'origine :</strong> En cas de facture rectificative ou d'avoir, le lien avec le document initial doit être clair.</li>
+            <li><strong>{t('blogPost2026.mention1').split(':')[0]}:</strong> {t('blogPost2026.mention1').split(':')[1]}</li>
+            <li><strong>{t('blogPost2026.mention2').split(':')[0]}:</strong> {t('blogPost2026.mention2').split(':')[1]}</li>
+            <li><strong>{t('blogPost2026.mention3').split(':')[0]}:</strong> {t('blogPost2026.mention3').split(':')[1]}</li>
+            <li><strong>{t('blogPost2026.mention4').split(':')[0]}:</strong> {t('blogPost2026.mention4').split(':')[1]}</li>
+            <li><strong>{t('blogPost2026.mention5').split(':')[0]}:</strong> {t('blogPost2026.mention5').split(':')[1]}</li>
           </ol>
-          <p>
-            L'oubli de l'une de ces mentions peut entraîner des amendes allant jusqu'à 15€ par mention manquante, plafonnées à 25% du montant de la facture. Plus grave encore, cela peut bloquer le paiement de votre client si son système rejette automatiquement la facture non conforme.
-          </p>
 
-          <h2 id="pourquoi">Pourquoi les factures papier/Excel ne suffiront plus</h2>
-          <p>
-            Beaucoup d'indépendants utilisent encore des modèles Excel ou Word. Si ces outils permettent de créer des documents visuellement corrects, ils échouent sur l'aspect "données structurées".
-          </p>
-          <p>
-            Une facture électronique conforme n'est pas juste un PDF. C'est un fichier qui contient des données lisibles par une machine. Le standard français est le format **Factur-X**. Il s'agit d'un PDF (pour l'humain) qui embarque un fichier XML (pour la machine).
-          </p>
-          <p>
-            Excel ne peut pas générer nativement ce type de fichier hybride. De plus, la réforme impose de passer par des plateformes certifiées (PDP) ou le Portail Public (PPF) pour garantir la traçabilité et l'intégrité des échanges. Envoyer un simple PDF par email ne sera plus considéré comme de la facturation électronique légale.
-          </p>
+          <h2 id="pourquoi">{t('blogPost2026.section3Title')}</h2>
+          <p>{t('blogPost2026.section3Content')}</p>
+          
+          <FacturXAnimation />
 
-          <h2 id="invoicegen">Comment InvoiceGEN vous prépare gratuitement à cette transition</h2>
-          <p>
-            Chez InvoiceGEN, nous avons anticipé ces changements. Notre mission est de rendre la conformité accessible à tous, sans frais cachés et sans complexité inutile.
-          </p>
-          <p>
-            Voici comment nous vous accompagnons :
-          </p>
-          <ul>
-            <li><strong>Templates mis à jour :</strong> Nos modèles de factures incluent déjà les champs pour les nouvelles mentions obligatoires (SIREN client, type d'opération).</li>
-            <li><strong>Format PDF/A :</strong> Nous générons des fichiers PDF haute définition conformes aux normes d'archivage à long terme.</li>
-            <li><strong>Architecture Local-First :</strong> Vos données restent chez vous. C'est la garantie d'une sécurité maximale face aux cyberattaques qui visent souvent les bases de données centralisées de facturation.</li>
-            <li><strong>Zéro Coût :</strong> Nous croyons que la conformité légale ne devrait pas être une charge financière pour les petits entrepreneurs.</li>
+          <p className="mt-12">{t('blogPost2026.facturXDesc')}</p>
+
+          <h3 className="mt-16">{t('blogPost2026.tableTitle')}</h3>
+          <div className="not-prose overflow-x-auto rounded-3xl border border-slate-100 shadow-xl mb-16">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-slate-50">
+                  <th className="p-6 text-sm font-black uppercase tracking-widest text-slate-400 border-b border-slate-100">Caractéristique</th>
+                  <th className="p-6 text-sm font-black uppercase tracking-widest text-slate-400 border-b border-slate-100">{t('blogPost2026.tableOld')}</th>
+                  <th className="p-6 text-sm font-black uppercase tracking-widest text-blue-600 border-b border-slate-100">{t('blogPost2026.tableNew')}</th>
+                </tr>
+              </thead>
+              <tbody className="text-slate-700 font-bold">
+                <tr>
+                  <td className="p-6 border-b border-slate-50">{t('blogPost2026.row1Label')}</td>
+                  <td className="p-6 border-b border-slate-50 text-slate-400">{t('blogPost2026.row1Old')}</td>
+                  <td className="p-6 border-b border-slate-50 text-blue-600">{t('blogPost2026.row1New')}</td>
+                </tr>
+                <tr>
+                  <td className="p-6 border-b border-slate-50">{t('blogPost2026.row2Label')}</td>
+                  <td className="p-6 border-b border-slate-50 text-slate-400">{t('blogPost2026.row2Old')}</td>
+                  <td className="p-6 border-b border-slate-50 text-blue-600">{t('blogPost2026.row2New')}</td>
+                </tr>
+                <tr>
+                  <td className="p-6">{t('blogPost2026.row3Label')}</td>
+                  <td className="p-6 text-slate-400">{t('blogPost2026.row3Old')}</td>
+                  <td className="p-6 text-blue-600">{t('blogPost2026.row3New')}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="invoicegen">{t('blogPost2026.section4Title')}</h2>
+          <p>{t('blogPost2026.section4Content')}</p>
+          
+          <FreelanceAnimation />
+
+          <ul className="mt-12">
+            <li><strong>{t('blogPost2026.feature1').split(':')[0]}:</strong> {t('blogPost2026.feature1').split(':')[1]}</li>
+            <li><strong>{t('blogPost2026.feature2').split(':')[0]}:</strong> {t('blogPost2026.feature2').split(':')[1]}</li>
+            <li><strong>{t('blogPost2026.feature3').split(':')[0]}:</strong> {t('blogPost2026.feature3').split(':')[1]}</li>
           </ul>
 
           {/* CTA Block 2 */}
@@ -195,25 +338,26 @@ export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => 
             <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-blue-600/20 to-transparent" />
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
               <div className="space-y-6">
-                <h3 className="text-4xl font-black tracking-tighter leading-none">Prêt pour 2026 ?</h3>
-                <p className="text-xl text-slate-400 font-bold">Rejoignez des milliers d'indépendants qui utilisent déjà InvoiceGEN pour leur gestion quotidienne.</p>
+                <h3 className="text-4xl font-black tracking-tighter leading-none">{i18n.language === 'fr' ? 'Prêt pour 2026 ?' : 'Ready for 2026?'}</h3>
+                <p className="text-xl text-slate-400 font-bold">{i18n.language === 'fr' ? 'Rejoignez des milliers d\'indépendants qui utilisent déjà InvoiceGEN.' : 'Join thousands of freelancers already using InvoiceGEN.'}</p>
               </div>
               <button onClick={onStart} className="shrink-0 px-12 py-6 bg-blue-600 text-white rounded-3xl font-black text-2xl hover:bg-blue-700 transition-all shadow-2xl shadow-blue-900/50 flex items-center gap-3">
-                Commencer <ArrowRight size={28} />
+                {i18n.language === 'fr' ? 'Commencer' : 'Get Started'} <ArrowRight size={28} />
               </button>
             </div>
           </div>
 
-          <h2 id="conclusion">Conclusion : N'attendez pas le dernier moment</h2>
-          <p>
-            La réforme 2026 est une opportunité de moderniser votre gestion. En adoptant dès maintenant les bons réflexes et les bons outils, vous vous assurez une transition sereine.
-          </p>
-          <p>
-            Rappelez-vous que la facturation est le dernier point de contact avec votre client. Une facture propre, conforme et professionnelle est le meilleur moyen de garantir un paiement rapide et de fidéliser vos partenaires.
-          </p>
-          <p>
-            InvoiceGEN reste à vos côtés pour faire de cette contrainte légale un simple formalisme de quelques secondes.
-          </p>
+          <h2 id="faq" className="mt-20">{t('blogPost2026.faqTitle')}</h2>
+          <div className="space-y-12 not-prose">
+            <div className="space-y-4">
+              <h4 className="text-2xl font-black tracking-tight text-slate-900">{t('blogPost2026.q1')}</h4>
+              <p className="text-lg text-slate-600 font-medium leading-relaxed">{t('blogPost2026.a1')}</p>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-2xl font-black tracking-tight text-slate-900">{t('blogPost2026.q2')}</h4>
+              <p className="text-lg text-slate-600 font-medium leading-relaxed">{t('blogPost2026.a2')}</p>
+            </div>
+          </div>
         </div>
 
         {/* Footer */}
@@ -222,21 +366,28 @@ export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => 
             <div className="flex items-center gap-6">
               <div className="w-20 h-20 bg-slate-900 rounded-[28px] flex items-center justify-center text-white font-black text-3xl shadow-xl">IG</div>
               <div>
-                <p className="text-xl font-black text-slate-900">Équipe InvoiceGEN</p>
-                <p className="text-sm text-slate-400 font-bold uppercase tracking-widest">Experts en Fintech & Conformité</p>
+                <p className="text-xl font-black text-slate-900">{t('blogPost2026.author')}</p>
+                <p className="text-sm text-slate-400 font-bold uppercase tracking-widest">{t('blogPost2026.authorRole')}</p>
               </div>
             </div>
             <div className="flex gap-4">
-              <button className="p-4 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 rounded-2xl transition-all text-slate-400">
-                Partager sur LinkedIn
+              <button className="p-4 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 rounded-2xl transition-all text-slate-400 font-black text-xs uppercase tracking-widest">
+                LinkedIn
               </button>
-              <button className="p-4 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 rounded-2xl transition-all text-slate-400">
-                Partager sur Twitter
+              <button className="p-4 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 rounded-2xl transition-all text-slate-400 font-black text-xs uppercase tracking-widest">
+                Twitter
               </button>
             </div>
           </div>
         </footer>
       </article>
+      
+      {/* Floating CTA for mobile */}
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 md:hidden">
+        <button onClick={onStart} className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-black shadow-2xl flex items-center gap-2">
+          {t('blogPost2026.ctaText')} <ArrowDown size={20} />
+        </button>
+      </div>
     </div>
   );
 };
