@@ -37,6 +37,7 @@ import { Invoice, DashboardStats, TemplateType } from './types';
 import { useInvoiceStore } from './hooks/useInvoiceStore';
 
 // Components
+import { MiniLandingPage } from './components/MiniLandingPage';
 import { Dashboard } from './components/Dashboard';
 import { InvoiceForm } from './components/InvoiceForm';
 import { InvoicePreview } from './components/InvoicePreview';
@@ -52,7 +53,7 @@ import { PublicHeader } from './components/PublicHeader';
 import { PublicFooter } from './components/PublicFooter';
 import { AppFooter } from './components/AppFooter';
 
-type View = 'landing' | 'features' | 'pricing' | 'faq' | 'blog' | 'blog-post' | 'legal' | 'dashboard' | 'list' | 'create' | 'edit' | 'preview' | 'settings';
+type View = 'landing' | 'features' | 'pricing' | 'faq' | 'blog' | 'blog-post' | 'legal' | 'dashboard' | 'list' | 'create' | 'edit' | 'preview' | 'settings' | 'facture-auto-entrepreneur' | 'facture-prestation-service' | 'facture-internationale';
 
 export default function App() {
   const { t, i18n } = useTranslation();
@@ -65,7 +66,7 @@ export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
 
-  const isPublicView = ['landing', 'features', 'pricing', 'faq', 'blog', 'blog-post', 'legal'].includes(view);
+  const isPublicView = ['landing', 'features', 'pricing', 'faq', 'blog', 'blog-post', 'legal', 'facture-auto-entrepreneur', 'facture-prestation-service', 'facture-internationale'].includes(view);
 
   const handleNavigate = (newView: View, slug?: string) => {
     setView(newView);
@@ -225,6 +226,9 @@ export default function App() {
                 onStart={() => setView('dashboard')} 
               />
             )}
+            {view === 'facture-auto-entrepreneur' && <MiniLandingPage key="facture-auto-entrepreneur" niche="auto-entrepreneur" onStart={() => setView('dashboard')} />}
+            {view === 'facture-prestation-service' && <MiniLandingPage key="facture-prestation-service" niche="prestation-service" onStart={() => setView('dashboard')} />}
+            {view === 'facture-internationale' && <MiniLandingPage key="facture-internationale" niche="internationale" onStart={() => setView('dashboard')} />}
             {view === 'legal' && <Legal key="legal" />}
           </AnimatePresence>
         </main>
@@ -479,7 +483,7 @@ export default function App() {
             {view === 'settings' && <ProfileSettings key="settings" profile={profile} onSave={(p) => { setProfile(p); setView('dashboard'); }} />}
           </AnimatePresence>
         </div>
-        <AppFooter />
+        <AppFooter onNavigate={setView} />
       </main>
     </div>
   );

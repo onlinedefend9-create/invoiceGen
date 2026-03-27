@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-export const AppFooter: React.FC = () => {
+export const AppFooter: React.FC<{ onNavigate: (view: any) => void }> = ({ onNavigate }) => {
   const { t } = useTranslation();
   
   return (
@@ -14,15 +14,15 @@ export const AppFooter: React.FC = () => {
         </div>
         
         <div className="flex items-center gap-6">
-          <a href="#" className="text-slate-400 hover:text-blue-600 text-[10px] font-black uppercase tracking-widest transition-colors">
-            {t('footer.termsOfUse', { defaultValue: 'Terms' })}
-          </a>
-          <a href="#" className="text-slate-400 hover:text-blue-600 text-[10px] font-black uppercase tracking-widest transition-colors">
-            {t('footer.privacyPolicy', { defaultValue: 'Privacy' })}
-          </a>
-          <a href="#" className="text-slate-400 hover:text-blue-600 text-[10px] font-black uppercase tracking-widest transition-colors">
-            {t('footer.contact', { defaultValue: 'Contact' })}
-          </a>
+          <button onClick={() => onNavigate('facture-auto-entrepreneur')} className="text-slate-400 hover:text-blue-600 text-[10px] font-black uppercase tracking-widest transition-colors">
+            Auto-entrepreneur
+          </button>
+          <button onClick={() => onNavigate('facture-prestation-service')} className="text-slate-400 hover:text-blue-600 text-[10px] font-black uppercase tracking-widest transition-colors">
+            Prestation
+          </button>
+          <button onClick={() => onNavigate('facture-internationale')} className="text-slate-400 hover:text-blue-600 text-[10px] font-black uppercase tracking-widest transition-colors">
+            Internationale
+          </button>
         </div>
       </div>
     </footer>
