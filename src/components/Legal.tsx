@@ -65,7 +65,7 @@ export const Legal: React.FC = () => {
               Registration: RCS Paris B 123 456 789
               Publication Director: Jean Facture
               Hosting: Cloud Run (Google Cloud Platform)
-              Contact: legal@invoicegen.pro
+              Contact: legal@invoicegen.click
             ` })}
           />
         </div>

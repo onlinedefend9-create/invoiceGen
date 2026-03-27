@@ -129,7 +129,7 @@
     "privacyTitle": "Privacy Policy (GDPR)",
     "privacyContent": "Your privacy is our priority. Here is how we treat your data:\n\n1. Data collection: We only collect the data necessary for the proper functioning of the service (email, billing data).\n2. Storage: Your data is stored securely and is never resold to third parties.\n3. User rights: In accordance with the GDPR, you have a right of access, rectification and deletion of your data.\n4. Cookies: We use technical cookies to improve your user experience.",
     "mentionsTitle": "Legal Mentions",
-    "mentionsContent": "Site publisher: InvoiceGEN SAS with a capital of €10,000\nHead office: 123 Avenue de la Facturation, 75000 Paris, France\nRegistration: RCS Paris B 123 456 789\nPublication Director: Jean Facture\nHosting: Cloud Run (Google Cloud Platform)\nContact: legal@invoicegen.pro",
+    "mentionsContent": "Site publisher: InvoiceGEN SAS with a capital of €10,000\nHead office: 123 Avenue de la Facturation, 75000 Paris, France\nRegistration: RCS Paris B 123 456 789\nPublication Director: Jean Facture\nHosting: Cloud Run (Google Cloud Platform)\nContact: legal@invoicegen.click",
     "lastUpdate": "Last update: March 26, 2026. For any questions, contact our legal team."
   },
   "blog": {

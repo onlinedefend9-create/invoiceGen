@@ -129,7 +129,7 @@
     "privacyTitle": "Politique de Confidentialité (RGPD)",
     "privacyContent": "Votre vie privée est notre priorité. Voici comment nous traitons vos données :\n\n1. Collecte des données : Nous collectons uniquement les données nécessaires au bon fonctionnement du service (email, données de facturation).\n2. Stockage : Vos données sont stockées de manière sécurisée et ne sont jamais revendues à des tiers.\n3. Droits des utilisateurs : Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données.\n4. Cookies : Nous utilisons des cookies techniques pour améliorer votre expérience utilisateur.",
     "mentionsTitle": "Mentions Légales",
-    "mentionsContent": "Éditeur du site : InvoiceGEN SAS au capital de 10 000 €\nSiège social : 123 Avenue de la Facturation, 75000 Paris, France\nImmatriculation : RCS Paris B 123 456 789\nDirecteur de la publication : Jean Facture\nHébergement : Cloud Run (Google Cloud Platform)\nContact : legal@invoicegen.pro",
+    "mentionsContent": "Éditeur du site : InvoiceGEN SAS au capital de 10 000 €\nSiège social : 123 Avenue de la Facturation, 75000 Paris, France\nImmatriculation : RCS Paris B 123 456 789\nDirecteur de la publication : Jean Facture\nHébergement : Cloud Run (Google Cloud Platform)\nContact : legal@invoicegen.click",
     "lastUpdate": "Dernière mise à jour : 26 Mars 2026. Pour toute question, contactez notre équipe juridique."
   },
   "blog": {
