@@ -36,6 +36,7 @@ export const PublicFooter: React.FC<Props> = ({ onNavigate }) => {
           <ul className="space-y-4 text-slate-400 text-sm font-bold">
             <li><button onClick={() => onNavigate('landing')} className="hover:text-blue-500 transition-colors">{t('nav.home')}</button></li>
             <li><button onClick={() => onNavigate('features')} className="hover:text-blue-500 transition-colors">{t('nav.features')}</button></li>
+            <li><button onClick={() => onNavigate('pricing')} className="hover:text-blue-500 transition-colors">{t('nav.pricing')}</button></li>
             <li><button onClick={() => onNavigate('dashboard')} className="hover:text-blue-500 transition-colors">{t('footer.start')}</button></li>
             <li><button onClick={() => onNavigate('blog')} className="hover:text-blue-500 transition-colors">{t('footer.blogGuides')}</button></li>
           </ul>

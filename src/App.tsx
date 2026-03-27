@@ -44,12 +44,13 @@ import { ProfileSettings } from './components/ProfileSettings';
 import { Blog } from './components/Blog';
 import { LandingPage } from './components/LandingPage';
 import { Features } from './components/Features';
+import { Pricing } from './components/Pricing';
 import { Legal } from './components/Legal';
 import { PublicHeader } from './components/PublicHeader';
 import { PublicFooter } from './components/PublicFooter';
 import { AppFooter } from './components/AppFooter';
 
-type View = 'landing' | 'features' | 'blog' | 'legal' | 'dashboard' | 'list' | 'create' | 'edit' | 'preview' | 'settings';
+type View = 'landing' | 'features' | 'pricing' | 'blog' | 'legal' | 'dashboard' | 'list' | 'create' | 'edit' | 'preview' | 'settings';
 
 export default function App() {
   const { t, i18n } = useTranslation();
@@ -60,7 +61,7 @@ export default function App() {
   const [isSending, setIsSending] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const isPublicView = ['landing', 'features', 'blog', 'legal'].includes(view);
+  const isPublicView = ['landing', 'features', 'pricing', 'blog', 'legal'].includes(view);
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'fr' ? 'en' : 'fr';
@@ -203,6 +204,7 @@ export default function App() {
           <AnimatePresence mode="wait">
             {view === 'landing' && <LandingPage key="landing" onStart={() => setView('dashboard')} onNavigate={setView} />}
             {view === 'features' && <Features key="features" />}
+            {view === 'pricing' && <Pricing key="pricing" />}
             {view === 'blog' && <Blog key="blog" />}
             {view === 'legal' && <Legal key="legal" />}
           </AnimatePresence>

@@ -15,6 +15,7 @@ export const PublicHeader: React.FC<Props> = ({ onNavigate, currentView }) => {
   const navLinks = [
     { label: t('nav.home', { defaultValue: 'Home' }), view: 'landing' },
     { label: t('nav.features', { defaultValue: 'Features' }), view: 'features' },
+    { label: t('nav.pricing', { defaultValue: 'Tarifs' }), view: 'pricing' },
     { label: t('nav.blog', { defaultValue: 'Blog' }), view: 'blog' },
     { label: t('nav.legal', { defaultValue: 'Legal' }), view: 'legal' },
   ];
