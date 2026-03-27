@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { debounce } from 'lodash';
 import { Invoice, UserProfile } from '../types';
 
 const INITIAL_PROFILE: UserProfile = {
@@ -21,13 +22,23 @@ export function useInvoiceStore() {
     return saved ? JSON.parse(saved) : INITIAL_PROFILE;
   });
 
-  useEffect(() => {
+  const debouncedSaveInvoices = useMemo(() => debounce((invoices: Invoice[]) => {
     localStorage.setItem('invoices', JSON.stringify(invoices));
-  }, [invoices]);
+  }, 500), []);
+
+  const debouncedSaveProfile = useMemo(() => debounce((profile: UserProfile) => {
+    localStorage.setItem('userProfile', JSON.stringify(profile));
+  }, 500), []);
 
   useEffect(() => {
-    localStorage.setItem('userProfile', JSON.stringify(profile));
-  }, [profile]);
+    debouncedSaveInvoices(invoices);
+    return () => debouncedSaveInvoices.cancel();
+  }, [invoices, debouncedSaveInvoices]);
+
+  useEffect(() => {
+    debouncedSaveProfile(profile);
+    return () => debouncedSaveProfile.cancel();
+  }, [profile, debouncedSaveProfile]);
 
   const addInvoice = (invoice: Invoice) => setInvoices([invoice, ...invoices]);
   const updateInvoice = (invoice: Invoice) => setInvoices(invoices.map(i => i.id === invoice.id ? invoice : i));

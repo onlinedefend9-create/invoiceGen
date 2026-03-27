@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useTransition } from 'react';
 import { 
   Plus, 
   FileText, 
@@ -63,6 +63,7 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSending, setIsSending] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const isPublicView = ['landing', 'features', 'pricing', 'faq', 'blog', 'blog-post', 'legal'].includes(view);
 
@@ -357,7 +358,7 @@ export default function App() {
             {view === 'dashboard' && <Dashboard key="dashboard" stats={stats} invoices={invoices} onViewAll={() => setView('list')} />}
             
             {view === 'list' && (
-              <motion.div key="list" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-white rounded-[32px] border border-slate-100 shadow-xl overflow-hidden">
+              <motion.div key="list" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-white rounded-[32px] border border-slate-100 shadow-xl overflow-hidden will-change-transform">
                 <div className="p-8 border-b border-slate-50 flex items-center justify-between">
                   <h3 className="font-black text-xl tracking-tight">{t('invoice.history', { defaultValue: "Invoice History" })}</h3>
                   <div className="flex gap-3">
@@ -436,7 +437,7 @@ export default function App() {
             )}
 
             {view === 'preview' && currentInvoice && (
-              <motion.div key="preview" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="space-y-8">
+              <motion.div key="preview" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="space-y-8 will-change-transform">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <button onClick={() => setView('edit')} className="flex items-center gap-2 text-slate-500 hover:text-slate-800 font-bold text-sm transition-colors">
                     <ArrowLeft size={20} /> {t('invoice.backToEdit')}
@@ -450,19 +451,19 @@ export default function App() {
                       {t('invoice.print', { defaultValue: 'Print' })}
                     </button>
                     <button 
-                      onClick={() => handleSendEmail(currentInvoice)}
-                      disabled={isSending}
+                      onClick={() => startTransition(() => { handleSendEmail(currentInvoice); })}
+                      disabled={isSending || isPending}
                       className="flex-1 sm:flex-none px-6 py-2 bg-white border border-slate-200 rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-slate-50 transition-all shadow-sm disabled:opacity-50"
                     >
-                      {isSending ? <Loader2 className="animate-spin" size={18} /> : <Mail size={18} />}
+                      {isSending || isPending ? <Loader2 className="animate-spin" size={18} /> : <Mail size={18} />}
                       {t('invoice.sendEmail')}
                     </button>
                     <button 
-                      onClick={() => handleExportPDF(currentInvoice)}
-                      disabled={isExporting}
+                      onClick={() => startTransition(() => { handleExportPDF(currentInvoice); })}
+                      disabled={isExporting || isPending}
                       className="flex-1 sm:flex-none px-8 py-2 bg-blue-600 text-white rounded-xl text-sm font-black flex items-center justify-center gap-2 hover:bg-blue-700 transition-all shadow-lg shadow-blue-100 disabled:opacity-50"
                     >
-                      {isExporting ? <Loader2 className="animate-spin" size={18} /> : <Download size={18} />}
+                      {isExporting || isPending ? <Loader2 className="animate-spin" size={18} /> : <Download size={18} />}
                       {t('invoice.downloadPDF')}
                     </button>
                   </div>
