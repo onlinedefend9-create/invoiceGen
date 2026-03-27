@@ -5,44 +5,79 @@ import { useTranslation } from 'react-i18next';
 
 // --- Animations ---
 
-const PulseInvoice = () => (
-  <div className="relative w-full max-w-md mx-auto h-64 bg-slate-50 rounded-[40px] flex items-center justify-center overflow-hidden border border-slate-100 my-16 shadow-inner">
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent animate-pulse" />
+const AppConceptVisual = () => (
+  <div className="relative w-full max-w-3xl mx-auto py-20 px-8 bg-white rounded-[64px] my-16 overflow-hidden shadow-2xl border border-slate-100 not-prose">
+    {/* Background Pattern */}
+    <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#3b82f6 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
     
-    <motion.div 
-      initial={{ y: 20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      className="relative z-10 flex flex-col items-center gap-6"
-    >
-      <div className="relative">
-        <motion.div
-          animate={{ 
-            scale: [1, 1.05, 1],
-            rotate: [0, -1, 1, 0]
-          }}
-          transition={{ duration: 4, repeat: Infinity }}
-          className="w-32 h-40 bg-white rounded-xl shadow-2xl border border-slate-100 p-4 flex flex-col gap-2"
-        >
-          <div className="w-full h-3 bg-slate-100 rounded" />
-          <div className="w-3/4 h-3 bg-slate-100 rounded" />
-          <div className="w-1/2 h-3 bg-slate-100 rounded" />
-          <div className="mt-auto w-full h-8 bg-slate-50 rounded-lg" />
-        </motion.div>
+    <div className="relative z-10 flex flex-col md:flex-row items-center gap-12">
+      {/* Left: The "Speed" & "UI" part */}
+      <div className="flex-1 space-y-6">
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-widest">
+          Concept Local-First
+        </div>
+        <h4 className="text-4xl font-black text-slate-900 tracking-tighter leading-none">
+          La Facturation <span className="text-blue-600">Instantanée</span> & Privée.
+        </h4>
+        <p className="text-slate-500 font-bold leading-relaxed">
+          InvoiceGEN n'est pas un logiciel cloud classique. C'est un outil de précision qui transforme votre navigateur en terminal de facturation sécurisé.
+        </p>
         
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.8, type: "spring" }}
-          className="absolute -bottom-4 -right-4 bg-blue-600 text-white px-4 py-2 rounded-xl font-black text-xs shadow-xl border-2 border-white flex items-center gap-2"
-        >
-          <ShieldCheck size={14} /> CERTIFIÉ 2026
-        </motion.div>
+        <div className="flex gap-8">
+          <div className="flex flex-col gap-1">
+            <span className="text-3xl font-black text-slate-900">10s</span>
+            <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest">Génération</span>
+          </div>
+          <div className="w-px h-10 bg-slate-100" />
+          <div className="flex flex-col gap-1">
+            <span className="text-3xl font-black text-slate-900">0</span>
+            <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest">Données Serveur</span>
+          </div>
+        </div>
       </div>
-      
-      <p className="text-xs font-black text-slate-400 uppercase tracking-widest animate-bounce">
-        Transformation automatique
-      </p>
-    </motion.div>
+
+      {/* Right: The Visual Representation */}
+      <div className="flex-1 relative w-full">
+        <motion.div 
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="relative z-20 w-full aspect-[4/5] bg-slate-900 rounded-3xl shadow-2xl border border-slate-800 p-6 overflow-hidden"
+        >
+          {/* Mini Dashboard UI */}
+          <div className="h-full flex flex-col gap-4">
+            <div className="flex justify-between items-center">
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-black text-xs">I</div>
+              <div className="w-20 h-2 bg-slate-700 rounded-full" />
+            </div>
+            <div className="flex-1 bg-slate-800/50 rounded-2xl border border-slate-700/50 flex items-center justify-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent" />
+              <Zap size={48} className="text-blue-500 opacity-50" />
+            </div>
+            <div className="space-y-2">
+              <div className="w-full h-2 bg-slate-700 rounded-full" />
+              <div className="w-2/3 h-2 bg-slate-700 rounded-full" />
+            </div>
+            <div className="mt-auto">
+              <div className="w-full h-12 bg-blue-600 rounded-xl flex items-center justify-center font-black text-white text-[10px] uppercase tracking-widest shadow-lg shadow-blue-900/50">
+                GÉNÉRER FACTUR-X
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Floating Badges */}
+        <motion.div 
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 3, repeat: Infinity }}
+          className="absolute -top-6 -right-6 z-30 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex flex-col items-center gap-1"
+        >
+          <ShieldCheck size={24} className="text-green-500" />
+          <span className="text-[8px] font-black text-slate-400 uppercase">100% Privé</span>
+        </motion.div>
+
+        <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-600/20 blur-[60px] rounded-full" />
+      </div>
+    </div>
   </div>
 );
 
@@ -343,7 +378,7 @@ export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => 
             "{t('blogPost2026.intro')}"
           </p>
 
-          <PulseInvoice />
+          <AppConceptVisual />
 
           {/* Psychological Structure: The Problem */}
           <div className="my-20 p-12 bg-red-50 rounded-[48px] border-2 border-red-100 font-sans not-prose">
