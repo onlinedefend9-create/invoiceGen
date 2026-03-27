@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plus, Trash2, Save, Printer, ArrowLeft, Layout, Type as TypeIcon, Briefcase } from 'lucide-react';
+import { Plus, Trash2, Save, Printer, ArrowLeft, Layout, Type as TypeIcon, Briefcase, Eye } from 'lucide-react';
 import { Invoice, InvoiceItem, Client, TemplateType, DocumentType } from '../types';
 import { formatCurrency, cn } from '../lib/utils';
 import { AIInput } from './AIInput';
@@ -10,10 +10,12 @@ interface Props {
   onSave: (invoice: Invoice) => void;
   onCancel: () => void;
   onChange: (invoice: Invoice) => void;
+  onPreview?: () => void;
 }
 
-export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onCancel, onChange }) => {
+export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onCancel, onChange, onPreview }) => {
   const { t } = useTranslation();
+  if (!invoice) return null;
   const subtotal = invoice.items.reduce((sum, item) => sum + (item.quantity * item.unitPrice), 0);
   const tax = subtotal * (invoice.taxRate / 100);
   const total = subtotal + tax - invoice.discount;
@@ -33,14 +35,19 @@ export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onCancel, onChan
           <ArrowLeft size={20} /> {t('common.back', { defaultValue: 'Back' })}
         </button>
         <div className="flex flex-wrap gap-4 w-full sm:w-auto">
+          {onPreview && (
+            <button onClick={onPreview} className="xl:hidden flex-1 sm:flex-none px-6 py-2 bg-white border border-slate-200 text-slate-700 rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-slate-50 transition-all shadow-sm">
+              <Eye size={18} /> {t('common.preview', { defaultValue: 'Preview' })}
+            </button>
+          )}
           <button onClick={() => onSave(invoice)} className="flex-1 sm:flex-none px-8 py-2 bg-blue-600 text-white rounded-xl text-sm font-black flex items-center justify-center gap-2 hover:bg-blue-700 transition-all shadow-lg shadow-blue-100">
             <Save size={18} /> {t('common.save', { defaultValue: 'Save' })}
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-8">
+      <div className="flex flex-col gap-8">
+        <div className="space-y-8">
           <div className="bg-white rounded-3xl border border-slate-100 shadow-xl p-4 lg:p-8 space-y-12">
             <section className="space-y-6">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -129,7 +136,7 @@ export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onCancel, onChan
                       type="text" 
                       placeholder={t('invoice.itemDescriptionPlaceholder', { defaultValue: "Item description..." })}
                       className="w-full bg-transparent border-none p-0 font-black text-base lg:text-lg tracking-tight focus:ring-0 placeholder:text-slate-300"
-                      value={item.description}
+                      value={item.description ?? ''}
                       onChange={(e) => {
                         const newItems = [...invoice.items];
                         newItems[idx].description = e.target.value;
@@ -142,7 +149,7 @@ export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onCancel, onChan
                         <input 
                           type="number" 
                           className="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 text-sm font-bold"
-                          value={item.quantity}
+                          value={item.quantity ?? 0}
                           onChange={(e) => {
                             const newItems = [...invoice.items];
                             newItems[idx].quantity = Number(e.target.value);
@@ -155,7 +162,7 @@ export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onCancel, onChan
                         <input 
                           type="number" 
                           className="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 text-sm font-bold"
-                          value={item.unitPrice}
+                          value={item.unitPrice ?? 0}
                           onChange={(e) => {
                             const newItems = [...invoice.items];
                             newItems[idx].unitPrice = Number(e.target.value);
@@ -190,7 +197,7 @@ export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onCancel, onChan
                   <input 
                     type="number" 
                     className="w-16 bg-slate-50 border-none rounded-lg px-2 py-1 text-xs font-black"
-                    value={invoice.taxRate}
+                    value={invoice.taxRate ?? 0}
                     onChange={(e) => onChange({ ...invoice, taxRate: Number(e.target.value) })}
                   />
                 </div>
@@ -202,7 +209,7 @@ export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onCancel, onChan
                   <input 
                     type="number" 
                     className="w-16 bg-slate-50 border-none rounded-lg px-2 py-1 text-xs font-black"
-                    value={invoice.discount}
+                    value={invoice.discount ?? 0}
                     onChange={(e) => onChange({ ...invoice, discount: Number(e.target.value) })}
                   />
                 </div>
@@ -221,7 +228,7 @@ export const InvoiceForm: React.FC<Props> = ({ invoice, onSave, onCancel, onChan
               rows={4}
               placeholder={t('invoice.notesPlaceholder', { defaultValue: "Additional notes or legal mentions..." })}
               className="w-full bg-slate-50 border-none rounded-2xl p-4 text-sm focus:ring-2 focus:ring-blue-500 resize-none font-medium"
-              value={invoice.notes}
+              value={invoice.notes ?? ''}
               onChange={(e) => onChange({ ...invoice, notes: e.target.value })}
             />
           </div>
@@ -239,13 +246,13 @@ function InputGroup({ label, value, onChange, type = 'text', options = [], isTex
         <textarea 
           className="w-full bg-slate-50 border-none rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all resize-none shadow-sm focus:shadow-blue-100"
           rows={3}
-          value={value}
+          value={value ?? ''}
           onChange={e => onChange(e.target.value)}
         />
       ) : type === 'select' ? (
         <select 
           className="w-full bg-slate-50 border-none rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all shadow-sm focus:shadow-blue-100"
-          value={value}
+          value={value ?? ''}
           onChange={e => onChange(e.target.value)}
         >
           {options.map(o => {
@@ -258,7 +265,7 @@ function InputGroup({ label, value, onChange, type = 'text', options = [], isTex
         <input 
           type={type}
           className="w-full bg-slate-50 border-none rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all shadow-sm focus:shadow-blue-100"
-          value={value}
+          value={value ?? ''}
           onChange={e => onChange(e.target.value)}
         />
       )}

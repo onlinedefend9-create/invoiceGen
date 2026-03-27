@@ -53,6 +53,7 @@ import { Legal } from './components/Legal';
 import { PublicHeader } from './components/PublicHeader';
 import { PublicFooter } from './components/PublicFooter';
 import { AppFooter } from './components/AppFooter';
+import { AppLayout } from './components/AppLayout';
 
 function PublicLayout() {
   return (
@@ -133,7 +134,7 @@ export default function App() {
       template: 'modern'
     };
     setCurrentInvoice(newInvoice);
-    navigate('/dashboard/invoices/new');
+    navigate('/editer');
   };
 
   const handleSaveInvoice = (invoice: Invoice) => {
@@ -223,58 +224,101 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<PublicLayout />}>
-        <Route index element={<LandingPage onStart={() => navigate('/dashboard')} />} />
+        <Route index element={<LandingPage onStart={() => navigate('/editer')} />} />
         <Route path="features" element={<Features />} />
         <Route path="pricing" element={<Pricing />} />
         <Route path="faq" element={<FAQ />} />
-        <Route path="blog" element={<Blog onStart={() => navigate('/dashboard')} />} />
-        <Route path="blog/:slug" element={<BlogPost onStart={() => navigate('/dashboard')} />} />
+        <Route path="blog" element={<Blog onStart={() => navigate('/editer')} />} />
+        <Route path="blog/:slug" element={<BlogPost onStart={() => navigate('/editer')} />} />
         <Route path="legal" element={<Legal />} />
-        <Route path="generateur/facture-auto-entrepreneur" element={<MiniLandingPage niche="auto-entrepreneur" onStart={() => navigate('/dashboard')} />} />
-        <Route path="generateur/facture-prestation-service" element={<MiniLandingPage niche="prestation-service" onStart={() => navigate('/dashboard')} />} />
-        <Route path="generateur/facture-internationale" element={<MiniLandingPage niche="internationale" onStart={() => navigate('/dashboard')} />} />
+        <Route path="generateur/facture-auto-entrepreneur" element={<MiniLandingPage niche="auto-entrepreneur" onStart={() => navigate('/editer')} />} />
+        <Route path="generateur/facture-prestation-service" element={<MiniLandingPage niche="prestation-service" onStart={() => navigate('/editer')} />} />
+        <Route path="generateur/facture-internationale" element={<MiniLandingPage niche="internationale" onStart={() => navigate('/editer')} />} />
       </Route>
-      <Route path="/dashboard" element={
-        <DashboardLayout>
+      
+      <Route path="/" element={<AppLayout onCreate={handleCreateNew} />}>
+        <Route path="dashboard" element={
           <Dashboard 
             stats={stats}
             invoices={invoices}
             onViewAll={() => navigate('/dashboard')}
           />
-        </DashboardLayout>
-      } />
-      <Route path="/dashboard/invoices/new" element={
-        <DashboardLayout>
-          <InvoiceForm 
-            invoice={currentInvoice!} 
-            onSave={handleSaveInvoice} 
-            onCancel={() => navigate('/dashboard')} 
-            onChange={setCurrentInvoice}
-          />
-        </DashboardLayout>
-      } />
-      <Route path="/dashboard/invoices/:id/edit" element={
-        <DashboardLayout>
-          <InvoiceForm 
-            invoice={currentInvoice!} 
-            onSave={handleSaveInvoice} 
-            onCancel={() => navigate('/dashboard')} 
-            onChange={setCurrentInvoice}
-          />
-        </DashboardLayout>
-      } />
-      <Route path="/dashboard/invoices/:id/preview" element={
-        <DashboardLayout>
+        } />
+        <Route path="editer" element={
+          currentInvoice ? (
+            <div className="flex flex-col xl:flex-row gap-8 h-[calc(100vh-8rem)]">
+              <div className="flex-1 overflow-y-auto pr-2 xl:pr-4 pb-20">
+                <InvoiceForm 
+                  invoice={currentInvoice} 
+                  onSave={handleSaveInvoice} 
+                  onCancel={() => navigate('/dashboard')} 
+                  onChange={setCurrentInvoice}
+                  onPreview={() => navigate(`/dashboard/invoices/${currentInvoice.id}/preview`)}
+                />
+              </div>
+              <div className="flex-1 overflow-y-auto hidden xl:block pb-20">
+                <InvoicePreview 
+                  invoice={currentInvoice} 
+                  profile={profile}
+                  onExportPDF={() => handleExportPDF(currentInvoice)}
+                  onSendEmail={() => handleSendEmail(currentInvoice)}
+                  isExporting={isExporting}
+                  isSending={isSending}
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center justify-center h-full">
+              <button onClick={handleCreateNew} className="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold">
+                Créer une nouvelle facture
+              </button>
+            </div>
+          )
+        } />
+        <Route path="dashboard/invoices/:id/edit" element={
+          <div className="flex flex-col xl:flex-row gap-8 h-[calc(100vh-8rem)]">
+            <div className="flex-1 overflow-y-auto pr-2 xl:pr-4 pb-20">
+              <InvoiceForm 
+                invoice={currentInvoice!} 
+                onSave={handleSaveInvoice} 
+                onCancel={() => navigate('/dashboard')} 
+                onChange={setCurrentInvoice}
+                onPreview={() => navigate(`/dashboard/invoices/${currentInvoice!.id}/preview`)}
+              />
+            </div>
+            <div className="flex-1 overflow-y-auto hidden xl:block pb-20">
+              <InvoicePreview 
+                invoice={currentInvoice!} 
+                profile={profile}
+                onExportPDF={() => handleExportPDF(currentInvoice!)}
+                onSendEmail={() => handleSendEmail(currentInvoice!)}
+                isExporting={isExporting}
+                isSending={isSending}
+              />
+            </div>
+          </div>
+        } />
+        <Route path="dashboard/invoices/:id/preview" element={
           <InvoicePreview 
             invoice={currentInvoice!} 
+            profile={profile}
             onBack={() => navigate('/dashboard')}
             onExportPDF={() => handleExportPDF(currentInvoice!)}
             onSendEmail={() => handleSendEmail(currentInvoice!)}
             isExporting={isExporting}
             isSending={isSending}
           />
-        </DashboardLayout>
-      } />
+        } />
+        <Route path="dashboard/settings" element={
+          <ProfileSettings 
+            profile={profile} 
+            onSave={(p) => {
+              setProfile(p);
+              navigate('/dashboard');
+            }} 
+          />
+        } />
+      </Route>
     </Routes>
   );
 }
