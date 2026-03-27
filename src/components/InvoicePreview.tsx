@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { format, parseISO } from 'date-fns';
-import { ArrowLeft, Printer, Send, Loader2 } from 'lucide-react';
-import { Invoice, UserProfile, DocumentType } from '../types';
+import { ArrowLeft, Printer, Send, Loader2, Layout } from 'lucide-react';
+import { Invoice, UserProfile, DocumentType, TemplateType } from '../types';
 import { formatCurrency, cn } from '../lib/utils';
 import { useTranslation } from 'react-i18next';
 
@@ -11,12 +11,28 @@ interface Props {
   onBack?: () => void;
   onExportPDF: () => void;
   onSendEmail: () => void;
+  onTemplateChange?: (template: TemplateType) => void;
   isExporting: boolean;
   isSending: boolean;
 }
 
-export const InvoicePreview: React.FC<Props> = React.memo(({ invoice, profile, onBack, onExportPDF, onSendEmail, isExporting, isSending }) => {
+export const InvoicePreview: React.FC<Props> = React.memo(({ invoice, profile, onBack, onExportPDF, onSendEmail, onTemplateChange, isExporting, isSending }) => {
   const { t } = useTranslation();
+  const [previewTemplate, setPreviewTemplate] = useState<TemplateType>(invoice?.template || 'minimalist');
+
+  useEffect(() => {
+    if (invoice) {
+      setPreviewTemplate(invoice.template);
+    }
+  }, [invoice?.template]);
+
+  const handleTemplateChange = (template: TemplateType) => {
+    setPreviewTemplate(template);
+    if (onTemplateChange) {
+      onTemplateChange(template);
+    }
+  };
+
   if (!invoice) return null;
   const subtotal = invoice.items.reduce((sum, item) => sum + (item.quantity * item.unitPrice), 0);
   const tax = subtotal * (invoice.taxRate / 100);
@@ -113,7 +129,7 @@ export const InvoicePreview: React.FC<Props> = React.memo(({ invoice, profile, o
 
   const templates = {
     minimalist: (
-      <div className="space-y-12 text-slate-800 font-sans p-8 sm:p-12 bg-white min-h-[1000px] shadow-sm border border-slate-100">
+      <div className="space-y-12 text-slate-800 font-sans p-8 sm:p-12 bg-white min-h-[1123px]">
         <div className="flex justify-between items-start">
           <div>
             {profile.logoUrl && <img src={profile.logoUrl} alt="Logo" className="h-12 mb-4" referrerPolicy="no-referrer" />}
@@ -147,7 +163,7 @@ export const InvoicePreview: React.FC<Props> = React.memo(({ invoice, profile, o
       </div>
     ),
     corporate: (
-      <div className="bg-white min-h-[1000px] p-0 font-sans text-slate-800 shadow-sm border border-slate-100">
+      <div className="bg-white min-h-[1123px] p-0 font-sans text-slate-800">
         <div className="bg-slate-800 text-white p-8 sm:p-12 flex justify-between items-center">
           <div>
             {profile.logoUrl ? (
@@ -202,7 +218,7 @@ export const InvoicePreview: React.FC<Props> = React.memo(({ invoice, profile, o
       </div>
     ),
     modern: (
-      <div className="bg-white min-h-[1000px] p-8 sm:p-12 font-sans text-slate-900 relative overflow-hidden shadow-sm border border-slate-100">
+      <div className="bg-white min-h-[1123px] p-8 sm:p-12 font-sans text-slate-900 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-bl-full -z-10" />
         
         <div className="flex justify-between items-start mb-16">
@@ -252,7 +268,7 @@ export const InvoicePreview: React.FC<Props> = React.memo(({ invoice, profile, o
       </div>
     ),
     credit_note: (
-      <div className="bg-white min-h-[1000px] p-0 font-sans text-rose-900 border-t-8 border-rose-600 shadow-sm">
+      <div className="bg-white min-h-[1123px] p-0 font-sans text-rose-900 border-t-8 border-rose-600">
         <div className="p-8 sm:p-12 space-y-12">
           <div className="flex justify-between items-start border-b border-rose-100 pb-8">
             <div>
@@ -301,7 +317,20 @@ export const InvoicePreview: React.FC<Props> = React.memo(({ invoice, profile, o
             <ArrowLeft size={20} /> {t('common.back', { defaultValue: 'Back' })}
           </button>
         )}
-        <div className="flex flex-wrap gap-4 w-full sm:w-auto ml-auto">
+        <div className="flex flex-wrap gap-4 w-full sm:w-auto ml-auto items-center">
+          <div className="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2 shadow-sm">
+            <Layout size={18} className="text-slate-400" />
+            <select
+              value={previewTemplate}
+              onChange={(e) => handleTemplateChange(e.target.value as TemplateType)}
+              className="bg-transparent border-none text-sm font-bold text-slate-700 focus:ring-0 cursor-pointer outline-none"
+            >
+              <option value="minimalist">{t('invoice.templates.minimalist', { defaultValue: 'Minimalist' })}</option>
+              <option value="corporate">{t('invoice.templates.corporate', { defaultValue: 'Corporate' })}</option>
+              <option value="modern">{t('invoice.templates.modern', { defaultValue: 'Modern' })}</option>
+              <option value="credit_note">{t('invoice.templates.credit_note', { defaultValue: 'Credit Note' })}</option>
+            </select>
+          </div>
           <button onClick={onExportPDF} className="flex-1 sm:flex-none px-6 py-2 bg-white border border-slate-200 rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-slate-50 transition-all shadow-sm">
             {isExporting ? <Loader2 className="animate-spin" size={18} /> : <Printer size={18} />} {t('invoice.exportPdf', { defaultValue: 'Export PDF' })}
           </button>
@@ -310,8 +339,8 @@ export const InvoicePreview: React.FC<Props> = React.memo(({ invoice, profile, o
           </button>
         </div>
       </div>
-      <div className="w-full max-w-[800px] mx-auto shadow-2xl rounded-lg overflow-hidden">
-        {templates[invoice.template] || templates.minimalist}
+      <div id="invoice-render" className="w-full max-w-[800px] mx-auto shadow-2xl">
+        {templates[previewTemplate] || templates.minimalist}
       </div>
     </div>
   );

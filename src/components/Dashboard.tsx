@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   LayoutDashboard, 
   CheckCircle, 
@@ -26,11 +26,13 @@ import { useTranslation } from 'react-i18next';
 interface Props {
   stats: DashboardStats;
   invoices: Invoice[];
-  onViewAll: () => void;
+  onPreviewInvoice: (id: string) => void;
 }
 
-export const Dashboard: React.FC<Props> = ({ stats, invoices, onViewAll }) => {
+export const Dashboard: React.FC<Props> = ({ stats, invoices, onPreviewInvoice }) => {
   const { t } = useTranslation();
+  const [showAll, setShowAll] = useState(false);
+  
   const chartData = [
     { name: t('dashboard.months.jan', { defaultValue: 'Jan' }), revenue: 4000 },
     { name: t('dashboard.months.feb', { defaultValue: 'Feb' }), revenue: 3000 },
@@ -102,12 +104,16 @@ export const Dashboard: React.FC<Props> = ({ stats, invoices, onViewAll }) => {
         <div className="bg-white p-6 sm:p-10 rounded-[32px] sm:rounded-[40px] border border-slate-100 shadow-xl space-y-8">
           <div className="flex items-center justify-between">
             <h3 className="font-black text-xl sm:text-2xl tracking-tight">{t('dashboard.recentActivity', { defaultValue: 'Recent Activity' })}</h3>
-            <button onClick={onViewAll} className="text-[10px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-700 transition-colors">{t('common.viewAll', { defaultValue: 'View All' })}</button>
+            {invoices.length > 5 && (
+              <button onClick={() => setShowAll(!showAll)} className="text-[10px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-700 transition-colors">
+                {showAll ? t('common.showLess', { defaultValue: 'Show Less' }) : t('common.viewAll', { defaultValue: 'View All' })}
+              </button>
+            )}
           </div>
           
           <div className="space-y-6">
-            {invoices.slice(0, 5).map(inv => (
-              <div key={inv.id} className="flex items-center gap-4 group cursor-pointer">
+            {invoices.slice(0, showAll ? undefined : 5).map(inv => (
+              <div key={inv.id} onClick={() => onPreviewInvoice(inv.id)} className="flex items-center gap-4 group cursor-pointer hover:bg-slate-50 p-2 -mx-2 rounded-2xl transition-colors">
                 <div className={cn(
                   "w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110 shrink-0",
                   inv.status === 'paid' ? "bg-emerald-50 text-emerald-600" : "bg-blue-50 text-blue-600"

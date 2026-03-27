@@ -241,7 +241,13 @@ export default function App() {
           <Dashboard 
             stats={stats}
             invoices={invoices}
-            onViewAll={() => navigate('/dashboard')}
+            onPreviewInvoice={(id) => {
+              const invoice = invoices.find(i => i.id === id);
+              if (invoice) {
+                setCurrentInvoice(invoice);
+                navigate(`/dashboard/invoices/${id}/preview`);
+              }
+            }}
           />
         } />
         <Route path="editer" element={
@@ -262,6 +268,11 @@ export default function App() {
                   profile={profile}
                   onExportPDF={() => handleExportPDF(currentInvoice)}
                   onSendEmail={() => handleSendEmail(currentInvoice)}
+                  onTemplateChange={(template) => {
+                    const updatedInvoice = { ...currentInvoice, template };
+                    setCurrentInvoice(updatedInvoice);
+                    // We don't call updateInvoice here because it's a new unsaved invoice
+                  }}
                   isExporting={isExporting}
                   isSending={isSending}
                 />
@@ -292,6 +303,11 @@ export default function App() {
                 profile={profile}
                 onExportPDF={() => handleExportPDF(currentInvoice!)}
                 onSendEmail={() => handleSendEmail(currentInvoice!)}
+                onTemplateChange={(template) => {
+                  const updatedInvoice = { ...currentInvoice!, template };
+                  setCurrentInvoice(updatedInvoice);
+                  updateInvoice(updatedInvoice);
+                }}
                 isExporting={isExporting}
                 isSending={isSending}
               />
@@ -305,6 +321,11 @@ export default function App() {
             onBack={() => navigate('/dashboard')}
             onExportPDF={() => handleExportPDF(currentInvoice!)}
             onSendEmail={() => handleSendEmail(currentInvoice!)}
+            onTemplateChange={(template) => {
+              const updatedInvoice = { ...currentInvoice!, template };
+              setCurrentInvoice(updatedInvoice);
+              updateInvoice(updatedInvoice);
+            }}
             isExporting={isExporting}
             isSending={isSending}
           />
