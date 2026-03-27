@@ -47,32 +47,60 @@ const PulseInvoice = () => (
 );
 
 const TimelineAnimation = () => (
-  <div className="relative h-48 w-full bg-slate-50 rounded-[32px] overflow-hidden flex items-center justify-center px-12 my-12">
-    <div className="absolute h-1 w-full bg-slate-200 top-1/2 -translate-y-1/2" />
-    <div className="flex justify-between w-full relative z-10">
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-12 h-12 bg-white border-4 border-slate-200 rounded-full flex items-center justify-center font-black text-slate-400">2025</div>
-        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Standard</span>
+  <div className="relative py-16 px-8 bg-slate-900 rounded-[48px] my-16 overflow-hidden shadow-2xl border border-slate-800 not-prose">
+    <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 blur-[120px] rounded-full -mr-48 -mt-48" />
+    <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-600/10 blur-[100px] rounded-full -ml-48 -mb-48" />
+    
+    <div className="relative z-10 space-y-12">
+      <div className="text-center space-y-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-blue-500/20">
+          Calendrier Officiel DGFiP
+        </div>
+        <h4 className="text-3xl font-black text-white tracking-tighter">Transition vers la Facturation 2026</h4>
       </div>
-      <motion.div 
-        initial={{ scale: 0, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.5, type: "spring" }}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
-      >
-        <div className="bg-green-500 text-white px-4 py-2 rounded-lg font-black text-sm rotate-12 shadow-xl border-2 border-white">CONFORME</div>
-      </motion.div>
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-16 h-16 bg-blue-600 border-4 border-blue-100 rounded-full flex items-center justify-center font-black text-white shadow-xl">2026</div>
-        <span className="text-xs font-bold text-blue-600 uppercase tracking-widest">Réforme</span>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+        {/* Connector Line */}
+        <div className="hidden md:block absolute top-10 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
+        
+        {/* 2025 */}
+        <div className="relative space-y-6 text-center md:text-left group">
+          <div className="w-12 h-12 bg-slate-800 rounded-2xl flex items-center justify-center mx-auto md:mx-0 border border-slate-700 text-slate-500 font-black relative z-10 group-hover:border-slate-600 transition-colors">25</div>
+          <div className="space-y-2">
+            <h5 className="text-slate-400 font-black text-sm uppercase tracking-tight">Aujourd'hui</h5>
+            <p className="text-xs text-slate-500 font-bold leading-relaxed">Formats libres (PDF, Papier, Excel). Pas de transmission automatique.</p>
+          </div>
+        </div>
+
+        {/* 2026 */}
+        <div className="relative space-y-6 text-center md:text-left group">
+          <motion.div 
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ repeat: Infinity, duration: 4 }}
+            className="w-16 h-16 bg-blue-600 rounded-[24px] flex items-center justify-center mx-auto md:mx-0 border-4 border-slate-900 text-white font-black shadow-2xl shadow-blue-500/40 relative z-10"
+          >
+            26
+          </motion.div>
+          <div className="space-y-2">
+            <h5 className="text-blue-400 font-black text-sm uppercase tracking-tight">Septembre 2026</h5>
+            <p className="text-xs text-slate-300 font-bold leading-relaxed">
+              <span className="text-white">Obligation de réception</span> pour toutes les entreprises. Début de l'e-invoicing pour les ETI.
+            </p>
+          </div>
+        </div>
+
+        {/* 2027 */}
+        <div className="relative space-y-6 text-center md:text-left group">
+          <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center mx-auto md:mx-0 border border-slate-200 text-slate-900 font-black relative z-10 shadow-xl">27</div>
+          <div className="space-y-2">
+            <h5 className="text-white font-black text-sm uppercase tracking-tight">Septembre 2027</h5>
+            <p className="text-xs text-slate-300 font-bold leading-relaxed">
+              <span className="text-white">Obligation d'émission</span> pour les Freelances & PME. Généralisation du format Factur-X.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-    <motion.div 
-      initial={{ width: 0 }}
-      whileInView={{ width: "50%" }}
-      transition={{ duration: 1.5, ease: "easeInOut" }}
-      className="absolute h-1 bg-blue-600 top-1/2 -translate-y-1/2 left-0"
-    />
   </div>
 );
 
