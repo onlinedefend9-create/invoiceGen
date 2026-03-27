@@ -1,0 +1,5 @@
+{
+  "name": "InvoiceGen Pro",
+  "description": "A professional invoice generator with PDF export, dashboard analytics, and client management.",
+  "requestFramePermissions": []
+}
