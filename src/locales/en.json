@@ -1,4 +1,20 @@
 {
+  "faq": {
+    "heroBadge": "Help Center",
+    "heroTitle": "Frequently Asked Questions",
+    "heroSubtitle": "Everything you need to know about modern billing, security, and 2026 compliance.",
+    "ctaTitle": "Still have questions?",
+    "q1": "How does InvoiceGEN guarantee compliance with the 2026 electronic invoicing reform?",
+    "a1": "InvoiceGEN natively integrates all mandatory mentions required by the new French regulations. Our documents are generated in high-definition PDF format, optimized for legal archiving. We closely follow the developments of the Factur-X format to ensure that your exports will remain compatible with partner dematerialization platforms (PDP) and the public billing portal (PPF) as soon as they are fully deployed in 2026.",
+    "q2": "Are my bank and client data stored on your servers?",
+    "a2": "Absolutely not. InvoiceGEN is based on a 'Local-First' architecture. All the information you enter (client details, bank details, amounts) remains exclusively in your browser's local memory. Nothing is sent, stored, or processed on our servers. This is the technical guarantee of absolute confidentiality: you are the sole owner of your data.",
+    "q3": "Why is this service free and without registration?",
+    "a3": "Our mission is to remove administrative barriers for freelancers. By using your device's local storage, we eliminate the massive costs associated with hosting cloud databases. This technical efficiency allows us to offer a high-end professional tool for free, without needing to sell your data or impose a subscription on you.",
+    "q4": "Can I transform a quote into an invoice in one click?",
+    "a4": "Yes, the tool was designed to optimize your workflow. Once your quote is created, you can instantly convert it into an invoice. All data is transferred automatically, thus avoiding any double entry and reducing the risk of manual errors. It's a valuable time saver for your daily management.",
+    "q5": "Do I need to install software to use InvoiceGEN?",
+    "a5": "No, InvoiceGEN is a modern web application that works directly in your browser (Chrome, Safari, Firefox, Edge). It is also optimized for mobile, allowing you to generate an urgent invoice from your smartphone in a few seconds, without any download required."
+  },
   "pricing": {
     "heroBadge": "Total Transparency",
     "heroTitle": "Professional Billing shouldn't be a tax on your work.",

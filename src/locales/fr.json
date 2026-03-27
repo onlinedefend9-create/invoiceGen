@@ -1,4 +1,20 @@
 {
+  "faq": {
+    "heroBadge": "Centre d'aide",
+    "heroTitle": "Questions Fréquentes",
+    "heroSubtitle": "Tout ce que vous devez savoir sur la facturation moderne, la sécurité et la conformité 2026.",
+    "ctaTitle": "Vous avez encore des questions ?",
+    "q1": "Comment InvoiceGEN garantit-il la conformité avec la réforme de la facturation électronique 2026 ?",
+    "a1": "InvoiceGEN intègre nativement toutes les mentions obligatoires exigées par la nouvelle réglementation française. Nos documents sont générés au format PDF haute définition, optimisés pour l'archivage légal. Nous suivons de près les évolutions du format Factur-X pour garantir que vos exports resteront compatibles avec les plateformes de dématérialisation partenaires (PDP) et le portail public de facturation (PPF) dès leur déploiement complet en 2026.",
+    "q2": "Mes données bancaires et clients sont-elles stockées sur vos serveurs ?",
+    "a2": "Absolument pas. InvoiceGEN repose sur une architecture 'Local-First'. Toutes les informations que vous saisissez (coordonnées clients, RIB, montants) restent exclusivement dans la mémoire locale de votre navigateur. Rien n'est envoyé, stocké ou traité sur nos serveurs. C'est la garantie technique d'une confidentialité absolue : vous êtes le seul et unique propriétaire de vos données.",
+    "q3": "Pourquoi ce service est-il gratuit et sans inscription ?",
+    "a3": "Notre mission est de lever les barrières administratives pour les indépendants. En utilisant le stockage local de votre appareil, nous éliminons les coûts massifs liés à l'hébergement de bases de données cloud. Cette efficacité technique nous permet d'offrir un outil professionnel haut de gamme gratuitement, sans avoir besoin de vendre vos données ou de vous imposer un abonnement.",
+    "q4": "Puis-je transformer un devis en facture en un clic ?",
+    "a4": "Oui, l'outil a été pensé pour optimiser votre flux de travail. Une fois votre devis créé, vous pouvez le convertir instantanément en facture. Toutes les données sont transférées automatiquement, vous évitant ainsi toute double saisie et réduisant le risque d'erreurs manuelles. C'est un gain de temps précieux pour votre gestion quotidienne.",
+    "q5": "Dois-je installer un logiciel pour utiliser InvoiceGEN ?",
+    "a5": "Non, InvoiceGEN est une application web moderne qui fonctionne directement dans votre navigateur (Chrome, Safari, Firefox, Edge). Elle est également optimisée pour mobile, vous permettant de générer une facture urgente depuis votre smartphone en quelques secondes, sans aucun téléchargement requis."
+  },
   "pricing": {
     "heroBadge": "Transparence Totale",
     "heroTitle": "La Facturation Professionnelle ne devrait pas être une taxe sur votre travail.",
