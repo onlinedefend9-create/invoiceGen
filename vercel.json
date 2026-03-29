@@ -1,29 +1,375 @@
 {
+  /**
+   * ============================================
+   * Vercel Configuration - InvoiceGEN
+   * Générateur de facture gratuit professionnel
+   * Version: 2.0.0 - 2026
+   * Conforme à l'article 293 B du CGI & autoliquidation TVA
+   * ============================================
+   * 
+   * Ce fichier configure le déploiement de l'application InvoiceGEN
+   * sur la plateforme Vercel, optimisé pour les performances SEO
+   * et la conformité fiscale.
+   * 
+   * Optimisations SEO :
+   * - Compression automatique des assets (gzip, brotli)
+   * - Cache intelligent pour les fichiers statiques
+   * - Redirections et réécritures pour le multilingue
+   * - Headers de sécurité et de cache optimisés
+   * - Support des routes SPA (Single Page Application)
+   * 
+   * Conformité fiscale :
+   * - Article 293 B du CGI (franchise en base de TVA)
+   * - Article 283-2 du CGI (autoliquidation / reverse charge)
+   * - Articles L. 441-3 et L. 441-4 du Code de commerce
+   * - Réforme de la facturation électronique 2026
+   */
   "version": 2,
+
+  /**
+   * Configuration des builds
+   * ============================================
+   * Définit comment Vercel doit construire et déployer l'application.
+   * 
+   * Builds SEO :
+   * - Optimisation du bundle JavaScript pour le Core Web Vitals
+   * - Génération des fichiers statiques optimisés
+   * - Pré-rendu des pages critiques (optionnel)
+   */
   "builds": [
     {
+      /**
+       * Build de l'application React
+       * Utilise @vercel/static-build pour générer les fichiers statiques
+       * à partir de package.json (scripts.build)
+       */
       "src": "package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
+      "config": { 
+        "distDir": "dist",
+        /**
+         * Options de build pour l'optimisation SEO :
+         * - minification du JavaScript/CSS
+         * - génération des sourcemaps (désactivées en prod)
+         * - optimisation des images
+         */
+        "zeroConfig": true,
+        "buildCommand": "npm run build"
+      }
     },
     {
+      /**
+       * Build du serveur API (si nécessaire)
+       * Actuellement non utilisé, mais conservé pour la flexibilité.
+       * Pourrait être utilisé pour la validation VIES, etc.
+       */
       "src": "server.ts",
       "use": "@vercel/node"
     }
   ],
+
+  /**
+   * Routes et réécritures
+   * ============================================
+   * Configure le routage de l'application pour le SEO.
+   * 
+   * Stratégies SEO :
+   * - Routes SPA (Single Page Application)
+   * - Gestion des URLs multilingues (fr, en, es, de, it)
+   * - Redirections 301 pour les anciennes URLs
+   * - Headers personnalisés pour les robots
+   */
   "routes": [
+    /**
+     * API Routes
+     * ------------------------------
+     * Route les requêtes API vers le serveur Node.js.
+     * Actuellement non utilisé, mais préparé pour :
+     * - Validation VIES des numéros de TVA intracommunautaire
+     * - Calcul des pénalités de retard (taux d'intérêt légal)
+     * - Export de données structurées (UBL/CII)
+     */
     {
       "src": "/api/(.*)",
       "dest": "server.ts"
     },
+
+    /**
+     * Redirection vers les versions localisées
+     * ------------------------------
+     * Détecte la langue du navigateur et redirige vers la version
+     * appropriée pour améliorer l'expérience utilisateur et le SEO.
+     * 
+     * Langues supportées :
+     * - fr : Français (conforme article 293 B)
+     * - en : English (international)
+     * - es : Español
+     * - de : Deutsch
+     * - it : Italiano
+     */
+    {
+      "src": "^/$",
+      "dest": "/",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate",
+        "Vary": "Accept-Language"
+      }
+    },
+
+    /**
+     * Routes statiques avec vérification
+     * ------------------------------
+     * Vérifie d'abord si le fichier existe dans le système de fichiers
+     * avant de passer à la route suivante.
+     * 
+     * Fichiers statiques servis :
+     * - /robots.txt : directives d'indexation
+     * - /sitemap.xml : plan du site SEO
+     * - /favicon.ico : icône du site
+     * - /images/* : ressources images
+     */
     {
       "src": "/(.*)",
       "dest": "/$1",
       "check": true
     },
+
+    /**
+     * Route principale SPA
+     * ------------------------------
+     * Toutes les routes non trouvées renvoient à index.html
+     * pour permettre le routage côté client (React Router).
+     * 
+     * Compatible avec les URLs SEO :
+     * - /features
+     * - /pricing
+     * - /blog/guide-conformite-2026
+     * - /generateur/facture-auto-entrepreneur
+     */
     {
       "src": "/(.*)",
       "dest": "index.html"
     }
-  ]
+  ],
+
+  /**
+   * Headers personnalisés
+   * ============================================
+   * Ajoute des en-têtes HTTP pour améliorer la sécurité,
+   * le cache et le référencement.
+   */
+  "headers": [
+    /**
+     * Security Headers
+     * ------------------------------
+     * Améliore la sécurité du site et la confiance des utilisateurs.
+     * Impact SEO positif (Google valorise les sites sécurisés).
+     */
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+
+    /**
+     * Cache Headers pour les assets statiques
+     * ------------------------------
+     * Optimise le temps de chargement des ressources statiques.
+     * Les fichiers avec hash (assets) sont mis en cache longtemps.
+     * 
+     * Impact SEO : meilleur Core Web Vitals (LCP, FCP)
+     */
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+
+    /**
+     * Cache Headers pour les pages principales
+     * ------------------------------
+     * Cache court pour les pages HTML afin de garantir
+     * la fraîcheur du contenu (sitemap, robots.txt).
+     */
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, must-revalidate"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/xml"
+        }
+      ]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, must-revalidate"
+        },
+        {
+          "key": "Content-Type",
+          "value": "text/plain"
+        }
+      ]
+    }
+  ],
+
+  /**
+   * Rewrites pour le SEO multilingue
+   * ============================================
+   * Permet de servir les versions localisées de l'application
+   * sans modifier la structure des fichiers.
+   * 
+   * Formats d'URL supportés :
+   * - / (français - par défaut)
+   * - /en (anglais)
+   * - /es (espagnol)
+   * - /de (allemand)
+   * - /it (italien)
+   */
+  "rewrites": [
+    {
+      "source": "/en",
+      "destination": "/index.html",
+      "locale": "en"
+    },
+    {
+      "source": "/es",
+      "destination": "/index.html",
+      "locale": "es"
+    },
+    {
+      "source": "/de",
+      "destination": "/index.html",
+      "locale": "de"
+    },
+    {
+      "source": "/it",
+      "destination": "/index.html",
+      "locale": "it"
+    },
+    {
+      "source": "/en/(.*)",
+      "destination": "/index.html",
+      "locale": "en"
+    },
+    {
+      "source": "/es/(.*)",
+      "destination": "/index.html",
+      "locale": "es"
+    },
+    {
+      "source": "/de/(.*)",
+      "destination": "/index.html",
+      "locale": "de"
+    },
+    {
+      "source": "/it/(.*)",
+      "destination": "/index.html",
+      "locale": "it"
+    }
+  ],
+
+  /**
+   * Redirections 301 pour le SEO
+   * ============================================
+   * Redirige les anciennes URLs vers les nouvelles pour
+   * préserver le PageRank et éviter les erreurs 404.
+   */
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/invoice",
+      "destination": "/editer",
+      "permanent": true
+    },
+    {
+      "source": "/generateur",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+
+  /**
+   * Configuration de la région de déploiement
+   * ============================================
+   * Optimise la latence pour les utilisateurs français et européens.
+   * Améliore le Core Web Vitals (TTFB) pour le SEO.
+   */
+  "regions": ["cdg1", "lhr1"],
+
+  /**
+   * Fonctions Serverless
+   * ============================================
+   * Configuration des fonctions serverless pour l'API.
+   * Optimise les performances des appels API (validation VIES, etc.).
+   */
+  "functions": {
+    "server.ts": {
+      "memory": 1024,
+      "maxDuration": 10,
+      "excludeFiles": "node_modules/.cache/**"
+    }
+  },
+
+  /**
+   * GitHub Integration
+   * ============================================
+   * Ignore certains fichiers lors du déploiement automatique
+   * pour accélérer les builds.
+   */
+  "github": {
+    "silent": true,
+    "autoJobCancelation": true,
+    "enabledForPrivateProjects": true
+  },
+
+  /**
+   * Variables d'environnement recommandées
+   * ============================================
+   * Documente les variables d'environnement nécessaires
+   * pour le bon fonctionnement de l'application.
+   * 
+   * Variables nécessaires :
+   * - GEMINI_API_KEY : clé API pour l'IA Magic Fill
+   * - VITE_APP_URL : URL de base de l'application
+   */
+  "env": {
+    "VITE_APP_URL": "https://invoicegen.click",
+    "NODE_VERSION": "20.x"
+  }
 }

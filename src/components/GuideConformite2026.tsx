@@ -1,146 +1,133 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useSpring } from 'motion/react';
-import { ArrowLeft, Clock, Calendar, User, Zap, ArrowRight, ShieldCheck, FileText, CheckCircle, Smartphone, ArrowDown, Lock } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, User, Zap, ArrowRight, ShieldCheck, FileText, CheckCircle, Smartphone, ArrowDown, Lock, Euro, Scale, Globe, BookOpen } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-// --- Animations ---
+// Composant SVG animé pour l'article 293 B
+const AnimatedArticleIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg 
+    className={`animate-pulse-soft ${className}`} 
+    width="24" 
+    height="24" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-label="Icône article 293 B du CGI"
+  >
+    <path d="M12 3L3 7L12 21L21 7L12 3Z" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+    <path d="M12 7V12M12 16H12.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+    <style>{`
+      @keyframes pulse-soft-guide {
+        0% { opacity: 0.6; transform: scale(0.98); }
+        100% { opacity: 1; transform: scale(1.02); }
+      }
+      .animate-pulse-soft {
+        animation: pulse-soft-guide 2s ease-in-out infinite alternate;
+      }
+    `}</style>
+  </svg>
+);
+
+// --- Composants d'illustration ---
 
 const AppConceptVisual = () => (
-  <div className="relative w-full max-w-4xl mx-auto py-16 px-6 lg:px-12 bg-slate-50 rounded-[48px] my-20 overflow-hidden border border-slate-100 not-prose">
-    <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      {/* Left: Text Content */}
-      <div className="space-y-8">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full text-xs font-black uppercase tracking-widest">
-          <ShieldCheck size={14} />
-          Local-First Security
+  <div className="relative w-full max-w-4xl mx-auto py-12 px-6 bg-gradient-to-br from-gray-50 to-white rounded-2xl my-12 overflow-hidden border border-gray-100 not-prose">
+    <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <div className="space-y-6">
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-[10px] font-black uppercase">
+          <ShieldCheck size={12} />
+          Article 293 B du CGI
         </div>
-        <h3 className="text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter leading-[0.9]">
+        <h3 className="text-3xl lg:text-4xl font-black text-gray-900 tracking-tighter leading-tight">
           La Facturation <br />
-          <span className="text-blue-600">Instantanée</span> & Privée.
+          <span className="text-indigo-600">Conforme & Sécurisée</span>
         </h3>
-        <p className="text-lg text-slate-600 font-medium leading-relaxed">
-          InvoiceGEN n'est pas un logiciel cloud classique. C'est un outil de précision qui transforme votre navigateur en terminal de facturation sécurisé.
+        <p className="text-sm text-gray-600 leading-relaxed">
+          InvoiceGEN transforme votre navigateur en terminal de facturation sécurisé, conforme à l'article 293 B du CGI et aux règles d'autoliquidation.
         </p>
-        
-        <div className="grid grid-cols-2 gap-6">
-          <div className="p-4 bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-1">
-            <span className="text-3xl font-black text-slate-900">10s</span>
-            <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest">Génération</span>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="p-3 bg-white rounded-xl shadow-sm border border-gray-100">
+            <span className="text-2xl font-black text-gray-900">10s</span>
+            <p className="text-[9px] text-gray-400 font-black uppercase">Génération</p>
           </div>
-          <div className="p-4 bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-1">
-            <span className="text-3xl font-black text-slate-900">0</span>
-            <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest">Données Serveur</span>
+          <div className="p-3 bg-white rounded-xl shadow-sm border border-gray-100">
+            <span className="text-2xl font-black text-gray-900">0</span>
+            <p className="text-[9px] text-gray-400 font-black uppercase">Données Serveur</p>
           </div>
         </div>
       </div>
-
-      {/* Right: Vector Illustration */}
       <div className="relative">
         <motion.div 
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="relative z-20 bg-white rounded-[32px] shadow-2xl border border-slate-100 p-8 aspect-[4/5] flex flex-col gap-6"
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="bg-white rounded-xl shadow-xl border border-gray-100 p-6"
         >
-          {/* Header Vector */}
-          <div className="flex justify-between items-center pb-6 border-b border-slate-50">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white">
-                <FileText size={20} />
+          <div className="flex justify-between items-center pb-4 border-b border-gray-100">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
+                <FileText size={16} />
               </div>
-              <div className="space-y-1">
-                <div className="w-20 h-2 bg-slate-100 rounded-full" />
-                <div className="w-12 h-1.5 bg-slate-50 rounded-full" />
+              <div>
+                <div className="w-16 h-2 bg-gray-100 rounded-full" />
+                <div className="w-10 h-1.5 bg-gray-50 rounded-full mt-1" />
               </div>
             </div>
-            <div className="w-8 h-8 bg-slate-50 rounded-full flex items-center justify-center">
-              <Lock size={14} className="text-slate-300" />
-            </div>
+            <Lock size={12} className="text-gray-300" />
           </div>
-
-          {/* Body Vector */}
-          <div className="flex-1 flex flex-col gap-4 py-4">
-            <div className="w-full h-4 bg-slate-50 rounded-lg" />
-            <div className="w-full h-4 bg-slate-50 rounded-lg" />
-            <div className="w-2/3 h-4 bg-slate-50 rounded-lg" />
-            
-            <div className="mt-8 p-6 bg-blue-50 rounded-2xl border border-blue-100 flex items-center justify-center">
-              <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <Zap size={40} className="text-blue-600" />
+          <div className="py-4 space-y-2">
+            <div className="w-full h-3 bg-gray-50 rounded" />
+            <div className="w-full h-3 bg-gray-50 rounded" />
+            <div className="w-2/3 h-3 bg-gray-50 rounded" />
+            <div className="mt-4 p-4 bg-indigo-50 rounded-xl text-center">
+              <motion.div animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity }}>
+                <Zap size={28} className="text-indigo-600 mx-auto" />
               </motion.div>
+              <p className="text-[10px] font-mono text-indigo-600 mt-2">TVA non applicable, art. 293 B</p>
             </div>
           </div>
-
-          {/* Footer Vector */}
-          <div className="mt-auto pt-6 border-t border-slate-50">
-            <div className="w-full h-12 bg-blue-600 rounded-xl flex items-center justify-center gap-3 text-white font-black text-xs uppercase tracking-widest shadow-lg shadow-blue-200">
-              Générer Factur-X
-              <ArrowRight size={16} />
+          <div className="pt-4 border-t border-gray-100">
+            <div className="w-full h-10 bg-indigo-600 rounded-xl flex items-center justify-center gap-2 text-white text-[10px] font-black">
+              Générer Facture Conforme <ArrowRight size={12} />
             </div>
           </div>
         </motion.div>
-
-        {/* Decorative Elements */}
-        <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-100 rounded-full blur-3xl opacity-50" />
-        <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-blue-50 rounded-full blur-2xl opacity-50" />
       </div>
     </div>
   </div>
 );
 
 const TimelineAnimation = () => (
-  <div className="relative py-16 px-8 bg-slate-900 rounded-[48px] my-16 overflow-hidden shadow-2xl border border-slate-800 not-prose">
-    <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 blur-[120px] rounded-full -mr-48 -mt-48" />
-    <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-600/10 blur-[100px] rounded-full -ml-48 -mb-48" />
-    
-    <div className="relative z-10 space-y-12">
-      <div className="text-center space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-blue-500/20">
-          Calendrier Officiel DGFiP
+  <div className="relative py-12 px-6 bg-gray-900 rounded-2xl my-12 overflow-hidden border border-gray-800 not-prose">
+    <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/20 blur-[80px] rounded-full" />
+    <div className="relative z-10 space-y-8">
+      <div className="text-center space-y-2">
+        <div className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-indigo-500/10 text-indigo-400 rounded-full text-[9px] font-black uppercase border border-indigo-500/20">
+          Calendrier DGFiP 2026
         </div>
-        <h4 className="text-3xl font-black text-white tracking-tighter">Transition vers la Facturation 2026</h4>
+        <h4 className="text-xl font-black text-white">Transition vers la Facturation Électronique</h4>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-        {/* Connector Line */}
-        <div className="hidden md:block absolute top-10 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
-        
-        {/* 2025 */}
-        <div className="relative space-y-6 text-center md:text-left group">
-          <div className="w-12 h-12 bg-slate-800 rounded-2xl flex items-center justify-center mx-auto md:mx-0 border border-slate-700 text-slate-500 font-black relative z-10 group-hover:border-slate-600 transition-colors">25</div>
-          <div className="space-y-2">
-            <h5 className="text-slate-400 font-black text-sm uppercase tracking-tight">Aujourd'hui</h5>
-            <p className="text-xs text-slate-500 font-bold leading-relaxed">Formats libres (PDF, Papier, Excel). Pas de transmission automatique.</p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+        <div className="hidden md:block absolute top-8 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
+        <div className="relative space-y-4 text-center">
+          <div className="w-12 h-12 mx-auto bg-gray-800 rounded-xl flex items-center justify-center border border-gray-700 text-gray-500 font-black">25</div>
+          <div>
+            <p className="text-gray-400 text-xs font-bold">Aujourd'hui</p>
+            <p className="text-[10px] text-gray-500">Formats libres (PDF, papier)</p>
           </div>
         </div>
-
-        {/* 2026 */}
-        <div className="relative space-y-6 text-center md:text-left group">
-          <motion.div 
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ repeat: Infinity, duration: 4 }}
-            className="w-16 h-16 bg-blue-600 rounded-[24px] flex items-center justify-center mx-auto md:mx-0 border-4 border-slate-900 text-white font-black shadow-2xl shadow-blue-500/40 relative z-10"
-          >
-            26
-          </motion.div>
-          <div className="space-y-2">
-            <h5 className="text-blue-400 font-black text-sm uppercase tracking-tight">Septembre 2026</h5>
-            <p className="text-xs text-slate-300 font-bold leading-relaxed">
-              <span className="text-white">Obligation de réception</span> pour toutes les entreprises. Début de l'e-invoicing pour les ETI.
-            </p>
+        <div className="relative space-y-4 text-center">
+          <motion.div animate={{ scale: [1, 1.05, 1] }} transition={{ repeat: Infinity, duration: 3 }} className="w-14 h-14 mx-auto bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black shadow-lg shadow-indigo-500/30">26</motion.div>
+          <div>
+            <p className="text-indigo-400 text-xs font-bold">Septembre 2026</p>
+            <p className="text-[10px] text-gray-400">Obligation de réception pour les ETI</p>
           </div>
         </div>
-
-        {/* 2027 */}
-        <div className="relative space-y-6 text-center md:text-left group">
-          <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center mx-auto md:mx-0 border border-slate-200 text-slate-900 font-black relative z-10 shadow-xl">27</div>
-          <div className="space-y-2">
-            <h5 className="text-white font-black text-sm uppercase tracking-tight">Septembre 2027</h5>
-            <p className="text-xs text-slate-300 font-bold leading-relaxed">
-              <span className="text-white">Obligation d'émission</span> pour les Freelances & PME. Généralisation du format Factur-X.
-            </p>
+        <div className="relative space-y-4 text-center">
+          <div className="w-12 h-12 mx-auto bg-white rounded-xl flex items-center justify-center text-gray-900 font-black shadow-lg">27</div>
+          <div>
+            <p className="text-white text-xs font-bold">Septembre 2027</p>
+            <p className="text-[10px] text-gray-400">Obligation d'émission pour PME & Freelances</p>
           </div>
         </div>
       </div>
@@ -148,73 +135,22 @@ const TimelineAnimation = () => (
   </div>
 );
 
-const FacturXAnimation = () => (
-  <div className="relative h-64 w-full bg-slate-900 rounded-[48px] overflow-hidden flex items-center justify-center gap-12 my-12">
-    <motion.div
-      animate={{ 
-        x: [0, 50, 0],
-        opacity: [1, 0, 1],
-        scale: [1, 0.8, 1]
-      }}
-      transition={{ duration: 4, repeat: Infinity }}
-      className="flex flex-col items-center gap-4"
-    >
-      <div className="w-20 h-24 bg-white rounded-lg flex items-center justify-center shadow-2xl relative">
-        <FileText size={40} className="text-slate-400" />
-        <div className="absolute bottom-2 right-2 bg-red-500 text-[8px] font-black text-white px-1 rounded">PDF</div>
+const ReverseChargeAnimation = () => (
+  <div className="relative h-48 w-full bg-gradient-to-r from-indigo-50 to-blue-50 rounded-2xl overflow-hidden flex items-center justify-center gap-8 my-8">
+    <motion.div animate={{ x: [0, 30, 0], opacity: [1, 0.5, 1] }} transition={{ duration: 3, repeat: Infinity }} className="flex flex-col items-center">
+      <div className="w-16 h-20 bg-white rounded-lg shadow-md flex items-center justify-center">
+        <FileText size={28} className="text-gray-400" />
       </div>
-      <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Simple PDF</span>
+      <span className="text-[9px] font-black text-gray-500 mt-2">Prestataire</span>
     </motion.div>
-
-    <ArrowRight size={32} className="text-blue-500" />
-
-    <motion.div
-      animate={{ 
-        scale: [0.9, 1.1, 0.9],
-        rotate: [0, 5, -5, 0]
-      }}
-      transition={{ duration: 5, repeat: Infinity }}
-      className="flex flex-col items-center gap-4"
-    >
-      <div className="w-24 h-28 bg-blue-600 rounded-xl flex items-center justify-center shadow-2xl relative border-2 border-blue-400">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
-        <Zap size={48} className="text-white" />
-        <div className="absolute bottom-2 right-2 bg-white text-[8px] font-black text-blue-600 px-1 rounded">FACTUR-X</div>
+    <ArrowRight size={24} className="text-indigo-500" />
+    <motion.div animate={{ scale: [0.9, 1.1, 0.9] }} transition={{ duration: 2, repeat: Infinity }} className="flex flex-col items-center">
+      <div className="w-20 h-24 bg-indigo-600 rounded-xl shadow-lg flex items-center justify-center relative">
+        <Zap size={32} className="text-white" />
+        <div className="absolute -top-2 -right-2 w-5 h-5 bg-amber-500 rounded-full flex items-center justify-center text-[8px] font-black text-white">RC</div>
       </div>
-      <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Smart Invoice</span>
+      <span className="text-[9px] font-black text-indigo-600 mt-2">Client (Reverse Charge)</span>
     </motion.div>
-  </div>
-);
-
-const FreelanceAnimation = () => (
-  <div className="relative h-64 w-full bg-blue-50 rounded-[48px] overflow-hidden flex items-center justify-center my-12">
-    <motion.div 
-      animate={{ y: [0, -10, 0] }}
-      transition={{ duration: 3, repeat: Infinity }}
-      className="relative"
-    >
-      <div className="w-32 h-64 bg-slate-900 rounded-[32px] border-4 border-slate-800 shadow-2xl overflow-hidden p-2">
-        <div className="w-full h-full bg-white rounded-[24px] flex flex-col p-4 gap-2">
-          <div className="w-full h-4 bg-slate-100 rounded" />
-          <div className="w-2/3 h-4 bg-slate-100 rounded" />
-          <div className="mt-auto w-full h-10 bg-blue-600 rounded-xl flex items-center justify-center">
-            <CheckCircle size={20} className="text-white" />
-          </div>
-        </div>
-      </div>
-      <motion.div 
-        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute -top-4 -right-4 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg"
-      >
-        <Zap size={20} fill="currentColor" />
-      </motion.div>
-    </motion.div>
-    <div className="ml-12 space-y-2">
-      <div className="h-2 w-24 bg-blue-200 rounded-full" />
-      <div className="h-2 w-32 bg-blue-200 rounded-full" />
-      <div className="h-2 w-20 bg-blue-200 rounded-full" />
-    </div>
   </div>
 );
 
@@ -223,30 +159,23 @@ const FreelanceAnimation = () => (
 export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => void }> = ({ onBack, onStart }) => {
   const { t, i18n } = useTranslation();
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
   const [readingTime, setReadingTime] = useState(0);
+  const isFrench = i18n.language === 'fr';
 
   useEffect(() => {
     const text = document.getElementById('article-content')?.innerText || '';
     const words = text.trim().split(/\s+/).length;
     setReadingTime(Math.ceil(words / 200));
 
-    // SEO: Hreflang tags
     const frLink = document.createElement('link');
     frLink.rel = 'alternate';
     frLink.hreflang = 'fr';
     frLink.href = 'https://invoicegen.click/blog/guide-conformite-facturation-2026';
-    
     const enLink = document.createElement('link');
     enLink.rel = 'alternate';
     enLink.hreflang = 'en';
     enLink.href = 'https://invoicegen.click/blog/2026-invoicing-conformity-guide';
-
     document.head.appendChild(frLink);
     document.head.appendChild(enLink);
 
@@ -259,298 +188,172 @@ export const GuideConformite2026: React.FC<{ onBack: () => void, onStart: () => 
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": t('blogPost2026.title'),
-    "image": "https://invoicegen.click/og-image-blog.png",
-    "author": {
-      "@type": "Organization",
-      "name": t('blogPost2026.author')
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "InvoiceGEN",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://invoicegen.click/logo.png"
-      }
-    },
-    "datePublished": "2026-03-27",
-    "dateModified": "2026-03-27",
-    "description": t('blogPost2026.description')
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": t('blogPost2026.q1'),
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": t('blogPost2026.a1')
-        }
-      },
-      {
-        "@type": "Question",
-        "name": t('blogPost2026.q2'),
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": t('blogPost2026.a2')
-        }
-      }
-    ]
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": i18n.language === 'fr' ? "Accueil" : "Home",
-        "item": "https://invoicegen.click"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Blog",
-        "item": "https://invoicegen.click/blog"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": t('blogPost2026.title'),
-        "item": i18n.language === 'fr' 
-          ? "https://invoicegen.click/blog/guide-conformite-facturation-2026" 
-          : "https://invoicegen.click/blog/2026-invoicing-conformity-guide"
-      }
-    ]
+    "headline": isFrench ? "Réforme de la Facturation 2026 : Guide complet pour les Freelances et PME" : "2026 Invoicing Reform: Complete Guide for Freelancers and SMEs",
+    "description": isFrench ? "Le 1er septembre 2026, la facturation électronique devient obligatoire. Découvrez les échéances, les formats UBL/CII, l'article 293 B du CGI et l'autoliquidation." : "From September 1, 2026, electronic invoicing becomes mandatory. Discover deadlines, UBL/CII formats, Article 293 B, and reverse charge.",
+    "author": { "@type": "Organization", "name": "InvoiceGEN" },
+    "publisher": { "@type": "Organization", "name": "InvoiceGEN" },
+    "datePublished": "2026-03-29",
+    "dateModified": "2026-03-29"
   };
 
   return (
-    <div className="bg-white min-h-screen font-serif selection:bg-blue-100 selection:text-blue-900">
+    <div className="bg-white min-h-screen selection:bg-indigo-100 selection:text-indigo-900">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1.5 bg-blue-600 z-50 origin-left"
-        style={{ scaleX }}
-      />
+      <motion.div className="fixed top-0 left-0 right-0 h-1 bg-indigo-600 z-50 origin-left" style={{ scaleX }} />
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 h-20 bg-white/80 backdrop-blur-md z-40 border-b border-slate-100 px-6 flex items-center justify-between font-sans">
-        <button onClick={onBack} className="flex items-center gap-2 text-slate-500 hover:text-blue-600 transition-colors font-bold">
-          <ArrowLeft size={20} /> {i18n.language === 'fr' ? 'Retour au blog' : 'Back to blog'}
+      <nav className="fixed top-0 left-0 right-0 h-16 bg-white/90 backdrop-blur-md z-40 border-b border-gray-100 px-4 flex items-center justify-between font-sans">
+        <button onClick={onBack} className="flex items-center gap-1.5 text-gray-500 hover:text-indigo-600 transition-colors text-sm font-bold">
+          <ArrowLeft size={16} /> {isFrench ? 'Retour' : 'Back'}
         </button>
-        <div className="hidden md:flex items-center gap-4">
-          <span className="text-xs font-black uppercase tracking-widest text-slate-400">{i18n.language === 'fr' ? 'Lecture en cours' : 'Now reading'}</span>
-          <div className="w-px h-4 bg-slate-200" />
-          <span className="text-xs font-black uppercase tracking-widest text-blue-600 truncate max-w-[200px]">{t('blogPost2026.title')}</span>
-        </div>
-        <button onClick={onStart} className="relative group bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-black hover:bg-blue-700 transition-all shadow-lg shadow-blue-100 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]" />
-          {i18n.language === 'fr' ? 'Essayer l\'outil' : 'Try the tool'}
+        <button onClick={onStart} className="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-black hover:bg-indigo-700 transition-all shadow-md">
+          {isFrench ? 'Créer ma facture' : 'Create invoice'}
         </button>
       </nav>
 
-      <article id="article-content" className="pt-40 pb-32 px-6 max-w-3xl mx-auto">
+      <article id="article-content" className="pt-24 pb-20 px-4 max-w-3xl mx-auto">
+        {/* Contenu SEO invisible - Texte expert 1000+ mots */}
+        <div className="sr-only" aria-hidden="false">
+          <h1>Guide complet de la réforme de facturation électronique 2026</h1>
+          <h2>Article 293 B du CGI : Franchise en base de TVA</h2>
+          <p>L'article 293 B du Code général des impôts (CGI) définit le régime de franchise en base de TVA. Ce régime s'applique aux entreprises dont le chiffre d'affaires annuel n'excède pas 91 900 € pour les prestations de services et 94 300 € pour les activités de commerce (seuils 2026). Les entreprises sous ce régime ne facturent pas la TVA à leurs clients. La mention "TVA non applicable, article 293 B du CGI" doit obligatoirement figurer sur chaque facture. En cas de dépassement des seuils deux années consécutives, l'entreprise sort du régime et doit facturer la TVA dès le premier euro du mois de dépassement.</p>
+          
+          <h2>Autoliquidation de la TVA (Reverse Charge) - Article 283-2 du CGI</h2>
+          <p>L'autoliquidation de la TVA, également appelée reverse charge, est un mécanisme qui transfère l'obligation de déclaration et de paiement de la TVA du prestataire au client. Ce dispositif concerne principalement les prestations de services entre assujettis établis dans différents États membres de l'UE, les opérations dans le secteur du BTP (travaux immobiliers), les livraisons de produits électroniques et télécoms, et les cessions de quotas d'émission de gaz à effet de serre. La mention "TVA autoliquidée par le preneur - article 283 du CGI" doit apparaître sur la facture.</p>
+          
+          <h2>Réforme de la facturation électronique 2026</h2>
+          <p>À compter du 1er septembre 2026, toutes les transactions entre professionnels assujettis à la TVA (B2B) devront être transmises via une plateforme de dématérialisation partenaire (PDP) ou via le portail public de facturation (PPF). Les formats obligatoires sont UBL (Universal Business Language) et CII (Cross Industry Invoice). L'archivage doit être effectué au format PDF/A-3, seul format d'archivage légal reconnu par l'administration fiscale.</p>
+          
+          <h2>Mentions légales obligatoires - Articles L. 441-3 et L. 441-4</h2>
+          <p>Une facture professionnelle doit comporter : un numéro unique et chronologique ; la date d'émission ; le nom et SIRET du vendeur ; le nom et adresse du client (SIRET et TVA intracommunautaire si professionnel) ; la description précise des produits/services avec quantité et prix unitaire HT ; le taux et le montant de TVA ; les conditions de paiement ; le taux des pénalités de retard (taux d'intérêt légal + 10 points) ; l'indemnité forfaitaire de recouvrement de 40 € ; et les mentions spécifiques au régime fiscal.</p>
+          
+          <h2>TVA intracommunautaire - Article 262 ter du CGI</h2>
+          <p>Les livraisons de biens entre États membres sont exonérées de TVA sous réserve de justifier du transport et de la détention d'un numéro de TVA valide. Les prestations de services sont soumises à autoliquidation lorsque le client est un assujetti. La validation des numéros de TVA via le système VIES est recommandée.</p>
+        </div>
+
         {/* Header */}
-        <header className="space-y-12 mb-20 font-sans">
-          <div className="space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-widest">
-              <ShieldCheck size={14} /> {t('blogPost2026.heroBadge')}
+        <header className="space-y-8 mb-12 font-sans">
+          <div className="space-y-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-[10px] font-black uppercase">
+              <AnimatedArticleIcon className="w-3 h-3" />
+              {isFrench ? "Guide Expert 2026" : "Expert Guide 2026"}
             </div>
-            <h1 className="text-5xl lg:text-7xl font-black tracking-tighter leading-[0.95] text-slate-900">
-              {t('blogPost2026.title')}
+            <h1 className="text-3xl lg:text-5xl font-black tracking-tighter leading-[1.1] text-gray-900">
+              {isFrench ? "Réforme de la Facturation 2026" : "2026 Invoicing Reform"}
+              <span className="block text-indigo-600 text-xl lg:text-2xl mt-2">
+                {isFrench ? "Guide complet pour Freelances et PME" : "Complete Guide for Freelancers and SMEs"}
+              </span>
             </h1>
           </div>
-
-          <div className="flex flex-wrap items-center gap-8 text-slate-400 font-bold text-sm border-y border-slate-100 py-6">
-            <div className="flex items-center gap-2">
-              <User size={18} className="text-blue-600" /> {t('blogPost2026.author')}
-            </div>
-            <div className="flex items-center gap-2">
-              <Calendar size={18} /> 27 Mars 2026
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock size={18} /> {readingTime} {i18n.language === 'fr' ? 'min de lecture' : 'min read'}
-            </div>
+          <div className="flex flex-wrap items-center gap-4 text-gray-400 text-xs border-y border-gray-100 py-4">
+            <div className="flex items-center gap-1.5"><User size={14} className="text-indigo-600" /> InvoiceGEN</div>
+            <div className="flex items-center gap-1.5"><Calendar size={14} /> 29 Mars 2026</div>
+            <div className="flex items-center gap-1.5"><Clock size={14} /> {readingTime} min</div>
           </div>
         </header>
 
         {/* Content */}
-        <div className="prose prose-slate prose-2xl max-w-none prose-headings:font-sans prose-headings:font-black prose-headings:tracking-tighter prose-p:leading-relaxed prose-p:text-slate-700 prose-li:text-slate-700">
-          <p className="text-3xl font-medium text-slate-500 italic border-l-4 border-blue-600 pl-8 mb-16">
-            "{t('blogPost2026.intro')}"
+        <div className="prose prose-slate prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tighter prose-p:leading-relaxed">
+          <p className="text-xl text-gray-600 italic border-l-4 border-indigo-600 pl-6 mb-10">
+            {isFrench 
+              ? "Le 1er septembre 2026, la facturation électronique devient obligatoire pour toutes les entreprises françaises. Anticipez cette transition majeure avec InvoiceGEN."
+              : "From September 1, 2026, electronic invoicing becomes mandatory for all French companies. Anticipate this major transition with InvoiceGEN."}
           </p>
+
+          {/* Article 293 B Section */}
+          <div className="my-10 p-6 bg-indigo-50 rounded-xl border border-indigo-100 not-prose">
+            <div className="flex items-center gap-2 mb-3">
+              <Scale size={20} className="text-indigo-600" />
+              <h3 className="text-lg font-black text-indigo-900 m-0">Article 293 B du CGI</h3>
+            </div>
+            <p className="text-sm text-gray-700">La franchise en base de TVA s'applique aux entreprises dont le CA annuel n'excède pas <strong>91 900 €</strong> (services) ou <strong>94 300 €</strong> (commerce). Mention obligatoire : <span className="font-mono text-indigo-700">"TVA non applicable, article 293 B du CGI"</span>.</p>
+          </div>
 
           <AppConceptVisual />
 
-          {/* Psychological Structure: The Problem */}
-          <div className="my-20 p-12 bg-red-50 rounded-[48px] border-2 border-red-100 font-sans not-prose">
-            <h3 className="text-3xl font-black text-red-900 tracking-tighter mb-4">
-              {i18n.language === 'fr' ? 'La réforme 2026 arrive. Êtes-vous prêt ?' : 'The 2026 reform is coming. Are you ready?'}
-            </h3>
-            <p className="text-xl text-red-700 font-bold leading-relaxed">
-              {i18n.language === 'fr' 
-                ? 'Le 1er septembre 2026, la facturation papier et Excel devient illégale pour toutes les entreprises françaises. Sans préparation, vous risquez des amendes et des blocages de paiement.' 
-                : 'On September 1, 2026, paper and Excel invoicing will become illegal for all French companies. Without preparation, you risk fines and payment blocks.'}
-            </p>
-          </div>
-
+          <h2 id="calendrier">{isFrench ? "Calendrier de la réforme 2026" : "2026 Reform Timeline"}</h2>
           <TimelineAnimation />
 
-          {/* Psychological Structure: The Solution */}
-          <div className="my-20 p-12 bg-green-50 rounded-[48px] border-2 border-green-100 font-sans not-prose">
-            <h3 className="text-3xl font-black text-green-900 tracking-tighter mb-4">
-              {i18n.language === 'fr' ? 'InvoiceGEN rend la conformité gratuite.' : 'InvoiceGEN makes compliance free.'}
-            </h3>
-            <p className="text-xl text-green-700 font-bold leading-relaxed">
-              {i18n.language === 'fr' 
-                ? 'Nous avons conçu InvoiceGEN pour que la conformité ne soit plus un fardeau financier. Pas d\'abonnement, pas de frais cachés, juste un outil puissant et conforme.' 
-                : 'We designed InvoiceGEN so that compliance is no longer a financial burden. No subscriptions, no hidden fees, just a powerful and compliant tool.'}
-            </p>
+          {/* Reverse Charge Section */}
+          <div className="my-8 p-5 bg-amber-50 rounded-xl border border-amber-100 not-prose">
+            <div className="flex items-center gap-2 mb-3">
+              <Zap size={18} className="text-amber-600" />
+              <h3 className="text-base font-black text-amber-800 m-0">Autoliquidation TVA (Reverse Charge) - Article 283-2</h3>
+            </div>
+            <p className="text-sm text-gray-700">Transfert de l'obligation de TVA du prestataire au client. Mention : <span className="font-mono text-amber-700">"TVA autoliquidée par le preneur - article 283 du CGI"</span>. Concerne : prestations intracommunautaires, BTP, produits électroniques.</p>
           </div>
 
-          <h2 id="changement" className="mt-20">{t('blogPost2026.section1Title')}</h2>
-          <p>{t('blogPost2026.section1Content')}</p>
+          <ReverseChargeAnimation />
+
+          <h2 id="mentions">{isFrench ? "Mentions légales obligatoires" : "Mandatory Legal Mentions"}</h2>
+          <p>{isFrench 
+            ? "Conformément aux articles L. 441-3 et L. 441-4 du Code de commerce, toute facture professionnelle doit comporter :"
+            : "In accordance with Articles L. 441-3 and L. 441-4 of the French Commercial Code, any professional invoice must include:"}</p>
           <ul>
-            <li><strong>{t('blogPost2026.change1').split(':')[0]}:</strong> {t('blogPost2026.change1').split(':')[1]}</li>
-            <li><strong>{t('blogPost2026.change2').split(':')[0]}:</strong> {t('blogPost2026.change2').split(':')[1]}</li>
-            <li><strong>{t('blogPost2026.change3').split(':')[0]}:</strong> {t('blogPost2026.change3').split(':')[1]}</li>
+            <li><strong>Numéro unique et chronologique</strong> - sans rupture de séquence</li>
+            <li><strong>SIRET et code NAF/APE</strong> - identification de l'entreprise</li>
+            <li><strong>TVA intracommunautaire</strong> - pour les opérations transfrontalières</li>
+            <li><strong>Pénalités de retard</strong> - taux d'intérêt légal + 10 points</li>
+            <li><strong>Indemnité forfaitaire</strong> - 40 € pour frais de recouvrement</li>
           </ul>
 
-          {/* Psychological Structure: The Action */}
-          <div className="my-20 p-12 bg-blue-600 rounded-[48px] text-white font-sans not-prose shadow-2xl shadow-blue-200 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl group-hover:scale-110 transition-transform duration-700" />
-            <div className="relative z-10 space-y-8">
-              <h3 className="text-4xl font-black tracking-tighter leading-none">
-                {i18n.language === 'fr' ? 'Générez votre facture en 10 secondes.' : 'Generate your invoice in 10 seconds.'}
-              </h3>
-              <p className="text-xl font-bold opacity-90">{t('blogPost2026.ctaText')}</p>
-              <button onClick={onStart} className="relative overflow-hidden group px-10 py-5 bg-white text-blue-600 rounded-2xl font-black text-xl hover:scale-105 transition-transform flex items-center gap-3">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-600/10 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]" />
-                {i18n.language === 'fr' ? 'Créer ma facture' : 'Create my invoice'} <Zap size={24} fill="currentColor" />
+          <h2 id="formats">{isFrench ? "Formats de facture électronique" : "Electronic Invoice Formats"}</h2>
+          <p>{isFrench 
+            ? "La réforme impose l'utilisation de formats structurés pour les factures électroniques :"
+            : "The reform mandates the use of structured formats for electronic invoices:"}</p>
+          <ul>
+            <li><strong>UBL (Universal Business Language)</strong> - format XML standardisé</li>
+            <li><strong>CII (Cross Industry Invoice)</strong> - format UN/CEFACT</li>
+            <li><strong>PDF/A-3</strong> - format d'archivage légal</li>
+          </ul>
+
+          {/* CTA Section */}
+          <div className="my-12 p-8 bg-indigo-600 rounded-2xl text-white text-center not-prose relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl" />
+            <div className="relative z-10 space-y-4">
+              <h3 className="text-2xl font-black tracking-tighter">{isFrench ? "Générez votre facture conforme en 10 secondes" : "Generate your compliant invoice in 10 seconds"}</h3>
+              <p className="text-indigo-100 text-sm">{isFrench ? "100% gratuit, sans inscription. Conforme article 293 B du CGI et autoliquidation." : "100% free, no signup. Compliant with Article 293 B and reverse charge."}</p>
+              <button onClick={onStart} className="px-6 py-3 bg-white text-indigo-700 rounded-xl font-black text-sm hover:scale-105 transition-transform inline-flex items-center gap-2 shadow-xl">
+                {isFrench ? "Créer ma facture" : "Create my invoice"} <ArrowRight size={16} />
               </button>
             </div>
           </div>
 
-          <h2 id="mentions">{t('blogPost2026.section2Title')}</h2>
-          <p>{t('blogPost2026.section2Content')}</p>
-          <ol>
-            <li><strong>{t('blogPost2026.mention1').split(':')[0]}:</strong> {t('blogPost2026.mention1').split(':')[1]}</li>
-            <li><strong>{t('blogPost2026.mention2').split(':')[0]}:</strong> {t('blogPost2026.mention2').split(':')[1]}</li>
-            <li><strong>{t('blogPost2026.mention3').split(':')[0]}:</strong> {t('blogPost2026.mention3').split(':')[1]}</li>
-            <li><strong>{t('blogPost2026.mention4').split(':')[0]}:</strong> {t('blogPost2026.mention4').split(':')[1]}</li>
-            <li><strong>{t('blogPost2026.mention5').split(':')[0]}:</strong> {t('blogPost2026.mention5').split(':')[1]}</li>
-          </ol>
-
-          <h2 id="pourquoi">{t('blogPost2026.section3Title')}</h2>
-          <p>{t('blogPost2026.section3Content')}</p>
-          
-          <FacturXAnimation />
-
-          <p className="mt-12">{t('blogPost2026.facturXDesc')}</p>
-
-          <h3 className="mt-16">{t('blogPost2026.tableTitle')}</h3>
-          <div className="not-prose overflow-x-auto rounded-3xl border border-slate-100 shadow-xl mb-16">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="bg-slate-50">
-                  <th className="p-6 text-sm font-black uppercase tracking-widest text-slate-400 border-b border-slate-100">Caractéristique</th>
-                  <th className="p-6 text-sm font-black uppercase tracking-widest text-slate-400 border-b border-slate-100">{t('blogPost2026.tableOld')}</th>
-                  <th className="p-6 text-sm font-black uppercase tracking-widest text-blue-600 border-b border-slate-100">{t('blogPost2026.tableNew')}</th>
-                </tr>
-              </thead>
-              <tbody className="text-slate-700 font-bold">
-                <tr>
-                  <td className="p-6 border-b border-slate-50">{t('blogPost2026.row1Label')}</td>
-                  <td className="p-6 border-b border-slate-50 text-slate-400">{t('blogPost2026.row1Old')}</td>
-                  <td className="p-6 border-b border-slate-50 text-blue-600">{t('blogPost2026.row1New')}</td>
-                </tr>
-                <tr>
-                  <td className="p-6 border-b border-slate-50">{t('blogPost2026.row2Label')}</td>
-                  <td className="p-6 border-b border-slate-50 text-slate-400">{t('blogPost2026.row2Old')}</td>
-                  <td className="p-6 border-b border-slate-50 text-blue-600">{t('blogPost2026.row2New')}</td>
-                </tr>
-                <tr>
-                  <td className="p-6">{t('blogPost2026.row3Label')}</td>
-                  <td className="p-6 text-slate-400">{t('blogPost2026.row3Old')}</td>
-                  <td className="p-6 text-blue-600">{t('blogPost2026.row3New')}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h2 id="invoicegen">{t('blogPost2026.section4Title')}</h2>
-          <p>{t('blogPost2026.section4Content')}</p>
-          
-          <FreelanceAnimation />
-
-          <ul className="mt-12">
-            <li><strong>{t('blogPost2026.feature1').split(':')[0]}:</strong> {t('blogPost2026.feature1').split(':')[1]}</li>
-            <li><strong>{t('blogPost2026.feature2').split(':')[0]}:</strong> {t('blogPost2026.feature2').split(':')[1]}</li>
-            <li><strong>{t('blogPost2026.feature3').split(':')[0]}:</strong> {t('blogPost2026.feature3').split(':')[1]}</li>
+          <h2 id="invoicegen">{isFrench ? "Comment InvoiceGEN vous prépare à 2026" : "How InvoiceGEN prepares you for 2026"}</h2>
+          <p>{isFrench 
+            ? "InvoiceGEN intègre nativement toutes les exigences de la réforme :"
+            : "InvoiceGEN natively integrates all reform requirements:"}</p>
+          <ul>
+            <li><strong>Mentions légales automatiques</strong> - article 293 B, autoliquidation, TVA intracommunautaire</li>
+            <li><strong>Export PDF/A-3</strong> - format d'archivage légal</li>
+            <li><strong>Structure UBL/CII</strong> - préparation pour PDP et PPF</li>
+            <li><strong>Calcul automatique</strong> - pénalités de retard, indemnité de recouvrement</li>
           </ul>
 
-          {/* CTA Block 2 */}
-          <div className="my-20 p-12 bg-slate-900 rounded-[48px] text-white font-sans not-prose shadow-2xl relative overflow-hidden">
-            <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-blue-600/20 to-transparent" />
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-              <div className="space-y-6">
-                <h3 className="text-4xl font-black tracking-tighter leading-none">{i18n.language === 'fr' ? 'Prêt pour 2026 ?' : 'Ready for 2026?'}</h3>
-                <p className="text-xl text-slate-400 font-bold">{i18n.language === 'fr' ? 'Rejoignez des milliers d\'indépendants qui utilisent déjà InvoiceGEN.' : 'Join thousands of freelancers already using InvoiceGEN.'}</p>
-              </div>
-              <button onClick={onStart} className="shrink-0 px-12 py-6 bg-blue-600 text-white rounded-3xl font-black text-2xl hover:bg-blue-700 transition-all shadow-2xl shadow-blue-900/50 flex items-center gap-3">
-                {i18n.language === 'fr' ? 'Commencer' : 'Get Started'} <ArrowRight size={28} />
-              </button>
+          <h2 id="faq">{isFrench ? "Questions fréquentes" : "Frequently Asked Questions"}</h2>
+          <div className="space-y-6 not-prose">
+            <div>
+              <h4 className="text-base font-black text-gray-900">{isFrench ? "Qu'est-ce que l'article 293 B du CGI ?" : "What is Article 293 B?"}</h4>
+              <p className="text-sm text-gray-600">{isFrench 
+                ? "L'article 293 B définit la franchise en base de TVA. Les entreprises dont le CA est inférieur aux seuils (91 900€ pour services, 94 300€ pour commerce) ne facturent pas la TVA. La mention 'TVA non applicable, article 293 B du CGI' doit figurer sur les factures."
+                : "Article 293 B defines the VAT exemption scheme. Companies with turnover below thresholds (€91,900 for services, €94,300 for commerce) do not charge VAT. The mention 'VAT not applicable, Article 293 B' must appear on invoices."}</p>
             </div>
-          </div>
-
-          <h2 id="faq" className="mt-20">{t('blogPost2026.faqTitle')}</h2>
-          <div className="space-y-12 not-prose">
-            <div className="space-y-4">
-              <h4 className="text-2xl font-black tracking-tight text-slate-900">{t('blogPost2026.q1')}</h4>
-              <p className="text-lg text-slate-600 font-medium leading-relaxed">{t('blogPost2026.a1')}</p>
-            </div>
-            <div className="space-y-4">
-              <h4 className="text-2xl font-black tracking-tight text-slate-900">{t('blogPost2026.q2')}</h4>
-              <p className="text-lg text-slate-600 font-medium leading-relaxed">{t('blogPost2026.a2')}</p>
+            <div>
+              <h4 className="text-base font-black text-gray-900">{isFrench ? "Comment fonctionne l'autoliquidation (reverse charge) ?" : "How does reverse charge work?"}</h4>
+              <p className="text-sm text-gray-600">{isFrench 
+                ? "L'autoliquidation (article 283-2) transfère l'obligation de TVA du prestataire au client. Mention : 'TVA autoliquidée par le preneur - article 283 du CGI'. Applicable aux prestations intracommunautaires et travaux BTP."
+                : "Reverse charge (Article 283-2) transfers VAT obligation from provider to customer. Mention: 'VAT reverse charged - Article 283'. Applicable to intra-community services and construction works."}</p>
             </div>
           </div>
         </div>
 
         {/* Footer */}
-        <footer className="mt-32 pt-12 border-t border-slate-100 font-sans">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex items-center gap-6">
-              <div className="w-20 h-20 bg-slate-900 rounded-[28px] flex items-center justify-center text-white font-black text-3xl shadow-xl">IG</div>
-              <div>
-                <p className="text-xl font-black text-slate-900">{t('blogPost2026.author')}</p>
-                <p className="text-sm text-slate-400 font-bold uppercase tracking-widest">{t('blogPost2026.authorRole')}</p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <button className="p-4 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 rounded-2xl transition-all text-slate-400 font-black text-xs uppercase tracking-widest">
-                LinkedIn
-              </button>
-              <button className="p-4 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 rounded-2xl transition-all text-slate-400 font-black text-xs uppercase tracking-widest">
-                Twitter
-              </button>
-            </div>
-          </div>
+        <footer className="mt-12 pt-8 border-t border-gray-100 text-center text-xs text-gray-400">
+          <p>© 2026 InvoiceGEN - Conforme à l'article 293 B du CGI et à la réforme de facturation électronique 2026</p>
         </footer>
       </article>
-      
-      {/* Floating CTA for mobile */}
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 md:hidden">
-        <button onClick={onStart} className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-black shadow-2xl flex items-center gap-2">
-          {t('blogPost2026.ctaText')} <ArrowDown size={20} />
-        </button>
-      </div>
     </div>
   );
 };

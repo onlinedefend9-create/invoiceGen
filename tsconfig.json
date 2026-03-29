@@ -1,26 +1,290 @@
 {
+  /**
+   * ============================================
+   * InvoiceGEN - Configuration TypeScript
+   * Générateur de facture gratuit professionnel
+   * Version: 2.0.0 - 2026
+   * Conforme à l'article 293 B du CGI & autoliquidation TVA
+   * ============================================
+   * 
+   * Ce fichier configure le compilateur TypeScript pour le projet InvoiceGEN.
+   * 
+   * Conformité fiscale et SEO :
+   * - Le code TypeScript garantit la fiabilité des calculs de TVA,
+   *   des pénalités de retard et des mentions légales obligatoires.
+   * - Les types stricts permettent d'éviter les erreurs de saisie
+   *   sur les données critiques (SIRET, TVA intracommunautaire, etc.).
+   * 
+   * Références légales :
+   * - Article 293 B du CGI : franchise en base de TVA
+   * - Article 283-2 du CGI : autoliquidation (reverse charge)
+   * - Articles L. 441-3 et L. 441-4 du Code de commerce
+   * - Directive européenne 2006/112/CE
+   * - Réforme facturation électronique 2026
+   */
   "compilerOptions": {
+    /**
+     * Cible ECMAScript : ES2022
+     * ------------------------------------------------------------
+     * Utilise les fonctionnalités modernes de JavaScript tout en
+     * garantissant une compatibilité avec les navigateurs récents.
+     * 
+     * Optimisations SEO :
+     * - ES2022 permet un code plus performant, améliorant les
+     *   Core Web Vitals (LCP, FID, CLS)
+     * - Meilleure gestion des promesses pour les appels API
+     *   (validation VIES, export PDF, etc.)
+     */
     "target": "ES2022",
+
+    /**
+     * Experimental Decorators
+     * ------------------------------------------------------------
+     * Active les décorateurs expérimentaux (utilisés par certaines
+     * bibliothèques). Non utilisé directement par InvoiceGEN mais
+     * conservé pour la compatibilité.
+     */
     "experimentalDecorators": true,
+
+    /**
+     * useDefineForClassFields
+     * ------------------------------------------------------------
+     * Désactive l'utilisation de defineProperty pour les champs de classe,
+     * assurant la compatibilité avec le comportement standard.
+     */
     "useDefineForClassFields": false,
+
+    /**
+     * Module System : ESNext
+     * ------------------------------------------------------------
+     * Utilise le système de modules ESNext pour une meilleure
+     * compatibilité avec les bundlers modernes (Vite).
+     * 
+     * Avantages SEO :
+     * - Tree-shaking optimisé pour réduire la taille du bundle
+     * - Chargement asynchrone des modules pour améliorer les performances
+     * - Meilleure gestion des chunks pour le lazy loading
+     */
     "module": "ESNext",
+
+    /**
+     * Bibliothèques incluses
+     * ------------------------------------------------------------
+     * ES2022 : fonctionnalités JavaScript modernes
+     * DOM : API du navigateur (nécessaire pour React)
+     * DOM.Iterable : itération sur les collections DOM
+     * 
+     * Ces librairies garantissent la compatibilité avec toutes
+     * les API nécessaires au fonctionnement d'InvoiceGEN.
+     */
     "lib": [
       "ES2022",
       "DOM",
       "DOM.Iterable"
     ],
+
+    /**
+     * SkipLibCheck
+     * ------------------------------------------------------------
+     * Ignore la vérification des types dans les bibliothèques tierces.
+     * Accélère la compilation sans compromettre la sécurité des types
+     * de l'application elle-même.
+     * 
+     * Impact SEO : temps de build réduit = déploiement plus rapide
+     */
     "skipLibCheck": true,
+
+    /**
+     * Module Resolution : bundler
+     * ------------------------------------------------------------
+     * Configure la résolution des modules pour les bundlers modernes
+     * comme Vite. Optimise la gestion des imports et exports.
+     * 
+     * Avantages :
+     * - Meilleure gestion des chemins d'import
+     * - Support des exports conditionnels
+     * - Compatibilité avec les modules ESM
+     */
     "moduleResolution": "bundler",
+
+    /**
+     * Isolated Modules
+     * ------------------------------------------------------------
+     * Garantit que chaque fichier peut être compilé indépendamment.
+     * Important pour les outils de build modernes et le rechargement
+     * à chaud (HMR).
+     * 
+     * Impact SEO : cycles de développement plus rapides
+     */
     "isolatedModules": true,
+
+    /**
+     * Module Detection
+     * ------------------------------------------------------------
+     * Force la détection des modules pour assurer la compatibilité
+     * avec les fichiers sans imports/exports explicites.
+     */
     "moduleDetection": "force",
+
+    /**
+     * Allow JS
+     * ------------------------------------------------------------
+     * Autorise l'import de fichiers JavaScript dans le projet.
+     * Utile pour la migration progressive ou l'intégration de
+     * bibliothèques legacy.
+     */
     "allowJs": true,
+
+    /**
+     * JSX Factory : react-jsx
+     * ------------------------------------------------------------
+     * Utilise le nouveau transform JSX de React 17+ qui ne nécessite
+     * pas d'importer 'react' dans chaque fichier.
+     * 
+     * Avantages :
+     * - Code plus propre et maintenable
+     * - Meilleures performances de build
+     * - Compatibilité avec React 19
+     */
     "jsx": "react-jsx",
+
+    /**
+     * Path Mapping
+     * ------------------------------------------------------------
+     * Définit des alias pour simplifier les imports.
+     * @/* correspond au répertoire racine du projet.
+     * 
+     * Exemples :
+     * - import { cn } from '@/lib/utils'
+     * - import { Invoice } from '@/types'
+     * 
+     * Avantages :
+     * - Imports plus lisibles et maintenables
+     * - Refactoring facilité
+     * - Meilleure organisation du code
+     */
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     },
+
+    /**
+     * Allow Importing TypeScript Extensions
+     * ------------------------------------------------------------
+     * Permet d'importer des fichiers avec l'extension .ts/.tsx
+     * sans avoir à spécifier l'extension.
+     * 
+     * Utile pour les imports comme :
+     * - import App from './App'
+     * - import { cn } from './lib/utils'
+     */
     "allowImportingTsExtensions": true,
-    "noEmit": true
-  }
+
+    /**
+     * No Emit
+     * ------------------------------------------------------------
+     * Désactive l'émission de fichiers JavaScript.
+     * La compilation est gérée par Vite (bundler) qui s'occupe
+     * de la transformation et du bundle final.
+     * 
+     * Avantages :
+     * - Build plus rapide
+     * - Pas de fichiers intermédiaires
+     * - Vite gère l'optimisation finale
+     */
+    "noEmit": true,
+
+    /**
+     * Strict Mode
+     * ------------------------------------------------------------
+     * Active toutes les vérifications strictes de TypeScript.
+     * Recommandé pour garantir la qualité et la fiabilité du code.
+     * 
+     * Vérifications incluses :
+     * - strictNullChecks : évite les erreurs null/undefined
+     * - strictFunctionTypes : vérifie la compatibilité des fonctions
+     * - strictBindCallApply : vérifie les appels de fonction
+     * - alwaysStrict : active le mode strict JavaScript
+     */
+    "strict": true,
+
+    /**
+     * No Unused Locals
+     * ------------------------------------------------------------
+     * Signale les variables locales non utilisées.
+     * Aide à maintenir un code propre et optimisé.
+     * 
+     * Impact : code plus lisible et maintenable
+     */
+    "noUnusedLocals": false,
+
+    /**
+     * No Unused Parameters
+     * ------------------------------------------------------------
+     * Signale les paramètres de fonction non utilisés.
+     * Aide à identifier le code mort et à améliorer la maintenabilité.
+     */
+    "noUnusedParameters": false,
+
+    /**
+     * No Fallthrough Cases in Switch
+     * ------------------------------------------------------------
+     * Empêche le fallthrough involontaire dans les instructions switch.
+     * Réduit les risques d'erreurs logiques.
+     */
+    "noFallthroughCasesInSwitch": true,
+
+    /**
+     * No Implicit Returns
+     * ------------------------------------------------------------
+     * Signale les fonctions qui peuvent retourner undefined implicitement.
+     * Améliore la prédictibilité du code.
+     */
+    "noImplicitReturns": true,
+
+    /**
+     * Force Consistent Casing in File Names
+     * ------------------------------------------------------------
+     * Force la cohérence de la casse dans les noms de fichiers.
+     * Évite les erreurs de résolution entre systèmes d'exploitation.
+     */
+    "forceConsistentCasingInFileNames": true
+  },
+
+  /**
+   * Fichiers inclus dans la compilation
+   * ------------------------------------------------------------
+   * Inclut tous les fichiers source de l'application.
+   * Exclut les fichiers de configuration et les dépendances.
+   */
+  "include": [
+    "src/**/*",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.d.ts"
+  ],
+
+  /**
+   * Fichiers exclus de la compilation
+   * ------------------------------------------------------------
+   * Exclut les dossiers de dépendances et les fichiers de build.
+   * Accélère la compilation et évite les conflits.
+   */
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
+  ],
+
+  /**
+   * Références TypeScript
+   * ------------------------------------------------------------
+   * Permet de référencer d'autres projets TypeScript si nécessaire.
+   * Non utilisé actuellement mais conservé pour la flexibilité.
+   */
+  "references": []
 }

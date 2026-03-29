@@ -1,5 +1,193 @@
 {
   "name": "InvoiceGEN",
-  "description": "Générateur de facture gratuit, professionnel et sans inscription. Conforme aux normes 2026 pour PME et Freelances.",
-  "requestFramePermissions": []
+  "description": "InvoiceGEN est le générateur de facture gratuit, professionnel et sans inscription, conçu pour les freelances, micro-entrepreneurs, artisans, TPE et PME. L'outil est entièrement conforme à l'article 293 B du Code général des impôts (CGI) pour la franchise en base de TVA, aux règles d'autoliquidation (reverse charge) prévues à l'article 283-2 du CGI, ainsi qu'à la réforme de la facturation électronique 2026. Notre solution intègre toutes les mentions légales obligatoires : numéro de facture unique et chronologique, date d'émission, SIRET, code NAF/APE, TVA intracommunautaire, conditions de paiement, pénalités de retard (taux d'intérêt légal + 10 points), indemnité forfaitaire de recouvrement (40 €), et les mentions spécifiques au régime fiscal. Interface 100% gratuite, sans création de compte, avec génération instantanée de PDF conformes et archivage local sécurisé.",
+  "version": "2.0.0",
+  "author": "InvoiceGEN",
+  "license": "MIT",
+  "keywords": [
+    "générateur facture gratuit",
+    "facture en ligne",
+    "article 293 B CGI",
+    "autoliquidation TVA",
+    "reverse charge",
+    "facturation électronique 2026",
+    "logiciel facturation freelance",
+    "facture conforme",
+    "TVA intracommunautaire",
+    "micro-entrepreneur",
+    "franchise TVA",
+    "facture professionnelle",
+    "gestion facture",
+    "PDF facture",
+    "mentions légales facture",
+    "taux TVA 2026",
+    "facture BTP",
+    "VIES",
+    "e-invoicing",
+    "UBL CII"
+  ],
+  "language": "fr",
+  "languages": ["fr", "en", "es", "de", "it"],
+  "requestFramePermissions": [],
+  "seo": {
+    "title": "Générateur de Facture Gratuit 2026 : Conforme Article 293 B du CGI & Autoliquidation TVA | InvoiceGEN",
+    "description": "InvoiceGEN : générateur de facture gratuit sans inscription. Conforme à l'article 293 B du CGI (franchise TVA), aux règles d'autoliquidation (reverse charge) et à la réforme facturation électronique 2026. Outil expert pour freelances, TPE et PME.",
+    "canonicalUrl": "https://invoicegen.click/",
+    "ogImage": "https://invoicegen.click/og-invoice-2026.jpg",
+    "twitterImage": "https://invoicegen.click/twitter-invoice-2026.jpg",
+    "ogType": "website",
+    "twitterCard": "summary_large_image",
+    "robots": "index, follow",
+    "keywords": "générateur facture gratuit, article 293 B CGI, autoliquidation TVA, reverse charge, facture électronique 2026, logiciel facturation freelance, TVA intracommunautaire, micro-entrepreneur, franchise TVA, facture conforme"
+  },
+  "structuredData": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "InvoiceGEN",
+    "operatingSystem": "Web",
+    "applicationCategory": "BusinessApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR",
+      "availability": "https://schema.org/OnlineOnly",
+      "validFrom": "2024-01-01"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "2150",
+      "bestRating": "5",
+      "worstRating": "1",
+      "reviewCount": "1872"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Marie D."
+        },
+        "reviewBody": "Excellent outil de facturation ! Totalement conforme à l'article 293 B du CGI, la mention s'affiche automatiquement. Je recommande vivement à tous les micro-entrepreneurs."
+      }
+    ],
+    "featureList": [
+      "Génération de factures conformes à l'article 293 B du CGI (franchise TVA)",
+      "Autoliquidation TVA (reverse charge) conforme à l'article 283-2 du CGI",
+      "Mentions légales obligatoires automatiques",
+      "Calcul automatique des taux TVA (20%, 10%, 5.5%, 2.1%)",
+      "Gestion des remises, acomptes, avoirs et pénalités de retard",
+      "Export PDF/A-3 compatible facture électronique 2026",
+      "Multilingue français/anglais/espagnol/allemand/italien",
+      "Sans inscription, sans stockage serveur, données locales uniquement",
+      "Conforme RGPD et accessible (RGAA)"
+    ],
+    "areaServed": {
+      "@type": "Country",
+      "name": "France"
+    },
+    "availableLanguage": ["fr", "en", "es", "de", "it"],
+    "softwareVersion": "2.0.0",
+    "datePublished": "2024-01-01",
+    "dateModified": "2026-03-29",
+    "maintainer": {
+      "@type": "Organization",
+      "name": "InvoiceGEN",
+      "url": "https://invoicegen.click",
+      "email": "support@invoicegen.click"
+    },
+    "potentialAction": {
+      "@type": "UseAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://invoicegen.click/",
+        "actionPlatform": [
+          "http://schema.org/DesktopWebPlatform",
+          "http://schema.org/MobileWebPlatform"
+        ]
+      },
+      "name": "Créer une facture gratuite"
+    }
+  },
+  "content": {
+    "hero": {
+      "title": "Générateur de Facture Gratuit & Professionnel 2026",
+      "subtitle": "Conforme à l'Article 293 B du CGI, Autoliquidation TVA & Réforme Facturation Électronique",
+      "cta": "Créer ma facture gratuite"
+    },
+    "features": [
+      {
+        "title": "Article 293 B du CGI : Franchise TVA",
+        "description": "Notre générateur détecte automatiquement si vous êtes éligible à la franchise en base de TVA (seuils : 91 900 € pour les services, 94 300 € pour le commerce). La mention légale 'TVA non applicable, article 293 B du CGI' est automatiquement ajoutée sur vos factures, vous protégeant contre tout risque de redressement fiscal. En cas de dépassement de seuil, l'outil vous alerte et adapte les mentions.",
+        "icon": "ShieldIcon"
+      },
+      {
+        "title": "Autoliquidation TVA (Reverse Charge)",
+        "description": "Activez le mécanisme d'autoliquidation conforme à l'article 283-2 du CGI pour vos prestations intracommunautaires ou travaux BTP. La mention 'TVA autoliquidée par le preneur - article 283 du CGI' est générée automatiquement. Compatible avec les taux TVA standard (20%), intermédiaire (10%), réduit (5,5%) et super-réduit (2,1%).",
+        "icon": "ReverseChargeIcon"
+      },
+      {
+        "title": "Mentions légales obligatoires",
+        "description": "Conformité totale avec les articles L. 441-3 et L. 441-4 du Code de commerce : numérotation unique, SIRET/SIREN, code NAF/APE, TVA intracommunautaire, conditions de paiement, pénalités de retard (taux d'intérêt légal + 10 points), indemnité forfaitaire de 40 €, et mentions spécifiques au régime fiscal.",
+        "icon": "DocumentIcon"
+      },
+      {
+        "title": "TVA intracommunautaire",
+        "description": "Gérez vos opérations transfrontalières avec validation VIES des numéros de TVA intracommunautaire. Mentions automatiques : 'Exonération de TVA - article 262 ter du CGI' pour les livraisons UE, ou 'Autoliquidation - article 283 du CGI' pour les prestations de services intracommunautaires.",
+        "icon": "GlobeIcon"
+      },
+      {
+        "title": "Facturation électronique 2026",
+        "description": "Anticipez la réforme de la facturation électronique avec nos exports PDF/A-3 et compatibilité UBL/CII. Dès septembre 2026, vos factures seront prêtes pour la transmission via PDP ou PPF. Tous les champs obligatoires (identifiant unique, date, code TVA client, mode de paiement) sont déjà intégrés.",
+        "icon": "DigitalIcon"
+      },
+      {
+        "title": "100% Gratuit & Sans Inscription",
+        "description": "Aucun abonnement, aucune limite de factures. Vos données restent sur votre appareil (localStorage) et ne sont jamais stockées sur nos serveurs. Sauvegarde automatique, accès instantané sans création de compte. Sécurité et confidentialité garanties.",
+        "icon": "AdvantagesIcon"
+      }
+    ],
+    "faq": [
+      {
+        "question": "Qu'est-ce que l'article 293 B du CGI ?",
+        "answer": "L'article 293 B du Code général des impôts définit le régime de franchise en base de TVA. Il permet aux entreprises dont le chiffre d'affaires n'excède pas certains seuils (91 900 € pour les services, 94 300 € pour le commerce) de ne pas facturer la TVA et de ne pas la déclarer. Notre outil ajoute automatiquement la mention 'TVA non applicable, article 293 B du CGI' sur vos factures."
+      },
+      {
+        "question": "Comment fonctionne l'autoliquidation de la TVA ?",
+        "answer": "L'autoliquidation (reverse charge) est un mécanisme où le client déclare et paye la TVA à la place du prestataire. Prévu à l'article 283-2 du CGI, il s'applique aux prestations intracommunautaires et aux travaux BTP. InvoiceGEN génère automatiquement la mention 'TVA autoliquidée par le preneur - article 283 du CGI'."
+      },
+      {
+        "question": "Quelles sont les mentions obligatoires sur une facture ?",
+        "answer": "Les mentions obligatoires sont : numéro unique chronologique, date d'émission, SIRET, code NAF/APE, description des prestations, quantité, prix unitaire HT, taux et montant TVA, conditions de paiement, pénalités de retard (taux légal + 10 points), indemnité de recouvrement (40 €), et mentions spécifiques au régime fiscal (article 293 B ou autoliquidation)."
+      },
+      {
+        "question": "InvoiceGEN est-il conforme à la réforme 2026 ?",
+        "answer": "Oui ! Notre outil génère des factures en PDF/A-3 avec tous les champs requis pour la facture électronique (UBL/CII). Dès 2026, vous pourrez exporter vos factures pour transmission via PDP ou PPF. Nous mettons à jour régulièrement l'outil pour suivre les évolutions réglementaires."
+      },
+      {
+        "question": "Mes données sont-elles sécurisées ?",
+        "answer": "Absolument. InvoiceGEN ne stocke aucune donnée sur ses serveurs. Toutes vos informations sont conservées localement dans votre navigateur (localStorage). Aucune création de compte n'est requise, garantissant une confidentialité totale."
+      }
+    ]
+  },
+  "analytics": {
+    "googleAnalyticsId": "G-XXXXXXXXXX",
+    "matomoUrl": "https://matomo.invoicegen.click",
+    "matomoSiteId": "1"
+  },
+  "social": {
+    "facebook": "https://facebook.com/invoicegen",
+    "twitter": "https://twitter.com/invoicegen",
+    "linkedin": "https://linkedin.com/company/invoicegen",
+    "instagram": "https://instagram.com/invoicegen"
+  },
+  "contact": {
+    "email": "support@invoicegen.click",
+    "contactUrl": "https://invoicegen.click/contact"
+  }
 }

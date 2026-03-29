@@ -1,4 +1,102 @@
+# ============================================
+# ROBOTS.TXT - InvoiceGEN
+# Générateur de facture gratuit professionnel
+# Conforme article 293 B du CGI & autoliquidation TVA
+# Version: 2.0.0 - 2026
+# ============================================
+
+# Agents généraux
 User-agent: *
 Allow: /
 
+# Délai de crawl pour respecter les serveurs
+Crawl-delay: 1
+
+# ============================================
+# BOTS SPÉCIFIQUES - Optimisation SEO
+# ============================================
+
+# Googlebot (optimisation Google)
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0.5
+
+# Googlebot Images (pour les captures d'écran de factures)
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /screenshots/
+
+# Bingbot (Microsoft)
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Yandex (Russie)
+User-agent: Yandex
+Allow: /
+Crawl-delay: 1
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# ============================================
+# BOTS SPÉCIFIQUES À BLOQUER PARTIELLEMENT
+# ============================================
+
+# Bloquer les bots inutiles qui consomment des ressources
+User-agent: AhrefsBot
+Disallow: /
+Crawl-delay: 5
+
+User-agent: SemrushBot
+Disallow: /
+Crawl-delay: 5
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /api/
+Disallow: /private/
+
+# ============================================
+# SITEMAPS - Référencement multilingue
+# ============================================
+
+# Sitemap principal (français)
 Sitemap: https://invoicegen.click/sitemap.xml
+Sitemap: https://invoicegen.click/sitemap-fr.xml
+
+# Sitemaps multilingues
+Sitemap: https://invoicegen.click/sitemap-en.xml
+Sitemap: https://invoicegen.click/sitemap-es.xml
+Sitemap: https://invoicegen.click/sitemap-de.xml
+Sitemap: https://invoicegen.click/sitemap-it.xml
+
+# Sitemap pour les articles de blog et guides SEO
+Sitemap: https://invoicegen.click/sitemap-blog.xml
+Sitemap: https://invoicegen.click/sitemap-guides.xml
+
+# Sitemap pour les pages statiques
+Sitemap: https://invoicegen.click/sitemap-pages.xml
+
+# ============================================
+# HOST - Définition du domaine principal
+# ============================================
+Host: https://invoicegen.click
+
+# ============================================
+# NOTES SEO:
+# - Ce fichier est optimisé pour le crawl des moteurs de recherche
+# - Les sitemaps multilingues permettent une meilleure indexation internationale
+# - Les règles de crawl-délay respectent les ressources serveur
+# - Conforme aux recommandations SEO 2026
+# ============================================

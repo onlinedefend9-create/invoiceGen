@@ -1,33 +1,417 @@
+/**
+ * ============================================
+ * InvoiceGEN - Générateur de facture gratuit professionnel
+ * Styles principaux et animations
+ * 
+ * Version: 2.0.0 - 2026
+ * Conforme à l'article 293 B du CGI & autoliquidation TVA
+ * 
+ * Ce fichier contient :
+ * - Les styles de base Tailwind CSS
+ * - Les animations personnalisées pour les SVG et éléments UI
+ * - Les styles d'impression pour l'export PDF/A-3
+ * - Les optimisations de performance et d'accessibilité
+ * 
+ * Conformité fiscale :
+ * Les styles intègrent les mentions visuelles pour :
+ * - Article 293 B du CGI (franchise en base de TVA)
+ * - Article 283-2 du CGI (autoliquidation / reverse charge)
+ * - Articles L. 441-3 et L. 441-4 du Code de commerce
+ * - Réforme de la facturation électronique 2026
+ * 
+ * @license SPDX-License-Identifier: Apache-2.0
+ * ============================================
+ */
+
+/* ============================================
+ * TAILWIND CSS - Framework utilitaire
+ * Version: 4.x
+ * Optimisé pour les performances et le responsive design
+ * ============================================ */
 @import "tailwindcss";
 
+/* ============================================
+ * THÈME PERSONNALISÉ
+ * ============================================ */
 @theme {
+  /* Animations principales */
   @keyframes shimmer {
     from { transform: translateX(-100%); }
     to { transform: translateX(100%); }
   }
+  
+  /* Animation flottante pour les SVG (article 293 B) */
+  @keyframes float-svg {
+    0% { transform: translateY(0px) rotate(0deg); }
+    100% { transform: translateY(-8px) rotate(2deg); }
+  }
+  
+  /* Animation pulsante douce pour les badges de conformité */
+  @keyframes pulse-soft {
+    0% { opacity: 0.6; transform: scale(0.98); }
+    100% { opacity: 1; transform: scale(1.02); }
+  }
+  
+  /* Animation de rotation lente pour l'autoliquidation */
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Animation de glissement pour la TVA intracommunautaire */
+  @keyframes slide-x {
+    0% { transform: translateX(0px); }
+    100% { transform: translateX(6px); }
+  }
+  
+  /* Animation de rebond pour les mentions légales */
+  @keyframes bounce-gentle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  
+  /* Animation de clignotement doux */
+  @keyframes blink-soft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  
+  /* Animation d'apparition progressive */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Animation de zoom au survol */
+  @keyframes zoom-in {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+  }
+  
+  /* Animation de bordure lumineuse */
+  @keyframes border-glow {
+    0% { border-color: rgba(79, 70, 229, 0.2); box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.1); }
+    100% { border-color: rgba(79, 70, 229, 0.6); box-shadow: 0 0 8px 2px rgba(79, 70, 229, 0.3); }
+  }
 }
 
+/* ============================================
+ * CLASSES D'ANIMATION PERSONNALISÉES
+ * ============================================ */
+
+/* Animation flottante - Utilisée pour les icônes de conformité fiscale */
+.animate-float-svg {
+  animation: float-svg 3s ease-in-out infinite alternate;
+}
+
+/* Animation pulsante - Pour les badges "Article 293 B" et "Autoliquidation" */
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite alternate;
+}
+
+/* Animation de rotation lente - Pour l'autoliquidation TVA */
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* Animation de glissement - Pour la TVA intracommunautaire */
+.animate-slide-x {
+  animation: slide-x 2s ease-in-out infinite alternate;
+}
+
+/* Animation de rebond - Pour les mentions légales */
+.animate-bounce-gentle {
+  animation: bounce-gentle 2s ease-in-out infinite;
+}
+
+/* Animation de clignotement - Pour les alertes de conformité */
+.animate-blink {
+  animation: blink-soft 1.5s ease-in-out infinite;
+}
+
+/* Animation d'apparition - Pour les sections de contenu SEO */
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+/* Animation de zoom au survol - Pour les cartes de fonctionnalités */
+.hover\:animate-zoom-in:hover {
+  animation: zoom-in 0.3s ease-out forwards;
+}
+
+/* Animation de bordure lumineuse - Pour les éléments interactifs */
+.animate-border-glow {
+  animation: border-glow 1.5s ease-in-out infinite alternate;
+}
+
+/* ============================================
+ * STYLES DE BASE
+ * ============================================ */
 @layer base {
-  @media print {
-    body * {
-      visibility: hidden;
+  /* Styles de base pour l'accessibilité et les performances */
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  body {
+    @apply bg-gray-50 font-sans antialiased;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  }
+  
+  /* Style de focus pour l'accessibilité */
+  :focus-visible {
+    @apply outline-none ring-2 ring-indigo-500 ring-offset-2;
+  }
+  
+  /* Sélection de texte personnalisée - Couleurs de marque */
+  ::selection {
+    @apply bg-indigo-100 text-indigo-900;
+  }
+  
+  ::-moz-selection {
+    @apply bg-indigo-100 text-indigo-900;
+  }
+  
+  /* Scrollbar personnalisée */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 rounded-full hover:bg-gray-500;
+  }
+}
+
+/* ============================================
+ * STYLES D'IMPRESSION - EXPORT PDF/A-3
+ * Conformes aux exigences d'archivage légal
+ * Format PDF/A-3 pour la réforme 2026
+ * ============================================ */
+@media print {
+  /* Masquer tous les éléments sauf la facture */
+  body * {
+    visibility: hidden;
+  }
+  
+  /* Afficher uniquement la facture */
+  #invoice-render, 
+  #invoice-render * {
+    visibility: visible;
+  }
+  
+  /* Positionner la facture pour l'impression A4 */
+  #invoice-render {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  
+  /* Configuration de la page A4 */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  
+  /* Optimisation pour l'archivage PDF/A-3 */
+  @page {
+    @bottom-center {
+      content: "Facture générée avec InvoiceGEN - Conforme à l'article 293 B du CGI";
+      font-size: 8pt;
+      color: #666;
     }
-    #invoice-render, #invoice-render * {
-      visibility: visible;
-    }
-    #invoice-render {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      box-shadow: none !important;
-      border: none !important;
-    }
-    @page {
-      size: A4;
-      margin: 0;
-    }
+  }
+  
+  /* Éviter les coupures intempestives */
+  .page-break-before {
+    page-break-before: always;
+  }
+  
+  .page-break-inside {
+    page-break-inside: avoid;
+  }
+}
+
+/* ============================================
+ * STYLES POUR L'ACCESSIBILITÉ
+ * Conformes au RGAA (Référentiel Général d'Amélioration de l'Accessibilité)
+ * ============================================ */
+
+/* Réduction des animations pour les utilisateurs préférant moins de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-float-svg,
+  .animate-pulse-soft,
+  .animate-spin-slow,
+  .animate-slide-x,
+  .animate-bounce-gentle,
+  .animate-blink {
+    animation: none !important;
+  }
+}
+
+/* Contraste amélioré pour les textes */
+@media (prefers-contrast: high) {
+  body {
+    @apply text-gray-900;
+  }
+  
+  .text-gray-500 {
+    @apply text-gray-700;
+  }
+  
+  .border-gray-100 {
+    @apply border-gray-300;
+  }
+}
+
+/* ============================================
+ * STYLES PERSONNALISÉS POUR LE CONTENU SEO
+ * Classes utilitaires pour les blocs de contenu invisible
+ * ============================================ */
+
+/* Contenu visible uniquement par les lecteurs d'écran et moteurs de recherche */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Contenu affiché pour l'impression */
+@media print {
+  .print-only {
+    display: block !important;
+  }
+  .screen-only {
+    display: none !important;
+  }
+}
+
+/* ============================================
+ * STYLES POUR LES BADGES DE CONFORMITÉ FISCALE
+ * ============================================ */
+
+/* Badge Article 293 B du CGI */
+.badge-article-293b {
+  @apply inline-flex items-center gap-1 px-2 py-1 bg-indigo-50 text-indigo-700 rounded-full text-[10px] font-mono border border-indigo-100;
+}
+
+/* Badge Autoliquidation (reverse charge) */
+.badge-reverse-charge {
+  @apply inline-flex items-center gap-1 px-2 py-1 bg-amber-50 text-amber-700 rounded-full text-[10px] font-mono border border-amber-100;
+}
+
+/* Badge TVA intracommunautaire */
+.badge-intra-vat {
+  @apply inline-flex items-center gap-1 px-2 py-1 bg-blue-50 text-blue-700 rounded-full text-[10px] font-mono border border-blue-100;
+}
+
+/* Badge Réforme 2026 */
+.badge-reforme-2026 {
+  @apply inline-flex items-center gap-1 px-2 py-1 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-mono border border-emerald-100;
+}
+
+/* ============================================
+ * STYLES POUR LES ANIMATIONS SVG
+ * Illustrations légères pour l'UX
+ * ============================================ */
+
+/* Animation pour l'icône de bouclier (conformité fiscale) */
+.shield-icon {
+  animation: pulse-soft 2s ease-in-out infinite alternate;
+}
+
+/* Animation pour l'icône Euro (TVA) */
+.euro-icon {
+  animation: bounce-gentle 2s ease-in-out infinite;
+}
+
+/* Animation pour l'icône Globe (TVA intracommunautaire) */
+.globe-icon {
+  animation: slide-x 2s ease-in-out infinite alternate;
+}
+
+/* Animation pour l'icône Zap (autoliquidation) */
+.zap-icon {
+  animation: blink-soft 1.5s ease-in-out infinite;
+}
+
+/* Animation pour l'icône de facture */
+.invoice-icon {
+  animation: float-svg 3s ease-in-out infinite alternate;
+}
+
+/* ============================================
+ * OPTIMISATIONS DE PERFORMANCE
+ * ============================================ */
+
+/* Contenir les animations pour améliorer les performances */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Désactiver les animations sur les éléments non visibles */
+@media (max-width: 768px) {
+  .animate-float-svg,
+  .animate-pulse-soft,
+  .animate-spin-slow {
+    animation-duration: 3s;
+  }
+}
+
+/* ============================================
+ * STYLES D'IMPRESSION POUR LA RÉFORME 2026
+ * Conformes aux normes PDF/A-3 pour l'archivage légal
+ * ============================================ */
+
+@media print {
+  /* Ajout d'un filigrane légal optionnel */
+  #invoice-render::after {
+    content: "Facture conforme à l'article 293 B du CGI - Générée par InvoiceGEN";
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 8pt;
+    color: #ccc;
+    opacity: 0.5;
+    pointer-events: none;
   }
 }

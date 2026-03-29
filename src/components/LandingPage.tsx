@@ -1,336 +1,317 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { useNavigate } from 'react-router-dom';
 import { 
   ArrowRight, 
   CheckCircle2, 
-  Zap, 
   ShieldCheck, 
-  Globe, 
-  Cpu, 
-  BarChart3, 
-  Layout, 
-  FileText,
-  Mail,
+  FileText, 
+  Zap, 
+  Euro,
+  Scale,
+  Globe,
+  Clock,
+  Lock,
   Download
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { cn } from '../lib/utils';
+import { Link } from 'react-router-dom';
 
-interface Props {
+// Composant SVG animé pour l'article 293 B
+const AnimatedShieldIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg 
+    className={`animate-pulse-soft ${className}`} 
+    width="20" 
+    height="20" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-label="Icône article 293 B du CGI"
+  >
+    <path d="M12 3L3 7L12 21L21 7L12 3Z" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+    <path d="M12 7V12M12 16H12.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+    <style>{`
+      @keyframes pulse-soft-landing {
+        0% { opacity: 0.6; transform: scale(0.98); }
+        100% { opacity: 1; transform: scale(1.02); }
+      }
+      .animate-pulse-soft {
+        animation: pulse-soft-landing 2s ease-in-out infinite alternate;
+      }
+    `}</style>
+  </svg>
+);
+
+interface LandingPageProps {
   onStart: () => void;
 }
 
-export const LandingPage: React.FC<Props> = ({ onStart }) => {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
+export const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
+  const { t, i18n } = useTranslation();
+  const isFrench = i18n.language === 'fr';
 
   return (
-    <div className="bg-white overflow-hidden">
+    <div className="bg-gradient-to-b from-white to-gray-50 min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 px-6">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full -z-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-100 rounded-full blur-3xl opacity-50 translate-x-1/2 translate-y-1/2" />
+      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full overflow-hidden -z-10 pointer-events-none">
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-100/50 blur-3xl" />
+          <div className="absolute top-[20%] right-[-10%] w-[30%] h-[30%] rounded-full bg-blue-100/50 blur-3xl" />
         </div>
 
-        <div className="max-w-7xl mx-auto text-center space-y-12">
+        <div className="max-w-5xl mx-auto text-center space-y-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-widest border border-blue-100"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-600 rounded-full text-xs font-black uppercase tracking-wider border border-indigo-100"
           >
-            <Zap size={14} className="fill-blue-600" />
-            {t('landing.newFeature', { defaultValue: 'Magic Fill' })}
+            <AnimatedShieldIcon className="w-4 h-4" />
+            {isFrench ? "Conforme Article 293 B & Réforme 2026" : "Compliant with Article 293 B & 2026 Reform"}
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-6xl lg:text-8xl font-black tracking-tighter text-slate-900 leading-[0.9]"
+            className="text-5xl lg:text-7xl font-black tracking-tighter text-gray-900 leading-[1.1]"
           >
-            {t('landing.heroTitle', { defaultValue: 'Invoice in seconds, not hours.' })}
+            {isFrench ? "Générateur de Facture" : "Invoice Generator"}
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500 mt-2">
+              {isFrench ? "100% Gratuit & Sécurisé" : "100% Free & Secure"}
+            </span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="max-w-2xl mx-auto text-xl text-slate-500 font-bold leading-relaxed"
+            transition={{ delay: 0.1 }}
+            className="max-w-2xl mx-auto text-xl text-gray-500 font-medium leading-relaxed"
           >
-            {t('landing.heroSubtitle', { defaultValue: 'Power your business with the fastest AI billing on the market. 2026 compliant and 100% ' })}
-            <motion.span
-              animate={{ 
-                scale: [1, 1.1, 1],
-                color: ['#3b82f6', '#2563eb', '#3b82f6'],
-                textShadow: [
-                  '0 0 0px rgba(59, 130, 246, 0)',
-                  '0 0 10px rgba(59, 130, 246, 0.5)',
-                  '0 0 0px rgba(59, 130, 246, 0)'
-                ]
-              }}
-              transition={{ 
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="inline-block text-blue-600 font-black"
-            >
-              {t('landing.heroFree', { defaultValue: 'FREE' })}
-            </motion.span>
+            {isFrench 
+              ? "Créez des factures professionnelles conformes aux normes fiscales françaises en quelques secondes. Sans inscription, vos données restent sur votre appareil."
+              : "Create professional invoices compliant with French tax standards in seconds. No registration, your data stays on your device."}
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8"
+            transition={{ delay: 0.2 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
           >
             <button 
               onClick={onStart}
-              className="w-full sm:w-auto px-10 py-5 bg-blue-600 text-white rounded-2xl font-black text-lg hover:bg-blue-700 transition-all shadow-2xl shadow-blue-100 flex items-center justify-center gap-3 group"
+              className="w-full sm:w-auto px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold text-lg hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-200 flex items-center justify-center gap-2 group"
             >
-              {t('landing.startFree', { defaultValue: 'Start for free' })}
+              {isFrench ? "Créer une facture maintenant" : "Create an invoice now"}
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </button>
-            <button 
-              onClick={() => navigate('/features')}
-              className="w-full sm:w-auto px-10 py-5 bg-white border-2 border-slate-100 text-slate-900 rounded-2xl font-black text-lg hover:bg-slate-50 transition-all"
+            <Link 
+              to="/features"
+              className="w-full sm:w-auto px-8 py-4 bg-white text-gray-700 rounded-2xl font-bold text-lg hover:bg-gray-50 transition-all border border-gray-200 flex items-center justify-center gap-2"
             >
-              {t('landing.viewFeatures', { defaultValue: 'View Features' })}
-            </button>
+              {isFrench ? "Découvrir les fonctionnalités" : "Discover features"}
+            </Link>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "backOut" }}
-            className="pt-24 relative max-w-5xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="pt-8 flex flex-wrap justify-center gap-6 text-sm text-gray-500 font-medium"
           >
-            {/* Magic Tech Showcase Container */}
-            <div className="relative z-10 bg-white rounded-[64px] p-8 lg:p-20 border border-slate-100 overflow-hidden aspect-[16/10] flex items-center justify-center shadow-[0_50px_100px_-20px_rgba(59,130,246,0.12)]">
-              
-              {/* Vibrant Background Glows */}
-              <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.05),transparent_70%)]" />
-              <div className="absolute -top-24 -right-24 w-96 h-96 bg-purple-500/10 blur-[100px] rounded-full animate-pulse" />
-              <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-blue-500/10 blur-[100px] rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-
-              <div className="relative w-full h-full flex items-center justify-center">
-                
-                {/* The "Magic" Transformation Scene */}
-                <div className="relative w-full max-w-3xl aspect-video">
-                  
-                  {/* Glowing Connection Beam */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <motion.div 
-                      animate={{ 
-                        opacity: [0.3, 0.6, 0.3],
-                        scaleX: [1, 1.2, 1]
-                      }}
-                      transition={{ duration: 4, repeat: Infinity }}
-                      className="w-full h-32 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent blur-3xl"
-                    />
-                  </div>
-
-                  {/* Main 3D-style Invoice Card */}
-                  <motion.div
-                    animate={{ 
-                      y: [0, -20, 0],
-                      rotateY: [-10, 10, -10],
-                      rotateX: [5, -5, 5]
-                    }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                    style={{ perspective: 1000 }}
-                    className="absolute inset-0 m-auto w-[300px] md:w-[420px] aspect-[3/4] bg-white rounded-[40px] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-10 flex flex-col gap-8 overflow-hidden group"
-                  >
-                    {/* Holographic Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/5 via-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    
-                    <div className="flex justify-between items-center relative z-10">
-                      <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-blue-200">
-                        <Zap size={32} fill="currentColor" />
-                      </div>
-                      <div className="px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-widest border border-blue-100">
-                        Draft v2.0
-                      </div>
-                    </div>
-
-                    <div className="flex-1 space-y-8 relative z-10">
-                      <div className="h-px bg-slate-100 w-full" />
-                      <div className="space-y-4">
-                        {[1, 2, 3].map(i => (
-                          <div key={i} className="flex justify-between items-center">
-                            <div className="space-y-2">
-                              <div className="w-40 h-2 bg-slate-100 rounded-full" />
-                              <div className="w-24 h-1.5 bg-slate-50 rounded-full" />
-                            </div>
-                            <div className="w-12 h-2 bg-slate-100 rounded-full" />
-                          </div>
-                        ))}
-                      </div>
-                      <div className="h-px bg-slate-100 w-full" />
-                    </div>
-
-                    <div className="mt-auto flex justify-between items-end relative z-10">
-                      <div className="space-y-2">
-                        <div className="w-20 h-2 bg-slate-100 rounded-full" />
-                        <div className="w-32 h-6 bg-slate-900 rounded-full" />
-                      </div>
-                      <motion.div 
-                        animate={{ scale: [1, 1.1, 1] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        className="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center text-white shadow-lg shadow-emerald-200 border-4 border-white"
-                      >
-                        <ShieldCheck size={32} />
-                      </motion.div>
-                    </div>
-                  </motion.div>
-
-                  {/* Floating "Magic" Particles */}
-                  {[1, 2, 3, 4].map(i => (
-                    <motion.div
-                      key={i}
-                      animate={{ 
-                        y: [0, -100, 0],
-                        opacity: [0, 1, 0],
-                        scale: [0.5, 1, 0.5]
-                      }}
-                      transition={{ 
-                        duration: 3 + i, 
-                        repeat: Infinity, 
-                        delay: i * 0.5 
-                      }}
-                      className="absolute w-4 h-4 bg-blue-400 rounded-full blur-[4px]"
-                      style={{ 
-                        left: `${20 + i * 15}%`,
-                        bottom: '20%'
-                      }}
-                    />
-                  ))}
-
-                  {/* Floating Status Badges */}
-                  <motion.div
-                    animate={{ x: [0, 20, 0], y: [0, -10, 0] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-10 right-0 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3"
-                  >
-                    <div className="w-8 h-8 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center">
-                      <CheckCircle2 size={18} />
-                    </div>
-                    <span className="text-[10px] font-black text-slate-900 uppercase tracking-widest">Certifié 2026</span>
-                  </motion.div>
-
-                  <motion.div
-                    animate={{ x: [0, -20, 0], y: [0, 10, 0] }}
-                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                    className="absolute bottom-10 left-0 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3"
-                  >
-                    <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
-                      <BarChart3 size={18} />
-                    </div>
-                    <span className="text-[10px] font-black text-slate-900 uppercase tracking-widest">Vitesse Max</span>
-                  </motion.div>
-
-                </div>
-              </div>
-            </div>
-
-            {/* Background Grid Accent */}
-            <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+            <span className="flex items-center gap-2"><CheckCircle2 size={16} className="text-emerald-500" /> {isFrench ? "Sans inscription" : "No registration"}</span>
+            <span className="flex items-center gap-2"><CheckCircle2 size={16} className="text-emerald-500" /> {isFrench ? "100% Gratuit" : "100% Free"}</span>
+            <span className="flex items-center gap-2"><CheckCircle2 size={16} className="text-emerald-500" /> {isFrench ? "Données locales" : "Local data"}</span>
+            <span className="flex items-center gap-2"><CheckCircle2 size={16} className="text-emerald-500" /> {isFrench ? "Export PDF/A-3" : "PDF/A-3 Export"}</span>
           </motion.div>
         </div>
       </section>
 
       {/* Features Grid */}
-      <section className="py-32 bg-slate-50 px-6">
-        <div className="max-w-7xl mx-auto space-y-24">
-          <div className="text-center space-y-6">
-            <h2 className="text-4xl lg:text-6xl font-black tracking-tighter text-slate-900 leading-none">
-              {t('landing.featuresTitle', { defaultValue: 'Everything you need to manage your business.' })}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-3xl lg:text-4xl font-black tracking-tighter text-gray-900">
+              {isFrench ? "Conçu pour les indépendants et TPE" : "Designed for freelancers and small businesses"}
             </h2>
-            <p className="max-w-xl mx-auto text-slate-500 font-bold">
-              {t('landing.featuresSubtitle', { defaultValue: 'Powerful tools designed for simplicity, compliance, and growth.' })}
+            <p className="text-xl text-gray-500 max-w-2xl mx-auto">
+              {isFrench 
+                ? "Une solution complète qui intègre toutes les obligations légales françaises."
+                : "A complete solution that integrates all French legal obligations."}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <FeatureCard 
-              icon={<Cpu className="text-blue-600" />}
-              title={t('landing.feature1Title', { defaultValue: 'Magic Fill AI' })}
-              description={t('landing.feature1Desc', { defaultValue: 'Paste your raw data and let our AI automatically extract clients and items.' })}
-            />
-            <FeatureCard 
-              icon={<Layout className="text-indigo-600" />}
-              title={t('landing.feature2Title', { defaultValue: 'WYSIWYG Templates' })}
-              description={t('landing.feature2Desc', { defaultValue: 'Customize your invoices in real-time with our Minimalist, Corporate, and Modern templates.' })}
-            />
-            <FeatureCard 
-              icon={<ShieldCheck className="text-emerald-600" />}
-              title={t('landing.feature3Title', { defaultValue: '2026 Compliance' })}
-              description={t('landing.feature3Desc', { defaultValue: 'All mandatory legal mentions are included by default for your peace of mind.' })}
-            />
-            <FeatureCard 
-              icon={<BarChart3 className="text-rose-600" />}
-              title={t('landing.feature4Title', { defaultValue: 'Advanced Analytics' })}
-              description={t('landing.feature4Desc', { defaultValue: 'Track your revenue, unpaid invoices, and growth with intuitive charts.' })}
-            />
-            <FeatureCard 
-              icon={<Globe className="text-sky-600" />}
-              title={t('landing.feature5Title', { defaultValue: 'Multi-Currency' })}
-              description={t('landing.feature5Desc', { defaultValue: 'Invoice your international clients in any currency with automatic conversion.' })}
-            />
-            <FeatureCard 
-              icon={<Zap className="text-amber-600" />}
-              title={t('landing.feature6Title', { defaultValue: 'Instant Sending' })}
-              description={t('landing.feature6Desc', { defaultValue: 'Send your invoices directly by email with receipt and payment tracking.' })}
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Feature 1 */}
+            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-6">
+                <Scale size={24} className="text-indigo-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                {isFrench ? "Article 293 B du CGI" : "Article 293 B of CGI"}
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                {isFrench 
+                  ? "Gestion automatique de la franchise en base de TVA avec l'ajout de la mention légale obligatoire sur vos factures."
+                  : "Automatic management of the VAT exemption with the addition of the mandatory legal mention on your invoices."}
+              </p>
+            </div>
+
+            {/* Feature 2 */}
+            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-6">
+                <Zap size={24} className="text-amber-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                {isFrench ? "Autoliquidation TVA" : "VAT Reverse Charge"}
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                {isFrench 
+                  ? "Gérez facilement l'autoliquidation (reverse charge) pour vos clients professionnels en UE ou dans le secteur du BTP."
+                  : "Easily manage reverse charge for your professional clients in the EU or in the construction sector."}
+              </p>
+            </div>
+
+            {/* Feature 3 */}
+            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-6">
+                <Lock size={24} className="text-emerald-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                {isFrench ? "Sécurité Local-First" : "Local-First Security"}
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                {isFrench 
+                  ? "Vos données ne quittent jamais votre appareil. Tout est stocké localement dans votre navigateur pour une confidentialité totale."
+                  : "Your data never leaves your device. Everything is stored locally in your browser for total privacy."}
+              </p>
+            </div>
+
+            {/* Feature 4 */}
+            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
+                <Clock size={24} className="text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                {isFrench ? "Prêt pour 2026" : "Ready for 2026"}
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                {isFrench 
+                  ? "Générez des factures au format PDF/A-3, le standard d'archivage légal requis pour la réforme de la facturation électronique."
+                  : "Generate invoices in PDF/A-3 format, the legal archiving standard required for the e-invoicing reform."}
+              </p>
+            </div>
+
+            {/* Feature 5 */}
+            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-6">
+                <FileText size={24} className="text-purple-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                {isFrench ? "Mentions Obligatoires" : "Mandatory Mentions"}
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                {isFrench 
+                  ? "Pénalités de retard, indemnité forfaitaire de 40€, SIRET, TVA intracommunautaire... Ne l'oubliez plus aucune mention légale."
+                  : "Late penalties, €40 fixed indemnity, SIRET, intra-community VAT... Never forget a legal mention again."}
+              </p>
+            </div>
+
+            {/* Feature 6 */}
+            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center mb-6">
+                <Download size={24} className="text-rose-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                {isFrench ? "Export Professionnel" : "Professional Export"}
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                {isFrench 
+                  ? "Téléchargez vos factures en PDF haute qualité ou envoyez-les directement par email à vos clients en un clic."
+                  : "Download your invoices in high-quality PDF or send them directly by email to your clients in one click."}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section className="py-20 px-6 bg-gray-50">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-black tracking-tighter text-gray-900">
+              {isFrench ? "Comment ça marche ?" : "How it works?"}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+            {/* Ligne connectrice (desktop) */}
+            <div className="hidden md:block absolute top-12 left-[15%] right-[15%] h-0.5 bg-indigo-100" />
+
+            <div className="relative text-center space-y-4">
+              <div className="w-24 h-24 mx-auto bg-white rounded-full border-4 border-indigo-50 flex items-center justify-center shadow-sm relative z-10">
+                <span className="text-3xl font-black text-indigo-600">1</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900">
+                {isFrench ? "Remplissez vos infos" : "Fill your info"}
+              </h3>
+              <p className="text-gray-500">
+                {isFrench ? "Saisissez vos coordonnées et celles de votre client." : "Enter your details and your client's details."}
+              </p>
+            </div>
+
+            <div className="relative text-center space-y-4">
+              <div className="w-24 h-24 mx-auto bg-white rounded-full border-4 border-indigo-50 flex items-center justify-center shadow-sm relative z-10">
+                <span className="text-3xl font-black text-indigo-600">2</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900">
+                {isFrench ? "Ajoutez vos prestations" : "Add your services"}
+              </h3>
+              <p className="text-gray-500">
+                {isFrench ? "Détaillez vos services, prix et sélectionnez le taux de TVA." : "Detail your services, prices and select the VAT rate."}
+              </p>
+            </div>
+
+            <div className="relative text-center space-y-4">
+              <div className="w-24 h-24 mx-auto bg-white rounded-full border-4 border-indigo-50 flex items-center justify-center shadow-sm relative z-10">
+                <span className="text-3xl font-black text-indigo-600">3</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900">
+                {isFrench ? "Téléchargez le PDF" : "Download the PDF"}
+              </h3>
+              <p className="text-gray-500">
+                {isFrench ? "Obtenez instantanément votre facture conforme au format PDF/A-3." : "Instantly get your compliant invoice in PDF/A-3 format."}
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 px-6">
-        <div className="max-w-5xl mx-auto bg-blue-600 rounded-[48px] p-12 lg:p-24 text-center space-y-12 relative overflow-hidden shadow-2xl shadow-blue-200">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-400/20 via-transparent to-transparent" />
-          
-          <h2 className="text-4xl lg:text-7xl font-black tracking-tighter text-white leading-[0.9] relative z-10">
-            {t('landing.ctaTitle', { defaultValue: 'Ready to transform your billing?' })}
+      <section className="py-24 px-6 bg-indigo-600 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <h2 className="text-4xl lg:text-5xl font-black tracking-tighter text-white mb-6">
+            {isFrench 
+              ? "Prêt à simplifier votre facturation ?" 
+              : "Ready to simplify your invoicing?"}
           </h2>
-          <p className="text-blue-100 text-xl font-bold max-w-2xl mx-auto relative z-10">
-            {t('landing.ctaSubtitle', { defaultValue: 'Join thousands of entrepreneurs who save time every day with InvoiceGEN.' })}
+          <p className="text-xl text-indigo-100 mb-10 max-w-2xl mx-auto">
+            {isFrench 
+              ? "Rejoignez des milliers d'indépendants qui utilisent InvoiceGEN pour créer des factures professionnelles et conformes."
+              : "Join thousands of freelancers who use InvoiceGEN to create professional and compliant invoices."}
           </p>
-          <div className="pt-8 relative z-10">
-            <button 
-              onClick={onStart}
-              className="px-12 py-6 bg-white text-blue-600 rounded-3xl font-black text-xl hover:bg-blue-50 transition-all shadow-xl flex items-center justify-center gap-3 mx-auto group"
-            >
-              {t('landing.startAdventure', { defaultValue: 'Start the adventure' })}
-              <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
+          <button 
+            onClick={onStart}
+            className="px-10 py-5 bg-white text-indigo-600 rounded-2xl font-black text-xl hover:scale-105 transition-transform inline-flex items-center gap-3 shadow-2xl"
+          >
+            {isFrench ? "Créer ma première facture" : "Create my first invoice"}
+            <ArrowRight size={24} />
+          </button>
+          <p className="mt-6 text-indigo-200 font-medium">
+            {isFrench ? "Totalement gratuit. Aucune carte de crédit requise." : "Totally free. No credit card required."}
+          </p>
         </div>
       </section>
     </div>
   );
 };
-
-function FeatureCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
-  return (
-    <div className="bg-white p-10 rounded-[40px] border border-slate-100 shadow-sm hover:shadow-[0_30px_60px_-15px_rgba(59,130,246,0.1)] hover:-translate-y-2 transition-all duration-500 space-y-6 group relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-2xl group-hover:bg-white group-hover:shadow-xl group-hover:shadow-blue-100 transition-all duration-500 relative z-10">
-        {icon}
-      </div>
-      <div className="space-y-3 relative z-10">
-        <h3 className="text-xl font-black tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors">{title}</h3>
-        <p className="text-slate-500 font-bold text-sm leading-relaxed">{description}</p>
-      </div>
-      <div className="pt-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 relative z-10">
-        <div className="flex items-center gap-2 text-blue-600 font-black text-[10px] uppercase tracking-widest">
-          Learn more <ArrowRight size={14} />
-        </div>
-      </div>
-    </div>
-  );
-}
