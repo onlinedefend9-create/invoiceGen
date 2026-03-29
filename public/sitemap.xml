@@ -1,13 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
   <url>
     <loc>https://invoicegen.click/</loc>
     <lastmod>2026-03-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://invoicegen.click/og-invoice-2026.jpg</image:loc>
+      <image:title>Générateur de facture gratuit 2026</image:title>
+      <image:caption>Conforme article 293 B du CGI</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://invoicegen.click/editer</loc>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://invoicegen.click/screenshots/invoice-editor.jpg</image:loc>
+      <image:title>Interface du générateur de facture avec autoliquidation TVA</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://invoicegen.click/guide-conformite-2026</loc>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://invoicegen.click/images/guide-2026.jpg</image:loc>
+      <image:title>Guide complet de la réforme facturation électronique 2026</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://invoicegen.click/blog/article-293-b-cgi-franchise-tva</loc>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://invoicegen.click/images/article-293b.jpg</image:loc>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://invoicegen.click/blog/autoliquidation-tva-reverse-charge</loc>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://invoicegen.click/images/reverse-charge.jpg</image:loc>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://invoicegen.click/en</loc>
+    <lastmod>2026-03-29</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://invoicegen.click/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://invoicegen.click/en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://invoicegen.click/"/>
+    <priority>0.8</priority>
   </url>
+
+  <url><loc>https://invoicegen.click/tools/calculateur-tva</loc><priority>0.5</priority></url>
+  <url><loc>https://invoicegen.click/tools/calculateur-penalites-retard</loc><priority>0.5</priority></url>
+
+  <url><loc>https://invoicegen.click/mentions-legales</loc><priority>0.3</priority></url>
+  <url><loc>https://invoicegen.click/politique-de-confidentialite</loc><priority>0.3</priority></url>
+
 </urlset>
