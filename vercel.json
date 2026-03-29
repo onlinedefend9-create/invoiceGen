@@ -70,7 +70,7 @@
       "destination": "/robots.txt"
     },
     {
-      "source": "/((?!api|static|sitemap\\.xml|robots\\.txt|.*\\..*).*)",
+      "source": "/((?!api|static|sitemap\\.xml|robots\\.txt|.*\\.(?:xml|txt|png|jpg|ico|svg)$|.*\\..*).*)",
       "destination": "/index.html"
     }
   ],
