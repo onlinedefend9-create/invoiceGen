@@ -140,6 +140,11 @@ export interface UserProfile {
    * Permet la validation VIES
    */
   vatNumber?: string;
+
+  /**
+   * Historique d'activité de l'utilisateur (interne)
+   */
+  Activity: any[];
 }
 
 /**

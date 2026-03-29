@@ -39,7 +39,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { cn, formatCurrency } from './lib/utils';
 import { Invoice, DashboardStats, TemplateType } from './types';
-import { useInvoiceStore } from './hooks/useInvoiceStore';
+import { useInvoiceStore } from './store/useInvoiceStore';
 
 // Components
 import { MiniLandingPage } from './components/MiniLandingPage';
