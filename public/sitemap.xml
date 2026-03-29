@@ -8,6 +8,9 @@
     <lastmod>2026-03-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://invoicegen.click/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://invoicegen.click/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://invoicegen.click/"/>
     <image:image>
       <image:loc>https://invoicegen.click/og-invoice-2026.jpg</image:loc>
       <image:title>Générateur de facture gratuit 2026</image:title>
@@ -30,7 +33,7 @@
     <loc>https://invoicegen.click/guide-conformite-2026</loc>
     <lastmod>2026-03-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.80</priority>
     <image:image>
       <image:loc>https://invoicegen.click/images/guide-2026.jpg</image:loc>
       <image:title>Guide complet de la réforme facturation électronique 2026</image:title>
@@ -41,7 +44,7 @@
     <loc>https://invoicegen.click/blog/article-293-b-cgi-franchise-tva</loc>
     <lastmod>2026-03-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.60</priority>
     <image:image>
       <image:loc>https://invoicegen.click/images/article-293b.jpg</image:loc>
     </image:image>
@@ -51,7 +54,7 @@
     <loc>https://invoicegen.click/blog/autoliquidation-tva-reverse-charge</loc>
     <lastmod>2026-03-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.60</priority>
     <image:image>
       <image:loc>https://invoicegen.click/images/reverse-charge.jpg</image:loc>
     </image:image>
@@ -60,15 +63,25 @@
   <url>
     <loc>https://invoicegen.click/en</loc>
     <lastmod>2026-03-29</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://invoicegen.click/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://invoicegen.click/en"/>
-    <priority>0.8</priority>
+    <priority>0.80</priority>
   </url>
 
-  <url><loc>https://invoicegen.click/tools/calculateur-tva</loc><priority>0.5</priority></url>
-  <url><loc>https://invoicegen.click/tools/calculateur-penalites-retard</loc><priority>0.5</priority></url>
+  <url>
+    <loc>https://invoicegen.click/tools/calculateur-tva</loc>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://invoicegen.click/tools/calculateur-penalites-retard</loc>
+    <priority>0.50</priority>
+  </url>
 
-  <url><loc>https://invoicegen.click/mentions-legales</loc><priority>0.3</priority></url>
-  <url><loc>https://invoicegen.click/politique-de-confidentialite</loc><priority>0.3</priority></url>
+  <url>
+    <loc>https://invoicegen.click/mentions-legales</loc>
+    <priority>0.30</priority>
+  </url>
+  <url>
+    <loc>https://invoicegen.click/politique-de-confidentialite</loc>
+    <priority>0.30</priority>
+  </url>
 
 </urlset>
