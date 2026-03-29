@@ -60,6 +60,7 @@ import { LegalNotice } from './pages/LegalNotice';
 import { PublicHeader } from './components/PublicHeader';
 import { PublicFooter } from './components/PublicFooter';
 import { Footer } from './components/Footer';
+import { CookieBanner } from './components/CookieBanner';
 import { AppFooter } from './components/AppFooter';
 import { AppLayout } from './components/AppLayout';
 
@@ -292,6 +293,7 @@ export default function App() {
 
   return (
     <>
+      <CookieBanner />
       <Routes>
         <Route path="/" element={<PublicLayout />}>
           <Route index element={<LandingPage onStart={() => navigate('/editer')} />} />
