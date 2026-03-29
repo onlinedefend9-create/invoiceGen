@@ -54,8 +54,12 @@ import { Features } from './components/Features';
 import { Pricing } from './components/Pricing';
 import { FAQ } from './components/FAQ';
 import { Legal } from './components/Legal';
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
+import { TermsOfService } from './pages/TermsOfService';
+import { LegalNotice } from './pages/LegalNotice';
 import { PublicHeader } from './components/PublicHeader';
 import { PublicFooter } from './components/PublicFooter';
+import { Footer } from './components/Footer';
 import { AppFooter } from './components/AppFooter';
 import { AppLayout } from './components/AppLayout';
 
@@ -115,7 +119,7 @@ function PublicLayout() {
       <main>
         <Outlet />
       </main>
-      <PublicFooter />
+      <Footer />
     </div>
   );
 }
@@ -297,6 +301,9 @@ export default function App() {
           <Route path="blog" element={<Blog onStart={() => navigate('/editer')} />} />
           <Route path="blog/:slug" element={<BlogPost onStart={() => navigate('/editer')} />} />
           <Route path="legal" element={<Legal />} />
+          <Route path="politique-confidentialite" element={<PrivacyPolicy />} />
+          <Route path="cgu" element={<TermsOfService />} />
+          <Route path="mentions-legales" element={<LegalNotice />} />
           <Route path="generateur/facture-auto-entrepreneur" element={
             <>
               <Helmet>

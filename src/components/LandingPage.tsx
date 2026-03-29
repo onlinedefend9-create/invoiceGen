@@ -126,6 +126,46 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
         </div>
       </section>
 
+      {/* SEO Content Section - Rich Text for AdSense */}
+      <section className="py-16 px-6 bg-white border-y border-gray-100">
+        <div className="max-w-4xl mx-auto prose prose-indigo prose-lg">
+          <h2 className="text-3xl font-black text-gray-900 mb-8 tracking-tight">Pourquoi utiliser un générateur de facture conforme en 2026 ?</h2>
+          
+          <div className="space-y-6 text-gray-600 leading-relaxed">
+            <p>
+              La gestion administrative est souvent le talon d'Achille des micro-entrepreneurs et des freelances. En 2026, avec l'entrée en vigueur progressive de la <strong>réforme de la facturation électronique</strong>, il devient crucial d'utiliser des outils qui ne se contentent pas de "faire une belle mise en page", mais qui garantissent une conformité fiscale totale.
+            </p>
+
+            <h3 className="text-xl font-bold text-gray-900">L'Article 293 B du CGI : Une mention obligatoire</h3>
+            <p>
+              Si vous êtes en franchise en base de TVA (auto-entrepreneur ou micro-entreprise), vous avez l'obligation légale de faire figurer la mention <em>"TVA non applicable, article 293 B du CGI"</em> sur toutes vos factures. L'oubli de cette mention peut entraîner des amendes administratives. Notre générateur l'intègre automatiquement dès que vous cochez l'option "Exonération de TVA".
+            </p>
+
+            <h3 className="text-xl font-bold text-gray-900">Comment faire une facture sans TVA ?</h3>
+            <p>
+              Pour faire une facture sans TVA en toute légalité, vous devez respecter les seuils de chiffre d'affaires (91 900 € pour les services et 94 300 € pour le commerce en 2026). Sur votre document, le montant de la TVA doit être à 0 ou ne pas apparaître, et le total HT doit être égal au total TTC. InvoiceGEN calcule ces montants pour vous et s'assure que la structure du document respecte les attentes de l'administration fiscale.
+            </p>
+
+            <h3 className="text-xl font-bold text-gray-900">Les mentions obligatoires pour micro-entrepreneur</h3>
+            <p>
+              Au-delà de la TVA, une facture doit comporter des éléments essentiels : votre numéro SIRET, l'adresse de votre siège social, l'identité complète de votre client, une numérotation chronologique sans trou, et les conditions de règlement. En cas de retard, vous devez également mentionner les pénalités de retard et l'indemnité forfaitaire de recouvrement de 40 €.
+            </p>
+
+            <h3 className="text-xl font-bold text-gray-900">Le format PDF/A-3 et la réforme 2026</h3>
+            <p>
+              La dématérialisation des factures ne signifie pas simplement envoyer un email. Le standard <strong>PDF/A-3</strong> permet d'embarquer des données structurées (XML) au sein d'un fichier lisible par l'humain. C'est le socle de la réforme 2026 qui vise à automatiser les déclarations de TVA et à lutter contre la fraude. InvoiceGEN prépare vos documents à cette transition technologique majeure.
+            </p>
+
+            <div className="bg-indigo-50 p-6 rounded-2xl border border-indigo-100 mt-8">
+              <h4 className="text-indigo-900 font-bold mb-2">Conseil d'expert :</h4>
+              <p className="text-indigo-800 text-sm">
+                Conservez toujours une copie de vos factures pendant 10 ans. Bien que nous ne stockions rien sur nos serveurs pour votre sécurité, nous vous recommandons d'utiliser un service de stockage cloud sécurisé ou un disque dur externe pour vos archives PDF.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Grid */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
