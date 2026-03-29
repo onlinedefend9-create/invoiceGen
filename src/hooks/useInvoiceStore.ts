@@ -45,7 +45,7 @@ interface InvoiceState {
   deleteInvoice: (id: string) => void;
 }
 
-export const useInvoiceStore = create<InvoiceState>()(
+export const useInvoiceStoreBase = create<InvoiceState>()(
   persist(
     (set) => ({
       invoices: [],
@@ -105,3 +105,14 @@ export const useInvoiceStore = create<InvoiceState>()(
     }
   )
 );
+
+export const useInvoiceStore = () => {
+  const store = useInvoiceStoreBase();
+  return {
+    ...store,
+    profile: {
+      Activity: [],
+      ...(store.profile || {})
+    }
+  };
+};

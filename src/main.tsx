@@ -27,7 +27,7 @@
  * - Réforme de la facturation électronique 2026
  */
 
-import { StrictMode, useState, useEffect } from 'react';
+import React, { StrictMode, useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
