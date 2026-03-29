@@ -42,6 +42,10 @@
           "value": "text/xml; charset=utf-8"
         },
         {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
           "key": "Cache-Control",
           "value": "public, max-age=0, must-revalidate"
         }
@@ -55,6 +59,10 @@
           "value": "text/plain; charset=utf-8"
         },
         {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
           "key": "Cache-Control",
           "value": "public, max-age=0, must-revalidate"
         }
@@ -63,7 +71,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!api|static|.*\\..*).*)",
+      "source": "/((?!api|static|sitemap\\.xml|robots\\.txt|.*\\..*).*)",
       "destination": "/index.html"
     }
   ],
