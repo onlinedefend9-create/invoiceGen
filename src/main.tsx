@@ -27,7 +27,7 @@
  * - Réforme de la facturation électronique 2026
  */
 
-import { StrictMode } from 'react';
+import { StrictMode, useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
@@ -307,35 +307,35 @@ if (process.env.NODE_ENV === 'development') {
  * Le composant App est chargé et contient toute la logique
  * de l'application, incluant les routes et les pages.
  */
+// Composant de sécurisation du rendu
+function SafeHydration({ children }: { children: React.ReactNode }) {
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    // Sécurise l'hydratation côté client
+    setIsHydrated(true);
+  }, []);
+
+  if (!isHydrated) {
+    return (
+      <div style={{ display: 'flex', height: '100vh', width: '100vw', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f9fafb' }}>
+        <div style={{ width: '40px', height: '40px', border: '3px solid #e5e7eb', borderTopColor: '#3b82f6', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      </div>
+    );
+  }
+
+  return <>{children}</>;
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <HelmetProvider context={helmetContext}>
       <BrowserRouter>
-        {/* Contenu SEO invisible - Texte expert 1000+ mots */}
-        <div className="sr-only" aria-hidden="false">
-          <h1>InvoiceGEN - Générateur de facture gratuit conforme à l'article 293 B du CGI</h1>
-          <h2>Solution de facturation professionnelle avec autoliquidation TVA et préparation à la réforme 2026</h2>
-          
-          <h3>Article 293 B du CGI - Franchise en base de TVA</h3>
-          <p>L'article 293 B du Code général des impôts (CGI) définit le régime de franchise en base de TVA. Ce régime s'applique aux entreprises dont le chiffre d'affaires annuel n'excède pas 91 900 € pour les prestations de services et professions libérales, et 94 300 € pour les activités de commerce et d'hébergement (seuils 2026). Les entreprises sous ce régime ne facturent pas la TVA à leurs clients. La mention "TVA non applicable, article 293 B du CGI" doit obligatoirement figurer sur chaque facture émise par les bénéficiaires de la franchise.</p>
-          
-          <h3>Autoliquidation de la TVA - Article 283-2 du CGI</h3>
-          <p>L'autoliquidation de la TVA, également appelée reverse charge, est un mécanisme fiscal qui transfère l'obligation de déclaration et de paiement de la TVA du prestataire au client. Ce dispositif, prévu à l'article 283-2 du CGI et à la directive européenne 2006/112/CE, concerne principalement : les prestations de services entre assujettis établis dans différents États membres de l'Union européenne ; les opérations dans le secteur du BTP (travaux immobiliers) ; les livraisons de certains produits électroniques, télécoms et de télédiffusion ; et les cessions de quotas d'émission de gaz à effet de serre. La mention "TVA autoliquidée par le preneur - article 283 du CGI" doit apparaître sur la facture.</p>
-          
-          <h3>Mentions légales obligatoires - Articles L. 441-3 et L. 441-4 du Code de commerce</h3>
-          <p>Une facture professionnelle doit comporter : un numéro unique et chronologique ; la date d'émission ; le nom et SIRET du vendeur ; le nom et adresse du client (SIRET et TVA intracommunautaire si professionnel) ; la description précise des produits/services avec quantité et prix unitaire HT ; le taux et le montant de TVA ; les conditions de paiement ; le taux des pénalités de retard (taux d'intérêt légal + 10 points) ; l'indemnité forfaitaire de recouvrement de 40 € ; et les mentions spécifiques au régime fiscal.</p>
-          
-          <h3>Réforme de la facturation électronique 2026</h3>
-          <p>La réforme de la facturation électronique entre en vigueur progressivement à partir de 2026. À compter du 1er septembre 2026, toutes les transactions entre professionnels assujettis à la TVA (B2B) devront être transmises via une plateforme de dématérialisation partenaire (PDP) ou via le portail public de facturation (PPF). Les formats obligatoires sont UBL (Universal Business Language) et CII (Cross Industry Invoice). L'archivage doit être effectué au format PDF/A-3, seul format d'archivage légal reconnu par l'administration fiscale.</p>
-          
-          <h3>TVA intracommunautaire - Article 262 ter du CGI</h3>
-          <p>Les livraisons de biens entre États membres sont exonérées de TVA sous réserve de justifier du transport et de la détention d'un numéro de TVA valide (article 262 ter du CGI). Les prestations de services sont soumises à autoliquidation lorsque le client est un assujetti. La validation des numéros de TVA via le système VIES (VAT Information Exchange System) est recommandée pour s'assurer de la validité des numéros intracommunautaires.</p>
-          
-          <h3>Pénalités de retard et indemnité de recouvrement</h3>
-          <p>En application de l'article L. 441-3 du Code de commerce, les pénalités de retard sont calculées au taux d'intérêt légal majoré de 10 points. Pour 2026, le taux d'intérêt légal est de 4,26%, soit un taux de pénalité de 14,26%. L'indemnité forfaitaire de recouvrement de 40 € est automatiquement due en cas de retard de paiement, sans nécessité de justifier des frais réels.</p>
-        </div>
-        <App />
+        <SafeHydration>
+          <App />
+        </SafeHydration>
       </BrowserRouter>
     </HelmetProvider>
-  </StrictMode>,
+  </StrictMode>
 );
