@@ -3,6 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
+  <!-- Accueil -->
   <url>
     <loc>https://invoicegen.click/</loc>
     <lastmod>2026-03-29</lastmod>
@@ -18,6 +19,7 @@
     </image:image>
   </url>
 
+  <!-- Éditeur -->
   <url>
     <loc>https://invoicegen.click/editer</loc>
     <lastmod>2026-03-29</lastmod>
@@ -29,6 +31,7 @@
     </image:image>
   </url>
 
+  <!-- Guide Conformité -->
   <url>
     <loc>https://invoicegen.click/guide-conformite-2026</loc>
     <lastmod>2026-03-29</lastmod>
@@ -40,6 +43,7 @@
     </image:image>
   </url>
 
+  <!-- Blog Article -->
   <url>
     <loc>https://invoicegen.click/blog/article-293-b-cgi-franchise-tva</loc>
     <lastmod>2026-03-29</lastmod>
@@ -50,38 +54,14 @@
     </image:image>
   </url>
 
-  <url>
-    <loc>https://invoicegen.click/blog/autoliquidation-tva-reverse-charge</loc>
-    <lastmod>2026-03-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.60</priority>
-    <image:image>
-      <image:loc>https://invoicegen.click/images/reverse-charge.jpg</image:loc>
-    </image:image>
-  </url>
-
+  <!-- Version Anglaise -->
   <url>
     <loc>https://invoicegen.click/en</loc>
     <lastmod>2026-03-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://invoicegen.click/tools/calculateur-tva</loc>
-    <priority>0.50</priority>
-  </url>
-  <url>
-    <loc>https://invoicegen.click/tools/calculateur-penalites-retard</loc>
-    <priority>0.50</priority>
-  </url>
-
-  <url>
-    <loc>https://invoicegen.click/mentions-legales</loc>
-    <priority>0.30</priority>
-  </url>
-  <url>
-    <loc>https://invoicegen.click/politique-de-confidentialite</loc>
-    <priority>0.30</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://invoicegen.click/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://invoicegen.click/en"/>
   </url>
 
 </urlset>
