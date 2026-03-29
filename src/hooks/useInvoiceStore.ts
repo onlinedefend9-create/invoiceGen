@@ -39,7 +39,7 @@ import { Invoice, UserProfile } from '../types';
  * Pour les opérations soumises à autoliquidation (article 283-2),
  * la mention "TVA autoliquidée par le preneur - article 283 du CGI" sera utilisée.
  */
-const INITIAL_PROFILE: UserProfile = {
+const INITIAL_PROFILE: any = {
   companyName: 'Ma Super Entreprise',
   email: 'contact@entreprise.fr',
   address: '123 Avenue de la République, 75011 Paris',
@@ -48,6 +48,7 @@ const INITIAL_PROFILE: UserProfile = {
   rib: 'FR76 1234 5678 9012 3456 7890 123',
   // TVA intracommunautaire (optionnel) - Format: FR + 11 chiffres
   vatNumber: '',
+  Activity: [],
 };
 
 /**
@@ -112,11 +113,14 @@ export function useInvoiceStore() {
    * - Informations bancaires (RIB/IBAN)
    * - TVA intracommunautaire (pour les opérations transfrontalières)
    */
-  const [profile, setProfile] = useState<UserProfile>(() => {
+  const [profile, setProfile] = useState<any>(() => {
     try {
       const saved = localStorage.getItem('userProfile');
       if (saved) {
         const parsed = JSON.parse(saved);
+        if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+          return INITIAL_PROFILE;
+        }
         console.log('[InvoiceGEN] Profil utilisateur chargé depuis localStorage');
         return parsed;
       }
@@ -245,7 +249,7 @@ export function useInvoiceStore() {
    */
   return { 
     invoices, 
-    profile, 
+    profile: { Activity: [], ...profile }, 
     setProfile, 
     addInvoice, 
     updateInvoice, 
